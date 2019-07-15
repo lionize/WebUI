@@ -1,13 +1,58 @@
+@import './assets/styles/variables.scss';
+
+html {
+    height: 100%;
+}
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+}
+#root {
+    min-height: 100vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+/////////common styles/////////
+.full-height {
+    height: 100%;
+}
+.full-width {
+    width: 100%;
+}
+.flex-self {
+    display: flex;
+}
+.flex-horizontal {
+    flex-direction: row;
+}
+.flex-vertical {
+    flex-direction: column;
+}
+.justify-space-between {
+    justify-content: space-between;
+}
+.primary-color {
+    color: $primary;
+}
+.secondary-color {
+    color: $secondary;
+}
+.primary-bg {
+    background-color: $primary;
+}
+.secondary-bg {
+    background-color: $secondary;
+}
+.horizontal-margin-5 {
+    margin: 0 5px !important;
+}
+
+
+
+.bordered-bottom {
+    border-bottom: 1px solid $border;
 }

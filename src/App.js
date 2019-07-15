@@ -1,14 +1,19 @@
 import React from 'react';
+import Header from './components/header/Header';
+import Main from './containers/main/Main';
+import Footer from './components/footer/Footer';
 import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    render() {
+        return (
+            <div className="app-container flex-self flex-vertical justify-space-between">
+                <Header />
+                <Main />
+                <Footer />
+            </div>
+        );
+    }
 }
 
 export default App;
