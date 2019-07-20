@@ -7,7 +7,7 @@ import './App.scss';
 class App extends Component {
     render() {
         return (
-            <div className="app-container flex-self flex-vertical justify-space-between">
+            <div className="app-container flex-self flex-vertical">
                 <Header />
                 <Main />
                 <Footer />

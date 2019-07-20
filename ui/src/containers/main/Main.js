@@ -10,9 +10,6 @@ class Main extends Component {
                 <Button variant="contained" color="primary" className="horizontal-margin-5">
                     Button EXAMPLE
                 </Button>
-                <i className="material-icons">
-                    file_copy
-                </i>
             </div>
         );
     }
