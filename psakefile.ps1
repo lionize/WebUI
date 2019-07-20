@@ -1,5 +1,5 @@
 Task Publish -Depends Pack {
-   Exec { docker login docker.io  --username=ashotnazaryan }
+   Exec { docker login docker.io  --username=ashotnazaryan45 }
    $remoteTag = "docker.io/$script:latestImageTag"
    Exec { docker tag $script:latestImageTag $remoteTag }
    Exec { docker push $remoteTag }
@@ -20,7 +20,7 @@ Task Clean -Depends Init {
 Task Init {
    $date = Get-Date
    $ticks = $date.Ticks
-   $script:latestImageTag = "ashotnazaryan/lionize-web-ui:latest"
+   $script:latestImageTag = "ashotnazaryan45/lionize-web-ui:latest"
    $trashFolder = Join-Path -Path . -ChildPath ".trash"
    $script:trashFolder = Join-Path -Path $trashFolder -ChildPath $ticks.ToString("D19")
    New-Item -Path $script:trashFolder -ItemType Directory
