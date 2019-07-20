@@ -6,7 +6,7 @@ Task Publish -Depends Pack {
 }
 
 Task Pack -Depends Build {
-   $src = (Resolve-Path ".\src\").Path
+   $src = (Resolve-Path ".\ui\").Path
    Exec { docker build -f Dockerfile $src -t $script:latestImageTag }
 }
 
