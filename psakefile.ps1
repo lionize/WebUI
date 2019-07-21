@@ -6,12 +6,11 @@ Task Publish -Depends Pack {
 }
 
 Task Pack -Depends Build {
-   $src = (Resolve-Path ".\ui\").Path
-   Exec { docker build -f Dockerfile $src -t $script:latestImageTag }
+   Exec { docker build -f Dockerfile $script:SourceRootFolder -t $script:latestImageTag }
 }
 
 Task Build -Depends Init,Clean {
-   #
+   Exec { npm install --prefix $script:SourceRootFolder react-scripts build }
 }
 
 Task Clean -Depends Init {
@@ -25,4 +24,5 @@ Task Init {
    $script:trashFolder = Join-Path -Path $trashFolder -ChildPath $ticks.ToString("D19")
    New-Item -Path $script:trashFolder -ItemType Directory
    $script:trashFolder = Resolve-Path -Path $script:trashFolder
+   $script:SourceRootFolder = (Resolve-Path ".\ui\").Path
 }
