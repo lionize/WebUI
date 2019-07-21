@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outFile": "ui/src/models.js",
+        "sourceMap": true
+    },
+    "include": [
+        "TypeScriptModels/**/*"
+    ],
+    "exclude": [
+        "ui/node_modules"
+    ]
+}
