@@ -10,7 +10,7 @@ Task Pack -Depends Build {
 }
 
 Task Build -Depends Init,Clean {
-   Exec { npm install --prefix $script:SourceRootFolder react-scripts build }
+   Exec { npm install $script:SourceRootFolder }
 }
 
 Task Clean -Depends Init {
