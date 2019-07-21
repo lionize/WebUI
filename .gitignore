@@ -27,3 +27,5 @@ yarn-error.log*
 .trash/
 ui/build/
 /TypeScriptModels/
+/ui/src/models.js
+/ui/src/models.js.map
