@@ -13,7 +13,8 @@ Task Build -Depends Init, Clean {
     try {
         Push-Location
         Set-Location $script:SourceRootFolder
-        Exec { npm install $script:SourceRootFolder }
+        Exec { npm install }
+        Exec { npm run build }
     }
     finally {
         Pop-Location
