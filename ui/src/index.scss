@@ -1,28 +1,27 @@
-@import './assets/styles/variables';
-@import './assets/styles/fonts';
+@import 'src/assets/styles/variables.scss';
+// @import 'src/assets/styles/fonts';
 
 html {
     
 }
 body {
     margin: 0;
-    font: 13px Roboto-Regular;
 }
-.material-icons {
-    font-family: 'Material Icons' !important;
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    -webkit-font-feature-settings: 'liga';
-    -webkit-font-smoothing: antialiased;
-}
+// .material-icons {
+//     font-family: 'Material Icons' !important;
+//     font-weight: normal;
+//     font-style: normal;
+//     font-size: 24px;
+//     line-height: 1;
+//     letter-spacing: normal;
+//     text-transform: none;
+//     display: inline-block;
+//     white-space: nowrap;
+//     word-wrap: normal;
+//     direction: ltr;
+//     -webkit-font-feature-settings: 'liga';
+//     -webkit-font-smoothing: antialiased;
+// }
 
 /////////common styles/////////
 .full-height {
