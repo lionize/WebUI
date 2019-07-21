@@ -5,8 +5,15 @@ Task Publish -Depends Pack {
     Exec { docker push $remoteTag }
 }
 
-Task Pack -Depends Build {
-    Exec { docker build -f Dockerfile $script:SourceRootFolder -t $script:latestImageTag }
+Task Pack -Depends CopyArtefacts {
+    Exec { docker build -f Dockerfile $script:artefacts -t $script:latestImageTag }
+}
+
+Task CopyArtefacts -Depends Build {
+    $script:artefacts = Join-Path -Path $script:trashFolder -ChildPath "artefacts"
+
+    Copy-Item -Path (Join-Path -Path $script:SourceRootFolder -ChildPath "build") -Destination (Join-Path -Path $script:artefacts -ChildPath "build") -Recurse
+    Copy-Item -Path (Join-Path -Path $script:SourceRootFolder -ChildPath "nginx.conf") -Destination (Join-Path -Path $script:artefacts -ChildPath "nginx.conf")
 }
 
 Task Build -Depends Init, Clean {
