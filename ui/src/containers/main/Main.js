@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
 import './Main.scss';
 
 class Main extends Component {
     render() {
         return (
-            <div className="main-container">
+            <div className="main-container border-box">
                 Main
-                <Button variant="contained" color="primary" className="horizontal-margin-5">
-                    Button EXAMPLE
-                </Button>
             </div>
         );
     }

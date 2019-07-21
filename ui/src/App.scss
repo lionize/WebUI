@@ -1,3 +1,8 @@
+// @import './assets/styles/fonts';  //todo fix
+@import './assets/styles/variables';
+
 .app-container {
+    font: 13px Roboto-Light;
     min-height: 100vh;
+    background-color: rgba($primary, 0.2);
 }
