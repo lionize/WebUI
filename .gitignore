@@ -26,3 +26,4 @@ yarn-error.log*
 
 .trash/
 ui/build/
+/TypeScriptModels/
