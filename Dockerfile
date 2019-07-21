@@ -1,6 +1,9 @@
 FROM nginx:stable
 
 COPY ./build/ /var/www
-# COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
-CMD ["nginx -g 'daemon off;'"]
+ENV PORT 80
+ENV SERVER_NAME _
+
+CMD /usr/sbin/nginx -g 'daemon off;'
