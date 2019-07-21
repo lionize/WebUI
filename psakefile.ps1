@@ -16,7 +16,7 @@ Task CopyArtefacts -Depends Build {
     Copy-Item -Path (Join-Path -Path $script:SourceRootFolder -ChildPath "nginx.conf") -Destination (Join-Path -Path $script:artefacts -ChildPath "nginx.conf")
 }
 
-Task Build -Depends Init, Clean {
+Task Build -Depends Init, Clean, TranspileModels {
     try {
         Push-Location
         Set-Location $script:SourceRootFolder
@@ -26,6 +26,10 @@ Task Build -Depends Init, Clean {
     finally {
         Pop-Location
     }
+}
+
+Task TranspileModels -Depends Init, Clean {
+    Exec { smite --input-file .\ui\TaskModels.yml --lang typescript --output-folder .\Models\ }
 }
 
 Task Clean -Depends Init {
