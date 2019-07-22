@@ -6,13 +6,18 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FolderIcon from '@material-ui/icons/Folder';
 import './Footer.scss';
-import '../../assets/styles/variables.scss';
+import variables from '../../assets/styles/variables.scss';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: 'block',
-        backgroundColor: 'rgba($primary, 0.5)' //todo fix
-    }
+        display: 'block'
+    },
+    bottomNavogation: {
+        backgroundColor: `${variables.primaryLight}`
+    },
+    // navigationButton: {
+    //     backgroundColor: `${variables.pureWhite}`
+    // }
 }));
 
 const Footer = (props) => {
@@ -26,10 +31,10 @@ const Footer = (props) => {
 
     return (
         <footer className={classes.root}>
-            <BottomNavigation value={value} onChange={handleChange}>
-                <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} />
-                <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
-                <BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon />} />
+            <BottomNavigation className={classes.bottomNavogation} value={value} onChange={handleChange}>
+                <BottomNavigationAction className={classes.navigationButton} label="Recents" value="recents" icon={<RestoreIcon />} />
+                <BottomNavigationAction className={classes.navigationButton} label="Favorites" value="favorites" icon={<FavoriteIcon />} />
+                <BottomNavigationAction className={classes.navigationButton} label="Folder" value="folder" icon={<FolderIcon />} />
             </BottomNavigation>
         </footer>
     );

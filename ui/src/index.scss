@@ -1,5 +1,4 @@
-@import 'src/assets/styles/variables.scss';
-// @import 'src/assets/styles/fonts';
+@import 'src/assets/styles/variables';
 
 html {
     
@@ -7,28 +6,13 @@ html {
 body {
     margin: 0;
 }
-// .material-icons {
-//     font-family: 'Material Icons' !important;
-//     font-weight: normal;
-//     font-style: normal;
-//     font-size: 24px;
-//     line-height: 1;
-//     letter-spacing: normal;
-//     text-transform: none;
-//     display: inline-block;
-//     white-space: nowrap;
-//     word-wrap: normal;
-//     direction: ltr;
-//     -webkit-font-feature-settings: 'liga';
-//     -webkit-font-smoothing: antialiased;
-// }
 
 /////////common styles/////////
 .full-height {
-    height: 100%;
+    height: $full-size;
 }
 .full-width {
-    width: 100%;
+    width: $full-size;
 }
 .flex-self {
     display: flex;
@@ -41,6 +25,15 @@ body {
 }
 .justify-space-between {
     justify-content: space-between;
+}
+.justrify-space-around {
+    justify-content: space-around;
+}
+.justify-center {
+    justify-content: center;
+}
+.flex-wrap {
+    flex-wrap: wrap;
 }
 .primary-color {
     color: $primary;
@@ -57,9 +50,26 @@ body {
 .horizontal-margin-5 {
     margin: 0 5px !important;
 }
-
-
-
 .bordered-bottom {
     border-bottom: 1px solid $border;
+}
+
+//fonts
+@font-face {
+    font-family: 'Roboto-Light';
+    src: url('./assets/fonts/Roboto-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }

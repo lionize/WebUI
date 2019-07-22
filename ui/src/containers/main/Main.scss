@@ -6,13 +6,20 @@
     margin: 0 auto;
     padding: $main-padding-large;
     padding-top: 75px; //todo fix, bad solution
-    // background-color: rgba($primary, 0.15);
-    @media only screen and (max-width: $desktop-hd) {
-        width: $desktop;
-    }
-    @media only screen and (max-width: $desktop) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 16px;
+    @media screen and (max-width: $desktop) {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 16px;
         width: $full-size;
         padding: $main-padding-small;
-        padding-top: 65px; //todo fix, bad solution
+        padding-top: 75px; //todo fix, bad solution
+    }
+    @media screen and (max-width: $tablet) {
+        grid-template-columns: 1fr;
+        grid-gap: 8px;
+        padding: 10px 0;
+        grid-auto-rows: inherit;
     }
 }
