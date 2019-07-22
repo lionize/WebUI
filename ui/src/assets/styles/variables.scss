@@ -6,6 +6,7 @@ $mobile: 420px;
 
 //theme-colors
 $primary: rgb(140, 140, 140);
+$primary-light: rgba($primary, 0.2);
 $secondary: rgb(204, 17, 17);
 
 $urgent: rgb(153, 204, 17);
@@ -22,3 +23,7 @@ $pure-black: rgb(0, 0, 0);
 $full-size: 100%;
 $main-padding-large: 15px;
 $main-padding-small: 10px;
+
+:export {
+    primaryLight: $primary-light;
+}
