@@ -28,7 +28,7 @@ Task Build -Depends TranspileModels {
 }
 
 Task TranspileModels -Depends NpmInstall {
-    Exec { smite --input-file .\ui\TaskModels.yml --lang typescript --output-folder .\TypeScriptModels\ }
+    Exec { smite --input-file .\ui\ApiModels.yml --lang typescript --output-folder .\TypeScriptModels\ }
     Exec { tsc }
 }
 
