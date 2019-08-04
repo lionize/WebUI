@@ -1,0 +1,11 @@
+@import "src/assets/styles/variables";
+
+.main-container {
+    width: 1265px;
+    margin: 0 auto;
+    padding: 10px;
+    @media screen and (max-width: $desktop) {
+        width: 100%;
+        padding: 0;
+    }
+}

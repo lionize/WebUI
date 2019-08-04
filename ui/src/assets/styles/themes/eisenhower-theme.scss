@@ -1,0 +1,106 @@
+
+$eisenhower-grey: (
+    50: #eeeeee,
+    100: #dddddd,
+    200: #cccccc,
+    300: #bbbbbb,
+    400: #aaaaaa,
+    500: #999999,
+    600: #888888,
+    700: rgb(140, 140, 140),  //todo change all
+    800: #666666,
+    900: #555555,
+    A100: #444444,
+    A200: #333333,
+    A400: #222222,
+    A700: #111111,
+    contrast: (
+        50: $black-87-opacity,
+        100: $black-87-opacity,
+        200: $black-87-opacity,
+        300: $black-87-opacity,
+        400: $black-87-opacity,
+        500: white,
+        600: white,
+        700: white,
+        800: $white-87-opacity,
+        900: $white-87-opacity,
+        A100: $black-87-opacity,
+        A200: white,
+        A400: white,
+        A700: white,
+    )
+);
+
+$eisenhower-green: (
+    50: #e8f5e9,
+    100: #c8e6c9,
+    200: #a5d6a7,
+    300: #81c784,
+    400: #66bb6a,
+    500: #2ecc71,
+    600: #43a047,
+    700: rgb(153, 204, 17),  //todo change all
+    800: #2e7d32,
+    900: #1b5e20,
+    A100: #b9f6ca,
+    A200: #69f0ae,
+    A400: #00e676,
+    A700: #2ecc71,
+    contrast: (
+      50: $black-87-opacity,
+      100: $black-87-opacity,
+      200: $black-87-opacity,
+      300: $black-87-opacity,
+      400: $black-87-opacity,
+      500: $black-87-opacity,
+      600: white,
+      700: white,
+      800: $white-87-opacity,
+      900: $white-87-opacity,
+      A100: $black-87-opacity,
+      A200: $black-87-opacity,
+      A400: $black-87-opacity,
+      A700: $black-87-opacity,
+    )
+  );
+
+  $eisenhower-red: (
+    50: #ff0000,
+    100: #ff0000,
+    200: #ff0000,
+    300: #ff0000,
+    400: #ff0000,
+    500: #ff0000,
+    600: #ff0000,
+    700: rgb(204, 17, 17),  //todo change all
+    800: #ff0000,
+    900: #ff0000,
+    A100: #ff0000,
+    A200: #ff0000,
+    A400: #ff0000,
+    A700: #ff0000,
+    contrast: (
+      50: $black-87-opacity,
+      100: $black-87-opacity,
+      200: $black-87-opacity,
+      300: $black-87-opacity,
+      400: $black-87-opacity,
+      500: $black-87-opacity,
+      600: white,
+      700: white,
+      800: $white-87-opacity,
+      900: $white-87-opacity,
+      A100: $black-87-opacity,
+      A200: $black-87-opacity,
+      A400: $black-87-opacity,
+      A700: $black-87-opacity,
+    )
+  );
+
+$eisenhower-primary: mat-palette($eisenhower-grey, 700);
+$eisenhower-accent: mat-palette($eisenhower-green, 700);
+$eisenhower-warn: mat-palette($eisenhower-red, 700);
+
+$eisenhower: mat-light-theme($eisenhower-primary, $eisenhower-accent, $eisenhower-warn);
+
