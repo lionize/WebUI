@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+@import '../assets/styles/variables';
+
+@mixin app-theme-component($theme) {
+
+    $primary: map-get($theme, primary);
+    // $accent: map-get($theme, accent);
+    // $foreground: map-get($theme, primary);
+
+    app-root {
+        .main-button-primary {
+            color: $pure-white;
+            background-color:  mat-color($primary);
+        }
+    }    
+}
