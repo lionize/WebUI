@@ -1,9 +1,14 @@
 @import "src/assets/styles/variables";
 
+:host {
+    display: flex;
+    flex-direction: column;
+}
 .main-container {
-    width: 1265px;
+    width: $desktop-hd;
     margin: 0 auto;
-    padding: 10px;
+    padding: $main-padding-small;
+    flex: auto;
     @media screen and (max-width: $desktop) {
         width: 100%;
         padding: 0;
