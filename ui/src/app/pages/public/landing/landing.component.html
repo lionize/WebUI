@@ -1,1 +1,9 @@
-landing
+<div class="landing-container">
+    landing
+    <button mat-flat-button color="primary" [routerLink]="['/login']">Login</button>
+    <button mat-flat-button color="accent" [routerLink]="['/admin/dashboard']">Dashboard</button>
+    <button mat-flat-button color="warn" [routerLink]="['/landing']">Landing</button>
+    <span>P.S. For testing private routes: open console, type the following <br />
+        localStorage.setItem('user', JSON.stringify({{ '{' }}token: "a"{{ '}' }}))</span>
+</div>
+<footer></footer>
