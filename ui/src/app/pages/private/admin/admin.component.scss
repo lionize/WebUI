@@ -7,7 +7,7 @@
 .main-container {
     width: $desktop-hd;
     margin: 0 auto;
-    padding: $main-padding-small;
+    padding: $padding-small;
     flex: auto;
     @media screen and (max-width: $desktop) {
         width: 100%;

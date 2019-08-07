@@ -5,11 +5,12 @@ import { LoginComponent } from 'src/app/pages/public/login/login.component';
 import { LandingComponent } from 'src/app/pages/public/landing/landing.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'landing', pathMatch: 'full' },
+    // { path: '', redirectTo: 'landing', pathMatch: 'full' },
     { path: '', loadChildren: 'src/app/pages/private/admin/admin.module#AdminModule', canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
-    { path: 'landing', component: LandingComponent },
-    { path: '**', redirectTo: 'landing', pathMatch: 'full' },
+    { path: '', loadChildren: 'src/app/pages/public/public.module#PublicModule' },
+    // { path: 'login', component: LoginComponent },
+    // { path: 'landing', component: LandingComponent },
+    // { path: '**', redirectTo: 'landing', pathMatch: 'full' }
 ];
 
 @NgModule({

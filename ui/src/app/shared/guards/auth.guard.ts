@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     }
 
     canActivate(): boolean {
-        let user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('user'));
         if (user && user.token) {
             return true;
         }
