@@ -10,14 +10,20 @@
             <div class="flex flex-direction-column">
                 <mat-form-field class="vertical-margin-5">
                     <input matInput placeholder="Username" formControlName="username" required>
-                    <mat-error>
-                        <span *ngIf="!form.get('username').valid && form.get('username').touched">Username is required</span>
+                    <mat-error *ngFor="let validation of validationMessages.username">
+                        <mat-error class="error-message" *ngIf="form.get('username').hasError(validation.type) && 
+                            (form.get('username').dirty || form.get('username').touched)">
+                            {{validation.message}}
+                        </mat-error>
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="vertical-margin-5">
                     <input matInput placeholder="Password" formControlName="password" type="password" required>
-                    <mat-error>
-                        <span *ngIf="!form.get('password').valid && form.get('password').touched">Password is required</span>
+                    <mat-error *ngFor="let validation of validationMessages.password">
+                        <mat-error class="error-message" *ngIf="form.get('password').hasError(validation.type) && 
+                            (form.get('password').dirty || form.get('password').touched)">
+                            {{validation.message}}
+                        </mat-error>
                     </mat-error>
                 </mat-form-field>
             </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { validation_messages } from 'src/app/shared/validation.messages'
 
 @Component({
     selector: 'login',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
 
     form: FormGroup;
     loading: boolean = false;
+    validationMessages = validation_messages;
 
     constructor(
         public snackBar: MatSnackBar,
@@ -46,8 +48,8 @@ export class LoginComponent implements OnInit {
 
     _createForm() {
         this.form = this.formBuilder.group({
-            username: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])),
-            password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])),
+            username: this.formBuilder.control(null, [Validators.required, Validators.pattern(/^.{6,}$/)]),
+            password: this.formBuilder.control(null, [Validators.required, Validators.pattern(/^.{6,}$/)]),
         });
     }
 
