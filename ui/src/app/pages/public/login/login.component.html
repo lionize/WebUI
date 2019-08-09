@@ -11,7 +11,7 @@
                 <mat-form-field class="vertical-margin-5">
                     <input matInput placeholder="Username" formControlName="username" required>
                     <mat-error *ngFor="let validation of validationMessages.username">
-                        <mat-error class="error-message" *ngIf="form.get('username').hasError(validation.type) && 
+                        <mat-error *ngIf="form.get('username').hasError(validation.type) && 
                             (form.get('username').dirty || form.get('username').touched)">
                             {{validation.message}}
                         </mat-error>
@@ -20,7 +20,7 @@
                 <mat-form-field class="vertical-margin-5">
                     <input matInput placeholder="Password" formControlName="password" type="password" required>
                     <mat-error *ngFor="let validation of validationMessages.password">
-                        <mat-error class="error-message" *ngIf="form.get('password').hasError(validation.type) && 
+                        <mat-error *ngIf="form.get('password').hasError(validation.type) && 
                             (form.get('password').dirty || form.get('password').touched)">
                             {{validation.message}}
                         </mat-error>

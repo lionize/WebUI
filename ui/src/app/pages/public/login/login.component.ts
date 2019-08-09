@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { validation_messages } from 'src/app/shared/validation.messages'
+import { validation_messages } from 'src/app/shared/validation.messages';
+import { PatternValidator } from 'src/app/shared/helpers/form.validators';
+import { IUser } from './user.model';
 
 @Component({
     selector: 'login',
@@ -28,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     }
 
-    localLogin(event?) {
+    localLogin(event?): void {
         if (event) {
             event.preventDefault();
         }
@@ -36,7 +38,7 @@ export class LoginComponent implements OnInit {
             this.loading = true;
             setTimeout(() => {
                 this.loading = false;
-                const user = {
+                const user: IUser = {
                     username: this.form.get('username').value,
                     token: 'qwertyuiop'
                 }
@@ -46,10 +48,10 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    _createForm() {
+    private _createForm(): void {
         this.form = this.formBuilder.group({
-            username: this.formBuilder.control(null, [Validators.required, Validators.pattern(/^.{6,}$/)]),
-            password: this.formBuilder.control(null, [Validators.required, Validators.pattern(/^.{6,}$/)]),
+            username: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{6,}$/)]),
+            password: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{6,}$/)]),
         });
     }
 

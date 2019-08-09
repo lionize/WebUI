@@ -17,15 +17,7 @@ export class DialogComponent implements OnInit {
     ngOnInit() {
         
     }
-
-    // noClick() {
-    //     this.dialogRef.close();
-    // }
-
-    // yesClick() {
-    //     this.dialogRef.close(true);
-    // }
-
+    
     buttonClick(item) {
         if(item === 'NO' || item === 'OK') {
             this.dialogRef.close();
