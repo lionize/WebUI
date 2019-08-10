@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { AdminComponent } from './admin.component';
-import { HeaderComponent } from 'src/app/pages/private/header/header.component';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 
