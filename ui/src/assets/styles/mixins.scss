@@ -1,0 +1,8 @@
+@mixin main-button ($padding, $border_radius, $font_size, $color, $background_color, $border-color) {
+    padding: $padding;
+    border-radius: $border_radius;
+    font-size: $font_size;
+    color: $color;
+    background-color: $background_color;
+    border: 1px solid $border-color;
+}

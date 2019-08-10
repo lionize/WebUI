@@ -1,3 +1,8 @@
-header
-{{user?.username}}
-<button mat-flat-button color="primary" (click)="logOut()">LOGOUT</button>
+<img src="assets/images/lionize_logo_large.jpg" />
+<div class="nav-menu"></div>
+<div class="user-actions">
+    <span class="horizontal-margin-5">{{user?.username}}</span>
+    <button mat-icon-button color="primary" (click)="logOut()">
+        <mat-icon>power_settings_new</mat-icon>
+    </button>
+</div>

@@ -1,0 +1,19 @@
+@import "src/assets/styles/variables";
+@import "src/assets/styles/common";
+
+:host {
+    @extend .flex-row-vertical-centered;
+    padding: 0 $padding-medium;
+    background-color: rgba($primary, 0.2);
+    > img {
+        height: 50px;
+    }
+    .nav-menu {
+        flex: auto;
+    }
+    .user-actions {
+        > span {
+            @extend .header-user;
+        }
+    }
+}

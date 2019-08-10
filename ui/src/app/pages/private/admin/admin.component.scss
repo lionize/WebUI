@@ -3,6 +3,8 @@
 :host {
     display: flex;
     flex-direction: column;
+    flex: auto;
+    background-color: rgba($primary, 0.1);
 }
 .main-container {
     width: $desktop-hd;
