@@ -33,6 +33,23 @@
                         "scripts": []
                     },
                     "configurations": {
+                        "development": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.prod.ts",
+                                    "with": "src/environments/environment.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": true,
+                            "extractCss": true,
+                            "namedChunks": true,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true
+                        },
                         "production": {
                             "fileReplacements": [
                                 {
@@ -70,6 +87,9 @@
                         "browserTarget": "lionize:build"
                     },
                     "configurations": {
+                        "development": {
+                            "browserTarget": "lionize:build:development"
+                        },
                         "production": {
                             "browserTarget": "lionize:build:production"
                         }
