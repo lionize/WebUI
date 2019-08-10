@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { PublicRoutingModule } from './public.routing.module';
 import { LoginComponent } from 'src/app/pages/public/login/login.component';
+import { RegisterComponent } from 'src/app/pages/public/register/register.component';
 import { LandingComponent } from 'src/app/pages/public/landing/landing.component';
 import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 
@@ -25,6 +26,7 @@ import { FooterComponent } from 'src/app/shared/components/footer/footer.compone
     ],
     declarations: [
         LoginComponent,
+        RegisterComponent,
         LandingComponent,
         FooterComponent
     ],

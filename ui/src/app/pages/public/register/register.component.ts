@@ -4,15 +4,15 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { validation_messages } from 'src/app/shared/validation.messages';
 import { PatternValidator } from 'src/app/shared/helpers/form.validators';
-import { IUserLogin } from './user.model';
+import { IUserRegister } from './user.model';
 
 @Component({
-    selector: 'login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+    selector: 'register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
     form: FormGroup;
     loading: boolean = false;
@@ -30,21 +30,13 @@ export class LoginComponent implements OnInit {
 
     }
 
-    localLogin(event?): void {
+    signUp(event?): void {
         if (event) {
             event.preventDefault();
         }
         else {
-            this.loading = true;
-            setTimeout(() => {
-                this.loading = false;
-                const user: IUserLogin = {
-                    username: this.form.get('username').value,
-                    token: 'qwertyuiop'
-                }
-                localStorage.setItem('user', JSON.stringify(user));
-                this.router.navigate(['/']);
-            }, 1000);
+            // this.loading = true;
+            
         }
     }
 
