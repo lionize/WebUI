@@ -29,3 +29,4 @@ ui/build/
 /TypeScriptModels/
 /ui/src/models.js
 /ui/src/models.js.map
+/ui/src/app/shared/models/Lionize.ts
