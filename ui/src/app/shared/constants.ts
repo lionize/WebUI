@@ -4,3 +4,6 @@ export enum MATRIX {
     DELEGATE = 'DELEGATE',
     DONT_DO = 'DONT DO',
 }
+export const API_URLS = {
+    SIGNUP: 'Accounts/SignUp'
+}
