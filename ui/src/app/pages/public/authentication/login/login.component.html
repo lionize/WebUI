@@ -1,12 +1,12 @@
-<div class="register-container">
+<div class="login-container">
     <mat-toolbar color="primary">
         <mat-toolbar-row class="justify-space-between">
-            <span>Register Form</span>
-            <mat-icon>person_add</mat-icon>
+            <span>Login Form</span>
+            <mat-icon>lock</mat-icon>
         </mat-toolbar-row>
     </mat-toolbar>
     <div class="form border-box">
-        <form [formGroup]="form" (ngSubmit)="signUp($event)">
+        <form [formGroup]="form" (ngSubmit)="localLogin($event)">
             <div class="flex flex-direction-column">
                 <mat-form-field class="vertical-margin-5">
                     <input matInput placeholder="Username" formControlName="username" required>
@@ -31,8 +31,8 @@
             </div>
             <div class="flex flex-direction-row vertical-center justify-space-between">
                 <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid || form.pristine"
-                    (click)="signUp()">
-                    SIGNUP
+                    (click)="localLogin()">
+                    LOG IN
                 </button>
                 <mat-spinner [diameter]="36" *ngIf="loading"></mat-spinner>
             </div>

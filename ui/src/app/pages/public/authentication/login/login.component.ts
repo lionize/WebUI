@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { validation_messages } from 'src/app/shared/validation.messages';
 import { PatternValidator } from 'src/app/shared/helpers/form.validators';
-import { IUserLogin } from './user.model';
+import { IUserLogin } from '../user.model';
 
 @Component({
     selector: 'login',
@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
                 this.loading = false;
                 const user: IUserLogin = {
                     username: this.form.get('username').value,
+                    password: '',  //todo fix
                     token: 'qwertyuiop'
                 }
                 localStorage.setItem('user', JSON.stringify(user));
@@ -51,7 +52,7 @@ export class LoginComponent implements OnInit {
     private _createForm(): void {
         this.form = this.formBuilder.group({
             username: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{6,}$/)]),
-            password: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{6,}$/)]),
+            password: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{6,}$/)])
         });
     }
 

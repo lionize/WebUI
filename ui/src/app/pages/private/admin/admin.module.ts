@@ -25,9 +25,7 @@ import { DialogComponent } from 'src/app/shared/components/dialog/dialog.compone
     exports: [
         AdminComponent
     ],
-    providers: [
-        
-    ],
+    providers: [],
     entryComponents: [DialogComponent]
 })
 export class AdminModule {}

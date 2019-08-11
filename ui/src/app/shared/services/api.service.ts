@@ -18,7 +18,7 @@ export class ApiService {
     get(url: string): Observable<any> {
         return this.http.get(url)
             .pipe(
-                timeout(3000),
+                timeout(5000),
                 takeUntil(this.subscription$),
                 map((response: any) => response),
                 catchError(error => throwError(error))
@@ -28,7 +28,7 @@ export class ApiService {
     post(url: string, body: object): Observable<any> {
         return this.http.post(url, body)
             .pipe(
-                timeout(3000),
+                timeout(5000),
                 takeUntil(this.subscription$),
                 map((response: any) => response),
                 catchError(error => throwError(error))
@@ -38,7 +38,7 @@ export class ApiService {
     patch(url: string, body: object): Observable<any> {
         return this.http.patch(url, body)
             .pipe(
-                timeout(3000),
+                timeout(5000),
                 takeUntil(this.subscription$),
                 map((response: any) => response),
                 catchError(error => throwError(error))
@@ -48,7 +48,7 @@ export class ApiService {
     delete(url: string): Observable<any> {
         return this.http.delete(url)
             .pipe(
-                timeout(3000),
+                timeout(5000),
                 takeUntil(this.subscription$),
                 map((response: any) => response),
                 catchError(error => throwError(error))

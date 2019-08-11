@@ -1,12 +1,12 @@
-<div class="login-container">
+<div class="register-container">
     <mat-toolbar color="primary">
         <mat-toolbar-row class="justify-space-between">
-            <span>Login Form</span>
-            <mat-icon>lock</mat-icon>
+            <span>Register Form</span>
+            <mat-icon>person_add</mat-icon>
         </mat-toolbar-row>
     </mat-toolbar>
     <div class="form border-box">
-        <form [formGroup]="form" (ngSubmit)="localLogin($event)">
+        <form [formGroup]="form" (ngSubmit)="signUp($event)">
             <div class="flex flex-direction-column">
                 <mat-form-field class="vertical-margin-5">
                     <input matInput placeholder="Username" formControlName="username" required>
@@ -26,13 +26,22 @@
                         </mat-error>
                     </mat-error>
                 </mat-form-field>
+                <mat-form-field class="vertical-margin-5">
+                    <input matInput placeholder="Confirm password" formControlName="confirmPassword" type="password" required>
+                    <mat-error *ngFor="let validation of validationMessages.confirmPassword">
+                        <mat-error *ngIf="form.get('confirmPassword').hasError(validation.type) && 
+                            (form.get('confirmPassword').dirty || form.get('confirmPassword').touched)">
+                            {{validation.message}}
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
             </div>
             <div class="flex justify-space-between vertical-margin-5">
             </div>
             <div class="flex flex-direction-row vertical-center justify-space-between">
                 <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid || form.pristine"
-                    (click)="localLogin()">
-                    LOGIN
+                    (click)="signUp()">
+                    SIGN UP
                 </button>
                 <mat-spinner [diameter]="36" *ngIf="loading"></mat-spinner>
             </div>
