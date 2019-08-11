@@ -4,15 +4,15 @@
     display: flex;
     flex-direction: column;
     flex: auto;
-    background-color: rgba($primary, 0.1);
 }
 .main-container {
     width: $desktop-hd;
     margin: 0 auto;
-    padding: $padding-small;
+    padding: $padding-medium;
+    display: flex;
     flex: auto;
-    @media screen and (max-width: $desktop) {
+    @media screen and (max-width: $desktop-hd) {
         width: 100%;
-        padding: 0;
+        padding:  $padding-small;
     }
 }
