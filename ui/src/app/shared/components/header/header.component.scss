@@ -3,8 +3,8 @@
 
 :host {
     @extend .flex-row-vertical-centered;
-    padding: 0 $padding-medium;
-    background-color: rgba($primary, 0.2);
+    padding-right: $padding-medium;
+    background-color: rgba($primary, 1);
     > img {
         height: 50px;
     }
@@ -15,5 +15,8 @@
         > span {
             @extend .header-user;
         }
+    }
+    .mat-icon {
+        color: $pure-white;
     }
 }
