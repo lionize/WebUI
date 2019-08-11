@@ -51,8 +51,8 @@ export class LoginComponent implements OnInit {
 
     private _createForm(): void {
         this.form = this.formBuilder.group({
-            username: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{6,}$/)]),
-            password: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{6,}$/)])
+            username: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{4,}$/)]),
+            password: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{4,}$/)])
         });
     }
 

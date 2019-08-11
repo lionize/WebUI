@@ -16,4 +16,8 @@ export class AuthenticationService {
         return this.apiService.post(`${environment.apiBase}${API_URLS.SIGNUP}`, payload).pipe(map((response: any) => response));
     }
 
+    signIn(payload) {
+        return this.apiService.post(`${environment.apiBase}${API_URLS.SIGNIN}`, payload).pipe(map((response: any) => response));
+    }
+
 }
