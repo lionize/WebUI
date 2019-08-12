@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "build": "ng build",
     "build:loc": "ng build --configuration=local",
     "build:dev": "ng build --configuration=development",
     "build:prod": "ng build --configuration=production",
