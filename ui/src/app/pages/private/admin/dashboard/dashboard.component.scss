@@ -2,4 +2,14 @@
 
 :host {
     flex: auto;
+    .matrix-container {
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: $padding-large;
+        grid-row-gap: $padding-large;
+        @media screen and (max-width: $tablet) {
+            grid-template-columns: 1fr;
+            grid-column-gap: $padding-small;
+            grid-row-gap: $padding-small;
+        }
+    }
 }
