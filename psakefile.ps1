@@ -20,7 +20,7 @@ Task Build -Depends TranspileModels {
     try {
         Push-Location
         Set-Location $script:SourceRootFolder
-        Exec { npm run build }
+        Exec { npm run "build:prod" }
     }
     finally {
         Pop-Location
