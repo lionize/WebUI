@@ -1,0 +1,30 @@
+//theme-colors
+$primary: #8c8c8c;
+$primary-light: rgba($primary, 0.2);
+
+//colors
+$urgent-important: #99cc11;
+$urgent-not-important: #ffaa22;
+$not-urgent-important: #4488ee;
+$not-urgent-not-important: #cc1111;
+
+$pure-black: #000000;
+$pure-white: #ffffff;
+
+//sizes
+$padding-large: 20px;
+$padding-medium: 15px;
+$padding-small: 10px; 
+
+//resolutions
+$desktop-hd: 1280px;
+$desktop: 1024px;
+$tablet: 768px;
+$mobile: 420px;
+
+:export {
+    urgentImportant: $urgent-important;
+    urgentNotImportant: $urgent-not-important;
+    notUrgentImportant: $not-urgent-important;
+    notUrgentNotImportant: $not-urgent-not-important;
+  }

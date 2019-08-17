@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import '~material-design-icons/iconfont/material-icons.css';
+
+@import './assets/styles/mixins';
+@import './assets/styles/fonts';
+@import './assets/styles/variables';
+
+@include mat-core();
+
+@import './assets/styles/themes/eisenhower-theme';
+
+@import './app/app-theme.component'; 
+
+@mixin custom-theme($theme) {
+    @include app-theme-component($theme);
+}
+
+@include angular-material-theme($eisenhower); 
+@include custom-theme($eisenhower);
+
+html {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto-Regular;
+}
+
+/////////common styles/////////
+.full-height {
+    height: 100%;
+}
+.full-width {
+    width: 100%;
+}
+.vertical-margin-5 {
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.flex {
+    display: flex;
+}
+.flex-direction-column {
+    flex-direction: column;
+}
+.flex-direction-row {
+    flex-direction: row;
+}
+.justify-space-between {
+    justify-content: space-between;
+}
+.justrify-space-around {
+    justify-content: space-around;
+}
+.justify-center {
+    justify-content: center;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.grid {
+    display: grid;
+}
+.primary-color {
+    color: $primary;
+}
+.horizontal-margin-5 {
+    margin: 0 5px !important;
+}
+.bordered-bottom {
+    border-bottom: 1px solid $primary;
+} 
+.border-box {
+    box-sizing: border-box;
+}

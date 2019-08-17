@@ -1,0 +1,22 @@
+@import "src/assets/styles/variables";
+@import "src/assets/styles/common";
+
+:host {
+    @extend .flex-row-vertical-centered;
+    padding-right: $padding-medium;
+    background-color: rgba($primary, 1);
+    > img {
+        height: 50px;
+    }
+    .nav-menu {
+        flex: auto;
+    }
+    .user-actions {
+        > span {
+            @extend .header-user;
+        }
+    }
+    .mat-icon {
+        color: $pure-white;
+    }
+}
