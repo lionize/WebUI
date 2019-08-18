@@ -30,14 +30,14 @@ Task Pack -Depends CopyArtefacts {
     write $tagsArguments
 
     Assert $false "stop"
-    Exec { docker build -f Dockerfile $artefacts $tagsArguments }
+    Exec { docker build -f Dockerfile $script:artefacts $tagsArguments }
 }
 
 Task CopyArtefacts -Depends Build {
-    $artefacts = Join-Path -Path $script:trashFolder -ChildPath "artefacts"
+    $script:artefacts = Join-Path -Path $script:trashFolder -ChildPath "artefacts"
 
-    Copy-Item -Path (Join-Path -Path $script:SourceRootFolder -ChildPath ".\dist\lionize") -Destination (Join-Path -Path $artefacts -ChildPath "build") -Recurse
-    Copy-Item -Path (Join-Path -Path $script:SourceRootFolder -ChildPath "nginx.conf") -Destination (Join-Path -Path $artefacts -ChildPath "nginx.conf")
+    Copy-Item -Path (Join-Path -Path $script:SourceRootFolder -ChildPath ".\dist\lionize") -Destination (Join-Path -Path $script:artefacts -ChildPath "build") -Recurse
+    Copy-Item -Path (Join-Path -Path $script:SourceRootFolder -ChildPath "nginx.conf") -Destination (Join-Path -Path $script:artefacts -ChildPath "nginx.conf")
 }
 
 Task Build -Depends TranspileModels {
