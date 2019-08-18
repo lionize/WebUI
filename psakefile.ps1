@@ -1,12 +1,41 @@
+Properties {
+    $VersionTags = @()
+
+    if ($Latest) {
+        $VersionTags += 'latest'
+    }
+
+    if (!!($Version)) {
+        $Version = [Version]$Version
+
+        Assert ($Version.Revision -eq -1) "Version should be formatted as Major.Minor.Patch like 1.2.3"
+        Assert ($Version.Build -ne -1) "Version should be formatted as Major.Minor.Patch like 1.2.3"
+
+        $Version = $Version.ToString()
+        $VersionTags += $Version
+    }
+
+    Assert $VersionTags "No version parameter (latest or specific version) is passed."
+}
+
 Task Publish -Depends Pack {
     Exec { docker login docker.io  --username=ashotnazaryan45 }
-    $remoteTag = "docker.io/$script:latestImageTag"
-    Exec { docker tag $script:latestImageTag $remoteTag }
-    Exec { docker push $remoteTag }
+    foreach ($VersionTag in $VersionTags) {
+        $localTag = ($script:imageName + ":" + $VersionTag)
+        $remoteTag = ("docker.io/" + $localTag)
+        Exec { docker tag $localTag $remoteTag }
+        Exec { docker push $remoteTag }
+    }
 }
 
 Task Pack -Depends CopyArtefacts {
-    Exec { docker build -f Dockerfile $script:artefacts -t $script:latestImageTag }
+    $tagsArguments = @()
+    foreach ($VersionTag in $VersionTags) {
+        $tagsArguments += "-t"
+        $tagsArguments += ($script:imageName + ":" + $VersionTag)
+    }
+
+    Exec { docker build -f Dockerfile $script:artefacts $tagsArguments }
 }
 
 Task CopyArtefacts -Depends Build {
@@ -50,9 +79,9 @@ Task Clean -Depends Init {
 Task Init {
     $date = Get-Date
     $ticks = $date.Ticks
-    $script:latestImageTag = "ashotnazaryan45/lionize-web-ui:latest"
-    $trashFolder = Join-Path -Path . -ChildPath ".trash"
-    $script:trashFolder = Join-Path -Path $trashFolder -ChildPath $ticks.ToString("D19")
+    $script:imageName = "ashotnazaryan45/lionize-web-ui"
+    $script:trashFolder = Join-Path -Path . -ChildPath ".trash"
+    $script:trashFolder = Join-Path -Path $script:trashFolder -ChildPath $ticks.ToString("D19")
     New-Item -Path $script:trashFolder -ItemType Directory
     $script:trashFolder = Resolve-Path -Path $script:trashFolder
     $script:SourceRootFolder = (Resolve-Path ".\ui\").Path
