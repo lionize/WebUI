@@ -27,9 +27,6 @@ Task Publish -Depends Pack {
 
 Task Pack -Depends CopyArtefacts {
     $tagsArguments = $VersionTags | ForEach-Object { "-t $_" } | Join-String -Separator " "
-    write $tagsArguments
-
-    Assert $false "stop"
     Exec { docker build -f Dockerfile $script:artefacts $tagsArguments }
 }
 
