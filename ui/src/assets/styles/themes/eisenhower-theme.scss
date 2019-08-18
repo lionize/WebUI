@@ -32,7 +32,7 @@ $eisenhower-grey: (
     )
 );
 
-$eisenhower-green: (
+$eisenhower-purple: (
     50: #e8f5e9,
     100: #c8e6c9,
     200: #a5d6a7,
@@ -40,7 +40,7 @@ $eisenhower-green: (
     400: #66bb6a,
     500: #2ecc71,
     600: #43a047,
-    700: #99cc11,  //todo change all
+    700: #b300b3,  //todo change all
     800: #2e7d32,
     900: #1b5e20,
     A100: #b9f6ca,
@@ -99,7 +99,7 @@ $eisenhower-green: (
   );
 
 $eisenhower-primary: mat-palette($eisenhower-grey, 700);
-$eisenhower-accent: mat-palette($eisenhower-green, 700);
+$eisenhower-accent: mat-palette($eisenhower-purple, 700);
 $eisenhower-warn: mat-palette($eisenhower-red, 700);
 
 $eisenhower: mat-light-theme($eisenhower-primary, $eisenhower-accent, $eisenhower-warn);

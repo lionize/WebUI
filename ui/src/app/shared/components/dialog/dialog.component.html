@@ -3,7 +3,7 @@
 <mat-dialog-content>{{data.content}}</mat-dialog-content>
 
 <mat-dialog-actions class="flex justify-space-between">
-    <button mat-flat-button color="{{ item === 'YES' ? 'accent' : 'warn'}}" *ngFor="let item of data.buttons"
+    <button mat-flat-button color="primary" *ngFor="let item of data.buttons" 
         (click)="buttonClick(item)">{{item}}
-    </button>
+    </button>  <!--{{ item === 'YES' ? 'accent' : 'primary'}}-->
 </mat-dialog-actions>

@@ -36,14 +36,10 @@ export class HeaderComponent implements OnInit {
             data: {
                 title: "LOG OUT",
                 content: "Are you sure you want to logout ?",
-                buttons: ["NO", "YES"]
+                buttons: ["YES", "NO"]
             }
         });
-        dialogRef.afterClosed().subscribe(data => {
-            if (data) {
-                this.logOut();
-            }
-        });
+        dialogRef.afterClosed().subscribe(data => data && this.logOut());
     }
 
 }
