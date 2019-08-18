@@ -1,11 +1,11 @@
 Properties {
     $VersionTags = @()
 
-    if($Latest) {
+    if ($Latest) {
         $VersionTags += 'latest'
     }
 
-    if(!!($Version)) {
+    if (!!($Version)) {
         $Version = [Version]$Version
 
         Assert ($Version.Revision -eq -1) "Version should be formatted as Major.Minor.Patch like 1.2.3"
@@ -26,7 +26,12 @@ Task Publish -Depends Pack {
 }
 
 Task Pack -Depends CopyArtefacts {
-    $tagsArguments = $VersionTags | ForEach-Object { "-t $_" } | Join-String -Separator " "
+    $tagsArguments = @()
+    foreach ($VersionTag in $VersionTags) {
+        $tagsArguments += "-t"
+        $tagsArguments += ($script:imageName + ":" + $VersionTag)
+    }
+
     Exec { docker build -f Dockerfile $script:artefacts $tagsArguments }
 }
 
