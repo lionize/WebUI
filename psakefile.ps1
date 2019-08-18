@@ -26,20 +26,24 @@ Task Publish -Depends Pack {
 }
 
 Task Pack -Depends CopyArtefacts {
-    Exec { docker build -f Dockerfile $artefacts -t $script:latestImageTag }
+    $tagsArguments = $VersionTags | ForEach-Object { "-t $_" } | Join-String -Separator " "
+    write $tagsArguments
+
+    Assert $false "stop"
+    Exec { docker build -f Dockerfile $artefacts $tagsArguments }
 }
 
 Task CopyArtefacts -Depends Build {
-    $artefacts = Join-Path -Path $trashFolder -ChildPath "artefacts"
+    $artefacts = Join-Path -Path $script:trashFolder -ChildPath "artefacts"
 
-    Copy-Item -Path (Join-Path -Path $SourceRootFolder -ChildPath ".\dist\lionize") -Destination (Join-Path -Path $artefacts -ChildPath "build") -Recurse
-    Copy-Item -Path (Join-Path -Path $SourceRootFolder -ChildPath "nginx.conf") -Destination (Join-Path -Path $artefacts -ChildPath "nginx.conf")
+    Copy-Item -Path (Join-Path -Path $script:SourceRootFolder -ChildPath ".\dist\lionize") -Destination (Join-Path -Path $artefacts -ChildPath "build") -Recurse
+    Copy-Item -Path (Join-Path -Path $script:SourceRootFolder -ChildPath "nginx.conf") -Destination (Join-Path -Path $artefacts -ChildPath "nginx.conf")
 }
 
 Task Build -Depends TranspileModels {
     try {
         Push-Location
-        Set-Location $SourceRootFolder
+        Set-Location $script:SourceRootFolder
         Exec { npm run "build:prod" }
     }
     finally {
@@ -56,7 +60,7 @@ Task TranspileModels -Depends NpmInstall {
 Task NpmInstall -Depends Init, Clean {
     try {
         Push-Location
-        Set-Location $SourceRootFolder
+        Set-Location $script:SourceRootFolder
         Exec { npm install }
     }
     finally {
@@ -70,10 +74,10 @@ Task Clean -Depends Init {
 Task Init {
     $date = Get-Date
     $ticks = $date.Ticks
-    $imageName = "ashotnazaryan45/lionize-web-ui"
-    $trashFolder = Join-Path -Path . -ChildPath ".trash"
-    $trashFolder = Join-Path -Path $trashFolder -ChildPath $ticks.ToString("D19")
-    New-Item -Path $trashFolder -ItemType Directory
-    $trashFolder = Resolve-Path -Path $trashFolder
-    $SourceRootFolder = (Resolve-Path ".\ui\").Path
+    $script:imageName = "ashotnazaryan45/lionize-web-ui"
+    $script:trashFolder = Join-Path -Path . -ChildPath ".trash"
+    $script:trashFolder = Join-Path -Path $script:trashFolder -ChildPath $ticks.ToString("D19")
+    New-Item -Path $script:trashFolder -ItemType Directory
+    $script:trashFolder = Resolve-Path -Path $script:trashFolder
+    $script:SourceRootFolder = (Resolve-Path ".\ui\").Path
 }
