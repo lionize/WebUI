@@ -20,9 +20,12 @@ Properties {
 
 Task Publish -Depends Pack {
     Exec { docker login docker.io  --username=ashotnazaryan45 }
-    $remoteTag = "docker.io/$script:latestImageTag"
-    Exec { docker tag $script:latestImageTag $remoteTag }
-    Exec { docker push $remoteTag }
+    foreach ($VersionTag in $VersionTags) {
+        $localTag = ($script:imageName + ":" + $VersionTag)
+        $remoteTag = ("docker.io/" + $localTag)
+        Exec { docker tag $localTag $remoteTag }
+        Exec { docker push $remoteTag }
+    }
 }
 
 Task Pack -Depends CopyArtefacts {
