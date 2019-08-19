@@ -44,11 +44,13 @@ export class RegisterComponent implements OnInit {
             this.loading = true;
             this.authenticationService.signUp(payload)
                 .subscribe(
-                    response => {
+                    (response) => {
                         this.loading = false;
-                        this.router.navigate(['/']);
+                        if (response.isSuccess) {
+                            this.router.navigate(['/auth/login']);
+                        }
                     },
-                    error => {
+                    (error) => {
                         this.loading = false;
                     });
         }

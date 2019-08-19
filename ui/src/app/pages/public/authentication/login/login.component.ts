@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { validation_messages } from 'src/app/shared/validation.messages';
 import { PatternValidator } from 'src/app/shared/helpers/form.validators';
-import { IUserLogin } from '../user.model';
+import { IUserLogin, IUser } from '../user.model';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
     selector: 'login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     constructor(
         public snackBar: MatSnackBar,
         private formBuilder: FormBuilder,
-        private router: Router
+        private router: Router,
+        private authenticationService: AuthenticationService
     ) {
         this._createForm();
     }
@@ -35,17 +37,28 @@ export class LoginComponent implements OnInit {
             event.preventDefault();
         }
         else {
+            const payload: IUserLogin = {
+                username: this.form.get('username').value,
+                password: this.form.get('password').value
+            }
             this.loading = true;
-            setTimeout(() => {
-                this.loading = false;
-                const user: IUserLogin = {
-                    username: this.form.get('username').value,
-                    password: '',  //todo fix
-                    token: 'qwertyuiop'
-                }
-                localStorage.setItem('user', JSON.stringify(user));
-                this.router.navigate(['/']);
-            }, 1000);
+            this.authenticationService.signIn(payload)
+                .subscribe(
+                    (response) => {
+                        this.loading = false;
+                        if (response.isSuccess) {
+                            const user: IUser = {
+                                username: response.username,
+                                accessToken: response.accessToken,
+                                refreshToken: response.refreshToken
+                            }
+                            localStorage.setItem('user', JSON.stringify(user));
+                            this.router.navigate(['/']);
+                        }
+                    },
+                    (error) => {
+                        this.loading = false;
+                    });
         }
     }
 

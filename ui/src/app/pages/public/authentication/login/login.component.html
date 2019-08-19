@@ -32,8 +32,11 @@
             <div class="flex flex-direction-row vertical-center justify-space-between">
                 <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid || form.pristine"
                     (click)="localLogin()">
-                    LOG IN
+                    SIGN IN
                 </button>
+                <!-- <button mat-flat-button color="primary" [routerLink]="['/auth/register']">
+                    SIGN UP
+                </button> -->
                 <mat-spinner [diameter]="36" *ngIf="loading"></mat-spinner>
             </div>
         </form>
