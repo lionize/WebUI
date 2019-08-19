@@ -13,11 +13,11 @@ export class AuthenticationService {
     }
 
     signUp(payload) {
-        return this.apiService.post(`${environment.apiBase}${API_URLS.SIGNUP}`, payload).pipe(map((response: any) => response));
+        return this.apiService.post(`${environment.signUpBase}${API_URLS.SIGNUP}`, payload).pipe(map((response: any) => response));
     }
 
     signIn(payload) {
-        return this.apiService.post(`${environment.apiBase}${API_URLS.SIGNIN}`, payload).pipe(map((response: any) => response));
+        return this.apiService.post(`${environment.signInBase}${API_URLS.SIGNIN}`, payload).pipe(map((response: any) => response));
     }
 
 }

@@ -33,23 +33,6 @@
                         "scripts": []
                     },
                     "configurations": {
-                        "local": {
-                            "fileReplacements": [
-                                {
-                                    "replace": "src/environments/environment.prod.ts",
-                                    "with": "src/environments/environment.loc.ts"
-                                }
-                            ],
-                            "optimization": false,
-                            "outputHashing": "all",
-                            "sourceMap": true,
-                            "extractCss": true,
-                            "namedChunks": true,
-                            "aot": false,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": false
-                        },
                         "development": {
                             "fileReplacements": [
                                 {

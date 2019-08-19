@@ -1,4 +1,6 @@
 export const environment = {
     production: true,
-    apiBase: 'http://localhost:8081/api/1.0/'  //todo change
+    //TODO change
+    signUpBase: 'http://localhost:8081/api/1.0/',
+    signInBase: 'http://localhost:8083/api/1.0/'
 };
