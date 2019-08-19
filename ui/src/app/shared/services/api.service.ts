@@ -16,13 +16,13 @@ export class ApiService {
     private subscription$: Subject<boolean> = new Subject<boolean>();
 
     constructor(
-        private _http: HttpClient,
-        private _snackBar: MatSnackBar
+        private http: HttpClient,
+        private snackBar: MatSnackBar
     ) {
     }
 
     get(url: string): Observable<any> {
-        return this._http.get(url)
+        return this.http.get(url)
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
@@ -32,7 +32,7 @@ export class ApiService {
     }
 
     post(url: string, body: object): Observable<any> {
-        return this._http.post(url, body)
+        return this.http.post(url, body)
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
@@ -41,7 +41,7 @@ export class ApiService {
                     (response: any) => {
                         if (response.isError) {
                             //TODO separate component
-                            this._snackBar.open(response.error, '');
+                            this.snackBar.open(response.error, '');
                         }
                         return response
                     }),
@@ -50,7 +50,7 @@ export class ApiService {
     }
 
     patch(url: string, body: object): Observable<any> {
-        return this._http.patch(url, body)
+        return this.http.patch(url, body)
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
@@ -60,7 +60,7 @@ export class ApiService {
     }
 
     delete(url: string): Observable<any> {
-        return this._http.delete(url)
+        return this.http.delete(url)
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
