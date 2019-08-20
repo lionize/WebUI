@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
                 .subscribe(
                     (response) => {
                         this.loading = false;
-                        if (response.isSuccess) {
+                        if (!response.isError) {
                             const user: IUser = {
                                 username: response.username,
                                 accessToken: response.accessToken,
