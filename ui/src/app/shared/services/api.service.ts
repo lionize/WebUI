@@ -21,6 +21,17 @@ export class ApiService {
     ) {
     }
 
+    private _errorHandle(error) {
+        debugger
+        // (response: any) => {
+            if (error.isError) {
+                //TODO separate component
+                this.snackBar.open(error.errorMessage, '');
+            }
+            return error;
+        // }),
+    }
+
     get(url: string): Observable<any> {
         return this.http.get(url)
             .pipe(
@@ -39,9 +50,10 @@ export class ApiService {
                 //QUICK FIX, use interface
                 map(
                     (response: any) => {
+                        // this._errorHandle(response);
                         if (response.isError) {
                             //TODO separate component
-                            this.snackBar.open(response.error, '');
+                            this.snackBar.open(response.errorMessage, '');
                         }
                         return response
                     }),
