@@ -21,15 +21,8 @@ export class ApiService {
     ) {
     }
 
-    private _errorHandle(error) {
-        debugger
-        // (response: any) => {
-            if (error.isError) {
-                //TODO separate component
-                this.snackBar.open(error.errorMessage, '');
-            }
-            return error;
-        // }),
+    private _handleError(error) {
+        this.snackBar.open(error.errorMessage, '');
     }
 
     get(url: string): Observable<any> {
@@ -37,7 +30,14 @@ export class ApiService {
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
-                map((response) => response),
+                map(
+                    //FIXME, use interface
+                    (response: any) => {
+                        if (response.isError) {
+                            return this._handleError(response);
+                        }
+                        return response;
+                    }),
                 catchError(error => throwError(error))
             );
     }
@@ -47,15 +47,13 @@ export class ApiService {
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
-                //QUICK FIX, use interface
                 map(
+                    //FIXME, use interface
                     (response: any) => {
-                        // this._errorHandle(response);
                         if (response.isError) {
-                            //TODO separate component
-                            this.snackBar.open(response.errorMessage, '');
+                            return this._handleError(response);
                         }
-                        return response
+                        return response;
                     }),
                 catchError((error) => throwError(error))
             );
@@ -66,7 +64,14 @@ export class ApiService {
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
-                map((response) => response),
+                map(
+                    //FIXME, use interface
+                    (response: any) => {
+                        if (response.isError) {
+                            return this._handleError(response);
+                        }
+                        return response;
+                    }),
                 catchError(error => throwError(error))
             );
     }
@@ -76,7 +81,14 @@ export class ApiService {
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
-                map((response) => response),
+                map(
+                    //FIXME, use interface
+                    (response: any) => {
+                        if (response.isError) {
+                            return this._handleError(response);
+                        }
+                        return response;
+                    }),
                 catchError(error => throwError(error))
             );
     }

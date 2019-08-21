@@ -43,10 +43,10 @@
                     (click)="signUp()">
                     SIGN UP
                 </button>
-                <!-- <button mat-flat-button color="primary" [routerLink]="['/auth/login']">
-                    SIGN IN
-                </button> -->
                 <mat-spinner [diameter]="36" *ngIf="loading"></mat-spinner>
+                <button mat-flat-button color="primary" type="button" [routerLink]="['/auth/login']">
+                    SIGN IN
+                </button>
             </div>
         </form>
     </div>

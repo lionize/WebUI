@@ -34,10 +34,10 @@
                     (click)="localLogin()">
                     SIGN IN
                 </button>
-                <!-- <button mat-flat-button color="primary" [routerLink]="['/auth/register']">
-                    SIGN UP
-                </button> -->
                 <mat-spinner [diameter]="36" *ngIf="loading"></mat-spinner>
+                <button mat-flat-button color="primary" type="button" [routerLink]="['/auth/register']">
+                    SIGN UP
+                </button>
             </div>
         </form>
     </div>
