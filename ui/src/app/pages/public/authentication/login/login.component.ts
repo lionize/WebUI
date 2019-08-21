@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
                         this.loading = false;
                         if (!response.isError) {
                             const user: IUser = {
-                                username: response.username,
+                                username: payload.username,
                                 accessToken: response.accessToken,
                                 refreshToken: response.refreshToken
                             }
