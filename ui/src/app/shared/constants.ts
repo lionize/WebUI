@@ -4,6 +4,7 @@ export enum MATRIX {
     DELEGATE = 'DELEGATE',
     DONT_DO = 'DONT DO',
 }
+
 export enum API_URLS {
     SIGN_UP = 'Accounts/SignUp',
     SIGN_IN = 'Accounts/SignIn'
