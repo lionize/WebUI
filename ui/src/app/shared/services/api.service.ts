@@ -23,6 +23,7 @@ export class ApiService {
 
     private _handleError(error) {
         this.snackBar.open(error.errorMessage, '');
+        return error;
     }
 
     get(url: string): Observable<any> {
@@ -31,7 +32,6 @@ export class ApiService {
                 timeout(5000),
                 takeUntil(this.subscription$),
                 map(
-                    //FIXME, use interface
                     (response: any) => {
                         if (response.isError) {
                             return this._handleError(response);
@@ -48,7 +48,6 @@ export class ApiService {
                 timeout(5000),
                 takeUntil(this.subscription$),
                 map(
-                    //FIXME, use interface
                     (response: any) => {
                         if (response.isError) {
                             return this._handleError(response);
@@ -65,7 +64,6 @@ export class ApiService {
                 timeout(5000),
                 takeUntil(this.subscription$),
                 map(
-                    //FIXME, use interface
                     (response: any) => {
                         if (response.isError) {
                             return this._handleError(response);
@@ -82,7 +80,6 @@ export class ApiService {
                 timeout(5000),
                 takeUntil(this.subscription$),
                 map(
-                    //FIXME, use interface
                     (response: any) => {
                         if (response.isError) {
                             return this._handleError(response);

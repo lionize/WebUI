@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
-import { IUserLogin } from 'src/app/pages/public/authentication/user.model';
+import { IClientUserLogin } from 'src/app/pages/public/authentication/user.model';
 
 @Component({
     selector: 'header',
@@ -12,7 +12,7 @@ import { IUserLogin } from 'src/app/pages/public/authentication/user.model';
 
 export class HeaderComponent implements OnInit {
 
-    user: IUserLogin;
+    user: IClientUserLogin;
 
     constructor(
         private router: Router,
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
 
     logOut() {
         localStorage.removeItem('user');
-        this.user = { username: '', password: '' };  //todo fix
+        this.user = { username: '', password: '' };
         this.router.navigate(['/auth/login']);
     }
 

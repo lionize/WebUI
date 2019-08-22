@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { validation_messages } from 'src/app/shared/validation.messages';
 import { PatternValidator } from 'src/app/shared/helpers/form.validators';
-import { IUserLogin, IUser } from '../user.model';
+import { IClientUserLogin, ISigInUser } from '../user.model';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
             event.preventDefault();
         }
         else {
-            const payload: IUserLogin = {
+            const payload: IClientUserLogin = {
                 username: this.form.get('username').value,
                 password: this.form.get('password').value
             }
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
                     (response) => {
                         this.loading = false;
                         if (!response.isError) {
-                            const user: IUser = {
+                            const user: ISigInUser = {
                                 username: payload.username,
                                 accessToken: response.accessToken,
                                 refreshToken: response.refreshToken
