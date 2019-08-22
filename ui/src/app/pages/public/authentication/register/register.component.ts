@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { validation_messages } from 'src/app/shared/validation.messages';
 import { PatternValidator, PasswordsMatchingValidator } from 'src/app/shared/helpers/form.validators';
-import { IUserRegister } from '../user.model';
+import { IClientUserRegister } from '../user.model';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
             event.preventDefault();
         }
         else {
-            const payload: IUserRegister = {
+            const payload: IClientUserRegister = {
                 username: this.form.get('username').value,
                 password: this.form.get('password').value
             }

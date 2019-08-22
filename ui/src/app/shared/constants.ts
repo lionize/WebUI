@@ -5,6 +5,6 @@ export enum MATRIX {
     DONT_DO = 'DONT DO',
 }
 export enum API_URLS {
-    SIGNUP = 'Accounts/SignUp',
-    SIGNIN = 'Accounts/SignIn'
+    SIGN_UP = 'Accounts/SignUp',
+    SIGN_IN = 'Accounts/SignIn'
 }
