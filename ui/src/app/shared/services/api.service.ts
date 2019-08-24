@@ -22,19 +22,21 @@ export class ApiService {
     }
 
     private _handleError(error) {
+        //TODO show button instead empty text
+        //TODO handle other errors
         this.snackBar.open(error.errorMessage, '');
         return error;
     }
 
     get(url: string): Observable<any> {
-        return this.http.get(url)
+        return this.http.get<any>(url)
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
                 map(
                     (response: any) => {
                         if (response.isError) {
-                            return this._handleError(response);
+                            this._handleError(response);
                         }
                         return response;
                     }),
@@ -43,14 +45,14 @@ export class ApiService {
     }
 
     post(url: string, body: object): Observable<any> {
-        return this.http.post(url, body)
+        return this.http.post<any>(url, body)
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
                 map(
                     (response: any) => {
                         if (response.isError) {
-                            return this._handleError(response);
+                            this._handleError(response);
                         }
                         return response;
                     }),
@@ -59,14 +61,14 @@ export class ApiService {
     }
 
     patch(url: string, body: object): Observable<any> {
-        return this.http.patch(url, body)
+        return this.http.patch<any>(url, body)
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
                 map(
                     (response: any) => {
                         if (response.isError) {
-                            return this._handleError(response);
+                            this._handleError(response);
                         }
                         return response;
                     }),
@@ -75,14 +77,14 @@ export class ApiService {
     }
 
     delete(url: string): Observable<any> {
-        return this.http.delete(url)
+        return this.http.delete<any>(url)
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),
                 map(
                     (response: any) => {
                         if (response.isError) {
-                            return this._handleError(response);
+                            this._handleError(response);
                         }
                         return response;
                     }),
