@@ -16,21 +16,11 @@ export class AuthenticationService {
 
     signUp(payload): Observable<ISignUpUser> {
         return this.apiService.post(`${environment.signUpBase}${API_URLS.SIGN_UP}`, payload)
-            .pipe(
-                map(
-                    (response) => {
-                        return response;
-                    })
-            );
+            .pipe(map((response: ISignUpUser) => response));
     }
 
     signIn(payload): Observable<ISigInUser> {
         return this.apiService.post(`${environment.signInBase}${API_URLS.SIGN_IN}`, payload)
-        .pipe(
-            map(
-                (response) => {
-                    return response;
-                })
-        );
+            .pipe(map((response: ISigInUser) => response));
     }
 }

@@ -13,6 +13,7 @@ import { IClientUserLogin } from 'src/app/pages/public/authentication/user.model
 export class HeaderComponent implements OnInit {
 
     user: IClientUserLogin;
+    isMenuOpen: boolean = false;
 
     constructor(
         private router: Router,
@@ -40,6 +41,10 @@ export class HeaderComponent implements OnInit {
             }
         });
         dialogRef.afterClosed().subscribe(data => data && this.logOut());
+    }
+
+    toggleMenu() {
+        this.isMenuOpen = !this.isMenuOpen;
     }
 
 }
