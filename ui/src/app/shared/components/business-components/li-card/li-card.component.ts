@@ -15,6 +15,6 @@ export class LiCardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.color
+        
     }
 }   
