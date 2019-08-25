@@ -2,13 +2,14 @@
 @import '~@angular/material/theming';
 @import '~material-design-icons/iconfont/material-icons.css';
 
-@import './assets/styles/mixins';
-@import './assets/styles/fonts';
-@import './assets/styles/variables';
+@import 'assets/styles/variables';
+@import 'assets/styles/mixins';
+@import 'assets/styles/fonts';
+@import 'assets/styles/common';
 
 @include mat-core();
 
-@import './assets/styles/themes/eisenhower-theme';
+@import 'assets/styles/themes/eisenhower-theme';
 
 @import './app/app-theme.component'; 
 

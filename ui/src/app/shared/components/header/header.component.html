@@ -1,6 +1,6 @@
-<img src="assets/images/lionize_logo_large.jpg" />
+<!-- <img src="assets/images/lionize_logo_large.jpg" /> -->
 <button mat-icon-button color="primary" (click)="toggleMenu()">
-    <mat-icon>menu</mat-icon>
+    <mat-icon>{{isMenuOpen ? 'close' : 'menu'}}</mat-icon>
 </button>
 <div class="nav-menu"></div>
 <div class="user-actions">

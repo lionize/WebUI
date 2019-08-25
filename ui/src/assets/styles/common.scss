@@ -7,3 +7,13 @@
     font: 16px Roboto-Bold;
     color: $pure-white;;
 }
+.full-flex-column {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+}
+.full-flex-row {
+    display: flex;
+    flex-direction: row;
+    flex: auto;
+}
