@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { MatSidenavModule } from '@angular/material/sidenav';
+// import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AdminRoutingModule } from './admin.routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -20,7 +20,7 @@ import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
         CommonModule,
         AdminRoutingModule, 
         SharedModule,
-        MatButtonModule, MatDialogModule, MatCardModule, MatSidenavModule
+        MatButtonModule, MatDialogModule, MatCardModule, /*MatSidenavModule*/
     ],
     declarations: [
         AdminComponent,
