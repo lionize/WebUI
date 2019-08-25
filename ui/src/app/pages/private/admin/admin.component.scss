@@ -1,24 +1,15 @@
-@import "src/assets/styles/variables";
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/common';
 
 :host {
-    display: flex;
-    flex-direction: row;
-    flex: auto;
+    @extend .full-flex-row;
 }
 .admin-container {
     width: $desktop-hd;
     margin: 0 auto;
-    // padding: $padding-medium;
-    display: flex;
-    flex-direction: column;
-    flex: auto;
     background-color: rgba($primary, 0.2);
+    @extend .full-flex-column;
     @media screen and (max-width: $desktop-hd) {
         width: 100%;
-        // padding:  $padding-small;
     }
-    // &.collapsed {
-        // width: calc(100% - $menu);
-        // padding-left: $menu;
-    // }
 }

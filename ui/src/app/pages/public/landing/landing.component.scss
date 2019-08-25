@@ -1,7 +1,8 @@
+@import "src/assets/styles/variables";
+@import "src/assets/styles/common";
+
 :host {
-    flex: auto;
-    display: flex;
-    flex-direction: column;
+    @extend .full-flex-column;
 }
 .landing-container {
     flex: auto;

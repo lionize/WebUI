@@ -30,7 +30,7 @@ import { transition, animate, style, state, trigger } from '@angular/animations'
 export class MenuComponent implements OnInit {
 
     menu$ = this.store.pipe(select(selectMenu));
-    isOpen: boolean;
+    isOpen: boolean = false;
 
     constructor(
         private store: Store<IAppState>,
