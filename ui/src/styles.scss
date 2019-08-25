@@ -75,3 +75,11 @@ body {
 .border-box {
     box-sizing: border-box;
 }
+
+//reset styles
+//TODO place in separate file
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}

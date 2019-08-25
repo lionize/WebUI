@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { IClientUserLogin } from 'src/app/pages/public/authentication/user.model';
+import { IAppState } from 'src/app/store/state/app.state';
+import { OpenMenu } from 'src/app/store/actions/menu.actions';
 
 @Component({
     selector: 'header',
@@ -17,7 +20,8 @@ export class HeaderComponent implements OnInit {
 
     constructor(
         private router: Router,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private store: Store<IAppState>
     ) {
     }
 
@@ -45,6 +49,7 @@ export class HeaderComponent implements OnInit {
 
     toggleMenu() {
         this.isMenuOpen = !this.isMenuOpen;
+        this.store.dispatch(new OpenMenu({ isOpen: this.isMenuOpen }));
     }
 
 }
