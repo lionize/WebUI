@@ -1,10 +1,7 @@
 import { MenuActions, EMenuActions } from 'src/app/store/actions/menu.actions';
 import { initialMenuState, IMenuState } from 'src/app/store/state/menu.state';
 
-export const menuReducers = (
-    state = initialMenuState,
-    action: MenuActions
-): IMenuState => {
+export function menuReducers(state = initialMenuState, action: MenuActions): IMenuState {
     switch (action.type) {
         case EMenuActions.OPEN_MENU: {
             return {
