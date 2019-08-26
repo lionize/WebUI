@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
     styleUrls: ['./li-card.component.scss']
 })
 
-export class LiCardComponent implements OnInit {
+export class LICardComponent implements OnInit {
 
     @Input() color: string;
 
