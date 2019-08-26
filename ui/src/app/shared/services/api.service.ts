@@ -92,7 +92,7 @@ export class ApiService {
             );
     }
 
-    cancelRequest() {
+    cancelRequest(): void {
         this.subscription$.next();
     }
 

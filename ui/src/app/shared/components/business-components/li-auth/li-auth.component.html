@@ -1,8 +1,16 @@
-<div class="register-container">
+<div class="li-auth-container">
     <mat-toolbar color="primary">
         <mat-toolbar-row class="justify-space-between">
-            <span>Register Form</span>
-            <mat-icon>person_add</mat-icon>
+            <ng-container [ngSwitch]="mode">
+                <ng-container *ngSwitchCase="MODES.SIGN_UP">
+                    <span>Sign Up</span>
+                    <mat-icon>person_add</mat-icon>
+                </ng-container>
+                <ng-container *ngSwitchCase="MODES.SIGN_IN">
+                    <span>Sign In</span>
+                    <mat-icon>lock</mat-icon>
+                </ng-container>
+            </ng-container>
         </mat-toolbar-row>
     </mat-toolbar>
     <div class="form">
@@ -12,7 +20,7 @@
                     <input matInput placeholder="Username" formControlName="username" required>
                     <mat-error *ngFor="let validation of validationMessages.username">
                         <mat-error *ngIf="form.get('username').hasError(validation.type) && 
-                            (form.get('username').dirty || form.get('username').touched)">
+                                        (form.get('username').dirty || form.get('username').touched)">
                             {{validation.message}}
                         </mat-error>
                     </mat-error>
@@ -21,16 +29,17 @@
                     <input matInput placeholder="Password" formControlName="password" type="password" required>
                     <mat-error *ngFor="let validation of validationMessages.password">
                         <mat-error *ngIf="form.get('password').hasError(validation.type) && 
-                            (form.get('password').dirty || form.get('password').touched)">
+                                        (form.get('password').dirty || form.get('password').touched)">
                             {{validation.message}}
                         </mat-error>
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="vertical-margin-5">
-                    <input matInput placeholder="Confirm password" formControlName="confirmPassword" type="password" required>
+                <mat-form-field *ngIf="mode === MODES.SIGN_UP" class="vertical-margin-5">
+                    <input matInput placeholder="Confirm password" formControlName="confirmPassword" type="password"
+                        required>
                     <mat-error *ngFor="let validation of validationMessages.confirmPassword">
                         <mat-error *ngIf="form.get('confirmPassword').hasError(validation.type) && 
-                            (form.get('confirmPassword').dirty || form.get('confirmPassword').touched)">
+                                        (form.get('confirmPassword').dirty || form.get('confirmPassword').touched)">
                             {{validation.message}}
                         </mat-error>
                     </mat-error>
@@ -39,14 +48,24 @@
             <div class="flex justify-space-between vertical-margin-5">
             </div>
             <div class="flex flex-direction-row vertical-center justify-space-between">
-                <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid || form.pristine"
-                    (click)="signUp()">
-                    SIGN UP
-                </button>
+                <ng-container [ngSwitch]="mode">
+                    <ng-container *ngSwitchCase="MODES.SIGN_UP">
+                        <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid || form.pristine"
+                            (click)="signUp()">
+                            SIGN UP
+                        </button>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="MODES.SIGN_IN">
+                        <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid || form.pristine"
+                            (click)="signIn()">
+                            SIGN IN
+                        </button>
+                    </ng-container>
+                </ng-container>
                 <mat-spinner [diameter]="36" *ngIf="loading"></mat-spinner>
-                <button mat-flat-button color="primary" type="button" [routerLink]="['/auth/login']">
+                <!-- <button mat-flat-button color="primary" type="button" [routerLink]="['/auth/login']">
                     SIGN IN
-                </button>
+                </button> -->
             </div>
         </form>
     </div>

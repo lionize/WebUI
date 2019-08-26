@@ -13,21 +13,24 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthenticationRoutingModule } from './authentication.routing.module';
 import { AuthenticationService } from './authentication.service';
 import { AuthenticationComponent } from './authentication.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { SignInComponent } from './signin/signin.component';
+import { SignUpComponent } from './signup/signup.component';
+import { LIAuthComponent } from 'src/app/shared/components/business-components/li-auth/li-auth.component';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule, ReactiveFormsModule,
         AuthenticationRoutingModule,
-        MatButtonModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatProgressSpinnerModule, MatSnackBarModule,
+        MatButtonModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatProgressSpinnerModule,
+        MatSnackBarModule,
         MatInputModule
     ],
     declarations: [
         AuthenticationComponent,
-        LoginComponent,
-        RegisterComponent
+        SignInComponent,
+        SignUpComponent,
+        LIAuthComponent,
     ],
     exports: [
         AuthenticationComponent
@@ -35,4 +38,5 @@ import { RegisterComponent } from './register/register.component';
     providers: [AuthenticationService],
     entryComponents: []
 })
-export class AuthenticationModule {}
+
+export class AuthenticationModule { }
