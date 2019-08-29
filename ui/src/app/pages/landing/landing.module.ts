@@ -3,26 +3,25 @@ import { CommonModule } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material/button';
 
-import { PublicRoutingModule } from './public.routing.module';
-import { LandingComponent } from 'src/app/pages/public/landing/landing.component';
+import { LandingRoutingModule } from './landing.routing.module';
+import { LandingComponent } from './landing.component';
 import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 
 @NgModule({
     imports: [
         CommonModule,
-        PublicRoutingModule,
-        MatButtonModule
+        MatButtonModule,
+        LandingRoutingModule
     ],
     declarations: [
         LandingComponent,
         FooterComponent
     ],
     exports: [
-
+        LandingComponent
     ],
-    providers: [
-
-    ],
+    providers: [],
     entryComponents: []
 })
-export class PublicModule { }
+
+export class LandingModule { }

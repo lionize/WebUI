@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { IMatrixDetail, matrixDetailed } from 'src/app/shared/constants';
 
 @Component({
     selector: 'li-card',
@@ -8,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class LICardComponent implements OnInit {
 
-    @Input() color: string;
+    @Input() data: IMatrixDetail[] = matrixDetailed;
 
     constructor() {
 

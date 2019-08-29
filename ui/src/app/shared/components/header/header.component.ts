@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
-import { IClientUserLogin } from 'src/app/pages/public/authentication/user.model';
+import { IClientUserLogin } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
 import { OpenMenu } from 'src/app/store/actions/menu.actions';
+import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 
 @Component({
     selector: 'header',
@@ -19,9 +20,10 @@ export class HeaderComponent implements OnInit {
     isMenuOpen: boolean = false;
 
     constructor(
-        private router: Router,
         public dialog: MatDialog,
-        private store: Store<IAppState>
+        private router: Router,
+        private store: Store<IAppState>,
+        private authenticationService: AuthenticationService
     ) {
     }
 
@@ -30,14 +32,17 @@ export class HeaderComponent implements OnInit {
     }
 
     logOut() {
-        localStorage.removeItem('user');
+        this.authenticationService.signOut();
+        //FIXME
         this.user = { username: '', password: '' };
-        this.router.navigate(['/auth/login']);
+        //FIXME
+        this.router.navigate(['/auth/signin']);
     }
 
     openDialog() {
         const dialogRef = this.dialog.open(DialogComponent, {
-            width: "300px",
+            //TODO use variable
+            width: "240px",
             data: {
                 title: "LOG OUT",
                 content: "Are you sure you want to logout ?",

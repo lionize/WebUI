@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 
@@ -15,7 +16,7 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
     imports: [
         CommonModule,
         MatButtonModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatProgressSpinnerModule, MatSnackBarModule,
-        MatInputModule
+        MatInputModule, MatMenuModule
     ],
     declarations: [
         HeaderComponent

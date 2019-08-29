@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+//TODO use from separate file
+import { IMatrixDetail, matrixDetailed } from 'src/app/shared/constants';
 
 @Component({
     selector: 'dashboard',
@@ -7,19 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class DashboardComponent implements OnInit {
-
-    colors = [  //todo use enum
-        '#99cc11',
-        '#ffaa22',
-        '#4488ee',
-        '#cc1111'
-    ]
+    matrixDetailed: IMatrixDetail[] = matrixDetailed;
 
     constructor() {
-
+        
     }
 
     ngOnInit() {
 
     }
+    
 }   

@@ -15,7 +15,7 @@ import { AuthenticationService } from './authentication.service';
 import { AuthenticationComponent } from './authentication.component';
 import { SignInComponent } from './signin/signin.component';
 import { SignUpComponent } from './signup/signup.component';
-import { LIAuthComponent } from 'src/app/shared/components/business-components/li-auth/li-auth.component';
+import { LIAuthComponent } from 'src/app/shared/components/li-auth/li-auth.component';
 
 @NgModule({
     imports: [

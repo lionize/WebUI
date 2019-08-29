@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingComponent } from 'src/app/pages/public/landing/landing.component';
+
+import { LandingComponent } from './landing.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'landing', pathMatch: 'full' },
-    { path: 'auth', loadChildren: 'src/app/pages/public/authentication/authentication.module#AuthenticationModule' },
     { path: 'landing', component: LandingComponent },
-    { path: '**', redirectTo: 'landing', pathMatch: 'full' }
+    { path: '**', redirectTo: 'landing' }
 ];
 
 @NgModule({
@@ -18,4 +18,4 @@ const routes: Routes = [
     ]
 })
 
-export class PublicRoutingModule { }
+export class LandingRoutingModule { }
