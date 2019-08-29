@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AuthGuard } from 'src/app/shared/guards/auth.guard';
-import { LandingComponent } from './pages/landing/landing.component';
+// import { LandingComponent } from './pages/landing/landing.component';
 
 const routes: Routes = [
     {

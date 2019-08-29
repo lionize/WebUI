@@ -16,12 +16,12 @@ import { AuthenticationModule } from './pages/authentication/authentication.modu
 import { ApiService } from 'src/app/shared/services/api.service';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
-import { LandingComponent } from './pages/landing/landing.component';
+// import { LandingComponent } from './pages/landing/landing.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        LandingComponent
+        // LandingComponent
     ],
     imports: [
         BrowserModule, BrowserAnimationsModule, HttpClientModule,
