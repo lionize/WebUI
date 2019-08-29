@@ -8,6 +8,8 @@ import { ISigInUser, ISignUpUser } from './user.model';
 
 @Injectable()
 export class AuthenticationService {
+    isLoggedIn: boolean = false;
+    redirectUrl: string;
 
     constructor(
         private apiService: ApiService
@@ -21,6 +23,15 @@ export class AuthenticationService {
 
     signIn(payload): Observable<ISigInUser> {
         return this.apiService.post(`${environment.signInBase}${API_URLS.SIGN_IN}`, payload)
-            .pipe(map((response: ISigInUser) => response));
+            .pipe(map((response: ISigInUser) => {
+                this.isLoggedIn = true;
+                return response;
+            }));
     }
+
+    signOut(): void {
+        localStorage.removeItem('user');
+        this.isLoggedIn = false;
+    }
+
 }

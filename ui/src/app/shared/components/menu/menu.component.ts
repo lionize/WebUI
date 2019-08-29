@@ -15,13 +15,11 @@ import { transition, animate, style, state, trigger } from '@angular/animations'
                 marginLeft: '0'
             })),
             state('closed', style({
-                marginLeft: '-300px'
+                //TODO use variable
+                marginLeft: '-240px'
             })),
-            transition('open => closed', [
-                animate(300)
-            ]),
-            transition('closed => open', [
-                animate(300)
+            transition('open <=> closed', [
+                animate(200)
             ]),
         ]),
     ],

@@ -4,11 +4,13 @@
 :host {
     @extend .flex-row-vertical-centered;
     padding-right: $padding-medium;
-    background-color: rgba($primary, 1);
+    background-color: $primary;
     height: 50px;
-    // > img {
-    //     height: 50px;
-    // }
+    .rotated {
+        .mat-icon {
+            transform: rotate(90deg);
+        }
+    }
     .nav-menu {
         flex: auto;
     }

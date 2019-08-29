@@ -1,11 +1,28 @@
 <!-- <img src="assets/images/lionize_logo_large.jpg" /> -->
-<button mat-icon-button color="primary" (click)="toggleMenu()">
-    <mat-icon>{{isMenuOpen ? 'close' : 'menu'}}</mat-icon>
+<button mat-icon-button color="primary" [class.rotated]="isMenuOpen" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
 </button>
 <div class="nav-menu"></div>
 <div class="user-actions">
     <span class="horizontal-margin-5">{{user?.username}}</span>
-    <button mat-icon-button color="primary" (click)="openDialog()">
+    <!-- <button mat-icon-button color="primary" (click)="openDialog()">
         <mat-icon>power_settings_new</mat-icon>
+    </button> -->
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
     </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item>
+            <mat-icon>settings_applications</mat-icon>
+            <span>Settings</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>build</mat-icon>
+            <span>Providers</span>
+        </button>
+        <button mat-menu-item (click)="openDialog()">
+            <mat-icon>power_settings_new</mat-icon>
+            <span>Sign out</span>
+        </button>
+    </mat-menu>
 </div>

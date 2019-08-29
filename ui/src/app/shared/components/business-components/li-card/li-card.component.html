@@ -1,15 +1,12 @@
-<mat-card class="li-card-container" [style.borderColor]="color">
+<mat-card class="li-card-container" [style.borderColor]="data.color">
     <mat-card-header>
-        <div mat-card-avatar></div>
-        <mat-card-title>Title</mat-card-title>
-        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+        <mat-card-title>{{data.title}}</mat-card-title>
+        <mat-card-subtitle>{{data.subTitle}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <p>
-            Description 1
-        </p>
+        <p></p>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-flat-button color="primary">Action</button>
+        <button mat-flat-button color="default">New task</button>
     </mat-card-actions>
 </mat-card>

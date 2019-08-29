@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { validation_messages } from 'src/app/shared/validation.messages';
 import { PatternValidator, PasswordsMatchingValidator } from 'src/app/shared/helpers/form.validators';
-import { IClientUserRegister, IClientUserLogin, ISigInUser } from 'src/app/pages/public/authentication/user.model';
-import { AuthenticationService } from 'src/app/pages/public/authentication/authentication.service';
+import { IClientUserRegister, IClientUserLogin, ISigInUser } from 'src/app/pages/authentication/user.model';
+import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 
 enum MODES {
     SIGN_IN = 'SIGN_IN',
