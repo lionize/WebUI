@@ -11,7 +11,7 @@ import { Subject } from 'rxjs/internal/Subject';
 import { Observable } from 'rxjs/internal/Observable';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ApiService {
     private subscription$: Subject<boolean> = new Subject<boolean>();
 

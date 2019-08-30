@@ -31,12 +31,12 @@ export class HeaderComponent implements OnInit {
         this.user = JSON.parse(localStorage.getItem('user'));
     }
 
-    logOut() {
+    private _signOut() {
         this.authenticationService.signOut();
         //FIXME
         this.user = { username: '', password: '' };
         //FIXME
-        this.router.navigate(['/auth/signin']);
+        this.router.navigate(['/landing']);
     }
 
     openDialog() {
@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
                 buttons: ["YES", "NO"]
             }
         });
-        dialogRef.afterClosed().subscribe(data => data && this.logOut());
+        dialogRef.afterClosed().subscribe(data => data && this._signOut());
     }
 
     toggleMenu() {

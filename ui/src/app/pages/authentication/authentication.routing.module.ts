@@ -6,15 +6,17 @@ import { SignUpComponent } from './signup/signup.component';
 import { AuthenticationComponent } from './authentication.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'landing', pathMatch: 'full' },
+    {
+        path: '',
+        loadChildren: () => import('src/app/pages/landing/landing.module').then(module => module.LandingModule),
+    },
     {
         path: 'auth', component: AuthenticationComponent,
         children: [
             { path: 'signin', component: SignInComponent },
-            { path: 'signup', component: SignUpComponent }
+            { path: 'signup', component: SignUpComponent },
         ]
-    },
-    { path: '**', redirectTo: 'landing' }
+    }
 ];
 
 @NgModule({
