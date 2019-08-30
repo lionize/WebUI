@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { ISigInUser, ISignUpUser } from './user.model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     isLoggedIn: boolean = false;
     redirectUrl: string;
@@ -25,6 +25,14 @@ export class AuthenticationService {
         return this.apiService.post(`${environment.signInBase}${API_URLS.SIGN_IN}`, payload)
             .pipe(map((response: ISigInUser) => {
                 this.isLoggedIn = true;
+                if (!response.isError) {
+                    const user: ISigInUser = {
+                        username: payload.username,
+                        accessToken: response.accessToken,
+                        refreshToken: response.refreshToken
+                    }
+                    localStorage.setItem('user', JSON.stringify(user));
+                }
                 return response;
             }));
     }

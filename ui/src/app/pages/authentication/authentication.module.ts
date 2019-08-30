@@ -16,6 +16,7 @@ import { AuthenticationComponent } from './authentication.component';
 import { SignInComponent } from './signin/signin.component';
 import { SignUpComponent } from './signup/signup.component';
 import { LIAuthComponent } from 'src/app/shared/components/li-auth/li-auth.component';
+// import { LandingComponent } from '../landing/landing.component';
 
 @NgModule({
     imports: [
@@ -31,6 +32,7 @@ import { LIAuthComponent } from 'src/app/shared/components/li-auth/li-auth.compo
         SignInComponent,
         SignUpComponent,
         LIAuthComponent,
+        // LandingComponent,
     ],
     exports: [
         AuthenticationComponent

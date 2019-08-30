@@ -30,7 +30,7 @@ export class LIAuthComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService
     ) {
-        
+
     }
 
     ngOnInit() {
@@ -76,13 +76,13 @@ export class LIAuthComponent implements OnInit {
                     (response) => {
                         this.loading = false;
                         if (!response.isError) {
-                            const user: ISigInUser = {
-                                username: payload.username,
-                                accessToken: response.accessToken,
-                                refreshToken: response.refreshToken
-                            }
-                            localStorage.setItem('user', JSON.stringify(user));
-                            this.router.navigate(['/']);
+                            //     const user: ISigInUser = {
+                            //         username: payload.username,
+                            //         accessToken: response.accessToken,
+                            //         refreshToken: response.refreshToken
+                            //     }
+                            //     localStorage.setItem('user', JSON.stringify(user));
+                            this.router.navigate(['/admin']);
                         }
                     },
                     (error) => {
