@@ -5,7 +5,11 @@
     @extend .flex-row-vertical-centered;
     padding-right: $padding-medium;
     background-color: $primary;
-    height: 50px;
+    // height: 50px;
+    > img {
+        height: 50px;
+        cursor: pointer;
+    }
     .rotated {
         .mat-icon {
             transform: rotate(90deg);
