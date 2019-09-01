@@ -21,7 +21,7 @@ export class ApiService {
     ) {
     }
 
-    private _handleError(error) {
+    private handleError(error) {
         //TODO show button instead empty text
         //TODO handle other errors
         this.snackBar.open(error.errorMessage, '');
@@ -36,7 +36,7 @@ export class ApiService {
                 map(
                     (response: any) => {
                         if (response.isError) {
-                            this._handleError(response);
+                            this.handleError(response);
                         }
                         return response;
                     }),
@@ -52,7 +52,7 @@ export class ApiService {
                 map(
                     (response: any) => {
                         if (response.isError) {
-                            this._handleError(response);
+                            this.handleError(response);
                         }
                         return response;
                     }),
@@ -68,7 +68,7 @@ export class ApiService {
                 map(
                     (response: any) => {
                         if (response.isError) {
-                            this._handleError(response);
+                            this.handleError(response);
                         }
                         return response;
                     }),
@@ -84,7 +84,7 @@ export class ApiService {
                 map(
                     (response: any) => {
                         if (response.isError) {
-                            this._handleError(response);
+                            this.handleError(response);
                         }
                         return response;
                     }),
