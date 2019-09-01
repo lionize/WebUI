@@ -3,13 +3,16 @@
 
 :host {
     @extend .flex-row-vertical-centered;
-    padding-right: $padding-medium;
     background-color: $primary;
-    // height: 50px;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    height: $header-height
     > img {
-        height: 50px;
+        height: 100%;
         cursor: pointer;
     }
+    //TODO make generic
     .rotated {
         .mat-icon {
             transform: rotate(90deg);

@@ -34,25 +34,21 @@ export class HeaderComponent implements OnInit {
         this.user = JSON.parse(localStorage.getItem('user'));
     }
 
-    private _signOut() {
+    private signOut() {
         this.authenticationService.signOut();
-        //FIXME
-        this.user = { username: '', password: '' };
-        //FIXME
         this.router.navigate(['/landing']);
+        //TODO reset app state here
     }
 
     openDialog() {
         const dialogRef = this.dialog.open(DialogComponent, {
-            //TODO use variable
-            width: "240px",
             data: {
                 title: "LOG OUT",
                 content: "Are you sure you want to logout ?",
                 buttons: ["YES", "NO"]
             }
         });
-        dialogRef.afterClosed().subscribe(data => data && this._signOut());
+        dialogRef.afterClosed().subscribe(data => data && this.signOut());
     }
 
     toggleLeftMenu() {

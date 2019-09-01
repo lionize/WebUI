@@ -8,7 +8,7 @@ export const leftOpenCloseAnimation = trigger('leftOpenCloseAnimation', [
         marginLeft: '-240px'
     })),
     transition('open <=> close', [
-        animate(200)
+        animate(300)
     ])
 ]);
 
@@ -20,6 +20,6 @@ export const rightOpenCloseAnimation = trigger('rightOpenCloseAnimation', [
         transform: 'translateX(100%)'
     })),
     transition('open <=> close', [
-        animate(200)
+        animate(150)
     ])
 ]);
