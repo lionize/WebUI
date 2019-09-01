@@ -7,6 +7,7 @@ import { IClientUserLogin } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
 import { OpenMenu } from 'src/app/store/actions/menu.actions';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
+import { MENU_DIRECTIONS } from 'src/app/shared/components/menu/menu.model';
 
 @Component({
     selector: 'header',
@@ -17,7 +18,9 @@ import { AuthenticationService } from 'src/app/pages/authentication/authenticati
 export class HeaderComponent implements OnInit {
 
     user: IClientUserLogin;
-    isMenuOpen: boolean = false;
+    isLeftMenuOpen: boolean = false;
+    isRightMenuOpen: boolean = false;
+    MENU_DIRECTIONS: MENU_DIRECTIONS;
 
     constructor(
         public dialog: MatDialog,
@@ -52,9 +55,14 @@ export class HeaderComponent implements OnInit {
         dialogRef.afterClosed().subscribe(data => data && this._signOut());
     }
 
-    toggleMenu() {
-        this.isMenuOpen = !this.isMenuOpen;
-        this.store.dispatch(new OpenMenu({ isOpen: this.isMenuOpen }));
+    toggleLeftMenu() {
+        this.isLeftMenuOpen = !this.isLeftMenuOpen;
+        this.store.dispatch(new OpenMenu({ isOpen: this.isLeftMenuOpen, direction: MENU_DIRECTIONS.LEFT }));
+    }
+
+    toggleRightMenu() {
+        this.isRightMenuOpen = !this.isRightMenuOpen;
+        this.store.dispatch(new OpenMenu({ isOpen: this.isRightMenuOpen, direction: MENU_DIRECTIONS.RIGHT }));
     }
 
 }

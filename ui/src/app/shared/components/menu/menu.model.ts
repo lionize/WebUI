@@ -1,5 +1,9 @@
-
 export interface IMenu {
     isOpen: boolean;
-    direction?: string;
+    direction: string;
+}
+
+export enum MENU_DIRECTIONS {
+    LEFT = 'LEFT',
+    RIGHT = 'RIGHT',
 }

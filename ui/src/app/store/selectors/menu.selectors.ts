@@ -6,6 +6,6 @@ import { IMenuState } from 'src/app/store/state/menu.state';
 const menuState = (state: IAppState) => state.menu;
 
 export const selectMenu = createSelector(
-  menuState,
-  (state: IMenuState) => state.menu
+    menuState,
+    (state: IMenuState) => state.menu
 );
