@@ -4,7 +4,7 @@
 </button>
 <div class="nav-menu"></div>
 <div class="user-actions flex-row-vertical-centered">
-    <span class="horizontal-margin-5">{{user?.username}}</span>
+    <span class="horizontal-margin-5 cursor-pointer" [routerLink]="['/admin/profile']">{{user?.username}}</span>
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
     </button>

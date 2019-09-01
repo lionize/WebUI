@@ -10,6 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProfileComponent } from 'src/app/pages/admin/profile/profile.component';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { LICardComponent } from 'src/app/shared/components/business-components/li-card/li-card.component';
 import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
@@ -24,6 +25,7 @@ import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
     declarations: [
         AdminComponent,
         DashboardComponent,
+        ProfileComponent,
         DialogComponent,
         MenuComponent,
         LICardComponent,
