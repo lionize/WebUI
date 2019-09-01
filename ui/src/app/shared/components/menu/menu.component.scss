@@ -5,15 +5,21 @@
     .menu-container {
         display: none;
         padding: $padding-small;
-        background-color: $pure-white;
-        width: $menu;
+        &.left {
+            //TODO make configurable
+            width: $left-menu-width;
+            background-color: rgba($primary, 0.4);
+        }
         &.right {
+            //TODO make configurable
+            width: $right-menu-width;
             position: absolute;
             top: 0;
             right: 0;
             bottom: 0;
             z-index: 3;
             box-shadow: -2px 0px 10px $primary;
+            background-color: $pure-white;
         }
         &.open {
             display: flex;

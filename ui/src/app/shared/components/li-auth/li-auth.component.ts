@@ -34,7 +34,7 @@ export class LIAuthComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._createForm();
+        this.createForm();
     }
 
     signUp(event?): void {
@@ -76,12 +76,6 @@ export class LIAuthComponent implements OnInit {
                     (response) => {
                         this.loading = false;
                         if (!response.isError) {
-                            //     const user: ISigInUser = {
-                            //         username: payload.username,
-                            //         accessToken: response.accessToken,
-                            //         refreshToken: response.refreshToken
-                            //     }
-                            //     localStorage.setItem('user', JSON.stringify(user));
                             this.router.navigate(['/admin']);
                         }
                     },
@@ -91,7 +85,7 @@ export class LIAuthComponent implements OnInit {
         }
     }
 
-    private _createForm(): void {
+    private createForm(): void {
         this.form = this.formBuilder.group({
             username: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{4,}$/)]),
             password: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{4,}$/)]),

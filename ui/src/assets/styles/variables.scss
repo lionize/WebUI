@@ -14,13 +14,15 @@ $pure-white: #ffffff;
 $padding-large: 20px;
 $padding-medium: 15px;
 $padding-small: 10px; 
-$menu: 240px;
+$left-menu-width: 240px;
+$right-menu-width: 300px;
+$header-height: 50px;
 
 //resolutions
 $desktop-hd: 1280px;
 $desktop: 1024px;
 $tablet: 768px;
-$mobile: 420px;
+$mobile: 300px;
 
 :export {
     urgentImportant: $urgent-important;

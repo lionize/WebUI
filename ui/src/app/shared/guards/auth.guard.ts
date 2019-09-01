@@ -14,14 +14,14 @@ export class AuthGuard implements CanLoad, CanActivate {
     }
 
     canActivate(): boolean {
-        return this._checkLogin();
+        return this.checkLogin();
     }
 
     canLoad(): boolean {
-        return this._checkLogin();
+        return this.checkLogin();
     }
 
-    private _checkLogin(): boolean {
+    private checkLogin(): boolean {
         //FIXME
         const user: ISigInUser = JSON.parse(localStorage.getItem('user'));
         if (this.authenticationService.isLoggedIn || (user && user.accessToken)) {
