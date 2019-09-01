@@ -1,0 +1,7 @@
+@import "src/assets/styles/variables";
+
+:host {
+    flex: auto;
+    //TODO create one container for all paddings
+    padding: $padding-medium;
+}
