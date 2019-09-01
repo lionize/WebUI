@@ -4,6 +4,7 @@
     display: flex;
     .menu-container {
         display: none;
+        flex-direction: column;
         padding: $padding-small;
         &.left {
             //TODO make configurable

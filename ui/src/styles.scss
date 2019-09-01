@@ -6,6 +6,7 @@
 @import 'assets/styles/mixins';
 @import 'assets/styles/fonts';
 @import 'assets/styles/common';
+@import 'assets/styles/reset.css';
 
 @include mat-core();
 
@@ -24,7 +25,6 @@ html {
     height: 100%;
 }
 body {
-    margin: 0;
     font-family: Roboto-Regular;
 }
 
@@ -84,6 +84,9 @@ body {
 }
 .cursor-pointer {
     cursor: pointer;
+}
+.text-center {
+    text-align: center;
 }
 
 //reset styles
