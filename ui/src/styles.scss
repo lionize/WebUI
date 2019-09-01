@@ -76,6 +76,12 @@ body {
 .border-box {
     box-sizing: border-box;
 }
+.position-relative {
+    position: relative;
+}
+.overflow-x-hidden {
+    overflow-x: hidden;
+}
 
 //reset styles
 //TODO place in separate file

@@ -1,3 +1,8 @@
-<div class="menu-container" [@openClose]="isOpen ? 'open' : 'closed'">
-    menu
+<div class="left menu-container" [class.open]="leftMenu?.isOpen && leftMenu?.direction === MENU_DIRECTIONS.LEFT"
+    [@leftOpenCloseAnimation]="(leftMenu?.isOpen && leftMenu?.direction === MENU_DIRECTIONS.LEFT) ? 'open' : 'close'">
+    {{leftMenu?.direction}} menu
+</div>
+<div class="right menu-container" [class.open]="rightMenu?.isOpen && rightMenu?.direction === MENU_DIRECTIONS.RIGHT"
+    [@rightOpenCloseAnimation]="(rightMenu?.isOpen && rightMenu?.direction === MENU_DIRECTIONS.RIGHT) ? 'open' : 'close'">
+    {{rightMenu?.direction}} menu
 </div>

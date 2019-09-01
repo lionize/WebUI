@@ -5,5 +5,8 @@ export interface IMenuState {
 }
 
 export const initialMenuState: IMenuState = {
-    menu: { isOpen: false }
+    menu: {
+        isOpen: false,
+        direction: 'left'
+    }
 };
