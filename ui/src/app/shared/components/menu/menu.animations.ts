@@ -8,7 +8,7 @@ export const leftOpenCloseAnimation = trigger('leftOpenCloseAnimation', [
         marginLeft: '-240px'
     })),
     transition('open <=> close', [
-        animate(300)
+        animate(250)
     ])
 ]);
 

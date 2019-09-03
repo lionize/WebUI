@@ -3,13 +3,14 @@
 :host {
     display: flex;
     .menu-container {
-        display: none;
+        // display: none;
         flex-direction: column;
         padding: $padding-small;
+        background-color: $pure-white;
         &.left {
             //TODO make configurable
             width: $left-menu-width;
-            background-color: rgba($primary, 0.4);
+            background-color: $pure-white;
         }
         &.right {
             //TODO make configurable
@@ -20,7 +21,6 @@
             bottom: 0;
             z-index: 3;
             box-shadow: -2px 0px 10px $primary;
-            background-color: $pure-white;
         }
         &.open {
             display: flex;

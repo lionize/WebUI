@@ -3,6 +3,12 @@
     flex-direction: row;
     align-items: center;
 }
+.flex-all-centered {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 .header-user {
     font: 16px Roboto-Bold;
     color: $pure-white;;
