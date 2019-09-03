@@ -1,4 +1,4 @@
-export interface IMenu {
+export type IMenu = {
     isOpen: boolean;
     direction: string;
 }

@@ -1,23 +1,23 @@
-
+//TODO use type instead of interface for simple types
 //TODO front-end models, place in separate file
-export interface IClientUserLogin {
+export type IClientUserLogin = {
     username: string;
     password: string;
 }
 
-export interface IClientUserRegister {
+export type IClientUserRegister = {
     username: string;
     password: string;
 }
 
 //TODO back-end models, place in separate file
-export interface ISignUpUser {
+export type ISignUpUser = {
     isError: boolean;
     isSuccess: boolean;
     errorMessage: string;
 }
 
-export interface ISigInUser {
+export type ISigInUser = {
     username: string;
     accessToken: string;
     identityToken?: string;
