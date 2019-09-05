@@ -45,7 +45,7 @@ Task CopyArtefacts -Depends Build {
     Copy-Item -Path (Join-Path -Path $script:SourceRootFolder -ChildPath "nginx.conf") -Destination (Join-Path -Path $script:artefacts -ChildPath "nginx.conf")
 }
 
-Task Build -Depends TranspileModels {
+Task Build -Depends NpmInstall {
     try {
         Push-Location
         Set-Location $script:SourceRootFolder
@@ -56,7 +56,18 @@ Task Build -Depends TranspileModels {
     }
 }
 
-Task TranspileModels -Depends NpmInstall {
+Task NpmInstall -Depends Init, Clean, TranspileModels {
+    try {
+        Push-Location
+        Set-Location $script:SourceRootFolder
+        Exec { npm install }
+    }
+    finally {
+        Pop-Location
+    }
+}
+
+Task TranspileModels -Depends Clean {
     $models = @(
         @{InputFile = ".\ui\apis\habitica\ApiModels.yml"; OutputFolder = ".\ui\src\app\shared\models\habitica" },
         @{InputFile = ".\ui\apis\identity\ApiModels.yml"; OutputFolder = ".\ui\src\app\shared\models\identity" },
@@ -65,19 +76,10 @@ Task TranspileModels -Depends NpmInstall {
 
     foreach ($model in $models) {
         $inputFile = Resolve-Path $model.InputFile
+        New-Item -Path $model.OutputFolder -ItemType Directory | Out-Null
         $outputFolder = Resolve-Path -Path $model.OutputFolder
-        Exec { smite --input-file $inputFile --lang typescript --output-folder $outputFolder }
-    }
-}
 
-Task NpmInstall -Depends Init, Clean {
-    try {
-        Push-Location
-        Set-Location $script:SourceRootFolder
-        Exec { npm install }
-    }
-    finally {
-        Pop-Location
+        Exec { smite --input-file $inputFile --lang typescript --output-folder $outputFolder }
     }
 }
 
