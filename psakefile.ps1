@@ -1,8 +1,35 @@
-Properties {
-    $VersionTags = @()
+Task Publish -Depends Pack {
+    Exec { docker login docker.io  --username=ashotnazaryan45 }
+    foreach ($VersionTag in $VersionTags) {
+        $localTag = ($script:imageName + ":" + $VersionTag)
+        $remoteTag = ("docker.io/" + $localTag)
+        Exec { docker tag $localTag $remoteTag }
+        Exec { docker push $remoteTag }
+
+        try {
+            Exec { keybase chat send --nonblock --private lionize "BUILD: Published $remoteTag" }
+        }
+        catch {
+            Write-Warning "Failed to send notification"
+        }
+    }
+}
+
+Task Pack -Depends CopyArtefacts, EstimateVersions {
+    $tagsArguments = @()
+    foreach ($VersionTag in $VersionTags) {
+        $tagsArguments += "-t"
+        $tagsArguments += ($script:imageName + ":" + $VersionTag)
+    }
+
+    Exec { docker build -f Dockerfile $script:artefacts $tagsArguments }
+}
+
+Task EstimateVersions {
+    $script:VersionTags = @()
 
     if ($Latest) {
-        $VersionTags += 'latest'
+        $script:VersionTags += 'latest'
     }
 
     if (!!($Version)) {
@@ -12,30 +39,10 @@ Properties {
         Assert ($Version.Build -ne -1) "Version should be formatted as Major.Minor.Patch like 1.2.3"
 
         $Version = $Version.ToString()
-        $VersionTags += $Version
+        $script:VersionTags += $Version
     }
 
-    Assert $VersionTags "No version parameter (latest or specific version) is passed."
-}
-
-Task Publish -Depends Pack {
-    Exec { docker login docker.io  --username=ashotnazaryan45 }
-    foreach ($VersionTag in $VersionTags) {
-        $localTag = ($script:imageName + ":" + $VersionTag)
-        $remoteTag = ("docker.io/" + $localTag)
-        Exec { docker tag $localTag $remoteTag }
-        Exec { docker push $remoteTag }
-    }
-}
-
-Task Pack -Depends CopyArtefacts {
-    $tagsArguments = @()
-    foreach ($VersionTag in $VersionTags) {
-        $tagsArguments += "-t"
-        $tagsArguments += ($script:imageName + ":" + $VersionTag)
-    }
-
-    Exec { docker build -f Dockerfile $script:artefacts $tagsArguments }
+    Assert $script:VersionTags "No version parameter (latest or specific version) is passed."
 }
 
 Task CopyArtefacts -Depends Build {
@@ -76,7 +83,9 @@ Task TranspileModels -Depends Clean {
 
     foreach ($model in $models) {
         $inputFile = Resolve-Path $model.InputFile
-        New-Item -Path $model.OutputFolder -ItemType Directory | Out-Null
+        if (-not (Test-Path -Path $model.OutputFolder)) {
+            New-Item -Path $model.OutputFolder -ItemType Directory | Out-Null
+        }
         $outputFolder = Resolve-Path -Path $model.OutputFolder
 
         Exec { smite --input-file $inputFile --lang typescript --output-folder $outputFolder }
