@@ -57,9 +57,17 @@ Task Build -Depends TranspileModels {
 }
 
 Task TranspileModels -Depends NpmInstall {
-    $inputFile = Resolve-Path ".\ui\ApiModels.yml"
-    $outputFolder = Resolve-Path -Path ".\ui\src\app\shared\models"
-    Exec { smite --input-file "$inputFile" --lang typescript --output-folder "$outputFolder" }
+    $models = @(
+        @{InputFile = ".\ui\apis\habitica\ApiModels.yml"; OutputFolder = ".\ui\src\app\shared\models\habitica" },
+        @{InputFile = ".\ui\apis\identity\ApiModels.yml"; OutputFolder = ".\ui\src\app\shared\models\identity" },
+        @{InputFile = ".\ui\apis\tasks\ApiModels.yml"; OutputFolder = ".\ui\src\app\shared\models\tasks" }
+    )
+
+    foreach ($model in $models) {
+        $inputFile = Resolve-Path $model.InputFile
+        $outputFolder = Resolve-Path -Path $model.OutputFolder
+        Exec { smite --input-file $inputFile --lang typescript --output-folder $outputFolder }
+    }
 }
 
 Task NpmInstall -Depends Init, Clean {
