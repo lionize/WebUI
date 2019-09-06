@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        //TODO reset app state
+        
     }
 
     private handleRouteChanges() {

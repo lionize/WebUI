@@ -4,7 +4,7 @@ import { API_URLS } from 'src/app/shared/constants';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
-import { ISigInUser, ISignUpUser } from './user.model';
+import { TSigInUser, TSignUpUser } from './user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -16,17 +16,17 @@ export class AuthenticationService {
     ) {
     }
 
-    signUp(payload): Observable<ISignUpUser> {
+    signUp(payload): Observable<TSignUpUser> {
         return this.apiService.post(`${environment.signUpBase}${API_URLS.SIGN_UP}`, payload)
-            .pipe(map((response: ISignUpUser) => response));
+            .pipe(map((response: TSignUpUser) => response));
     }
 
-    signIn(payload): Observable<ISigInUser> {
+    signIn(payload): Observable<TSigInUser> {
         return this.apiService.post(`${environment.signInBase}${API_URLS.SIGN_IN}`, payload)
-            .pipe(map((response: ISigInUser) => {
+            .pipe(map((response: TSigInUser) => {
                 this.isLoggedIn = true;
                 if (!response.isError) {
-                    const user: ISigInUser = {
+                    const user: TSigInUser = {
                         username: payload.username,
                         accessToken: response.accessToken,
                         refreshToken: response.refreshToken

@@ -10,9 +10,13 @@ export const appReducers: ActionReducerMap<IAppState, any> = {
     //other reducers
 };
 
-// FIXME
-export function clearState(state = initialAppState, action: AppActions): IAppState {
-    if (action.type === APP_ACTIONS.RESET) {
-        return initialAppState;
-    }
-};
+export function clearState(reducer) {
+    return function (state, action) {
+
+        if (action.type === APP_ACTIONS.RESET) {
+            state = undefined;
+        }
+
+        return reducer(state, action);
+    };
+}

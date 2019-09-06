@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
-import { IClientUserLogin } from 'src/app/pages/authentication/user.model';
+import { TClientUserLogin } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
+import { ResetApp } from 'src/app/store/actions/app.actions';
 import { ToggleMenu } from 'src/app/store/actions/menu.actions';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
-import { MENU_DIRECTIONS, IMenu } from 'src/app/shared/components/menu/menu.model';
+import { MENU_DIRECTIONS, TMenu } from 'src/app/shared/components/menu/menu.model';
 import { selectMenu } from 'src/app/store/selectors/menu.selectors';
 
 @Component({
@@ -17,7 +18,7 @@ import { selectMenu } from 'src/app/store/selectors/menu.selectors';
 })
 
 export class HeaderComponent implements OnInit {
-    user: IClientUserLogin;
+    user: TClientUserLogin;
     isLeftMenuOpen: boolean = false;
     isRightMenuOpen: boolean = false;
     MENU_DIRECTIONS: MENU_DIRECTIONS;
@@ -39,11 +40,11 @@ export class HeaderComponent implements OnInit {
     private signOut() {
         this.authenticationService.signOut();
         this.router.navigate(['/landing']);
-        //TODO reset app state here or in app.component
+        this.store.dispatch(new ResetApp());
     }
 
     private toggleMenuIcons() {
-        this.menu$.subscribe((menu: IMenu) => {
+        this.menu$.subscribe((menu: TMenu) => {
             if (menu.direction === MENU_DIRECTIONS.LEFT) {
                 this.isLeftMenuOpen = menu.isOpen;
             }

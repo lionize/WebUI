@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, CanLoad } from '@angular/router';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
-import { ISigInUser } from 'src/app/pages/authentication/user.model';
+import { TSigInUser } from 'src/app/pages/authentication/user.model';
 
 @Injectable()
 export class AuthGuard implements CanLoad, CanActivate {
@@ -23,7 +23,7 @@ export class AuthGuard implements CanLoad, CanActivate {
 
     private checkLogin(): boolean {
         //FIXME
-        const user: ISigInUser = JSON.parse(localStorage.getItem('user'));
+        const user: TSigInUser = JSON.parse(localStorage.getItem('user'));
         if (this.authenticationService.isLoggedIn || (user && user.accessToken)) {
             return true;
         }
