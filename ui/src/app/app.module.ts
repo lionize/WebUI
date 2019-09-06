@@ -9,7 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { environment } from 'src/environments/environment';
-import { appReducers } from 'src/app/store/reducers/app.reducers';
+import { appReducers, clearState } from 'src/app/store/reducers/app.reducers';
 
 import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 import { AuthenticationModule } from './pages/authentication/authentication.module';
@@ -24,7 +24,7 @@ import { AppComponent } from './app.component';
     imports: [
         BrowserModule, BrowserAnimationsModule, HttpClientModule,
         MatSnackBarModule,
-        StoreModule.forRoot(appReducers),
+        StoreModule.forRoot(appReducers, { metaReducers: [clearState] }),
         StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         AuthenticationModule,

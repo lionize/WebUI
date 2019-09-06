@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { validation_messages } from 'src/app/shared/validation.messages';
 import { PatternValidator, PasswordsMatchingValidator } from 'src/app/shared/helpers/form.validators';
-import { IClientUserRegister, IClientUserLogin, ISigInUser } from 'src/app/pages/authentication/user.model';
+import { TClientUserRegister, TClientUserLogin, TSigInUser } from 'src/app/pages/authentication/user.model';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 
 enum MODES {
@@ -19,7 +19,6 @@ enum MODES {
 
 export class LIAuthComponent implements OnInit {
     @Input() mode: MODES;
-
     MODES = MODES;
     form: FormGroup;
     loading: boolean = false;
@@ -42,7 +41,7 @@ export class LIAuthComponent implements OnInit {
             event.preventDefault();
         }
         else {
-            const payload: IClientUserRegister = {
+            const payload: TClientUserRegister = {
                 username: this.form.get('username').value,
                 password: this.form.get('password').value
             }
@@ -66,7 +65,7 @@ export class LIAuthComponent implements OnInit {
             event.preventDefault();
         }
         else {
-            const payload: IClientUserLogin = {
+            const payload: TClientUserLogin = {
                 username: this.form.get('username').value,
                 password: this.form.get('password').value
             }

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { IMenu } from 'src/app/shared/components/menu/menu.model';
+import { TMenu } from 'src/app/shared/components/menu/menu.model';
 
 export enum MENU_ACTIONS {
     OPEN_MENU = '[MENU] Open Menu'
@@ -8,7 +8,7 @@ export enum MENU_ACTIONS {
 
 export class ToggleMenu implements Action {
     public readonly type = MENU_ACTIONS.OPEN_MENU;
-    constructor(public payload: IMenu) { }
+    constructor(public payload: TMenu) { }
 }
 
 export type MenuActions = ToggleMenu;

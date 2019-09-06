@@ -1,7 +1,7 @@
-import { IMenu } from 'src/app/shared/components/menu/menu.model';
+import { TMenu } from 'src/app/shared/components/menu/menu.model';
 
 export interface IMenuState {
-    menu: IMenu;
+    menu: TMenu;
 }
 
 export const initialMenuState: IMenuState = {
