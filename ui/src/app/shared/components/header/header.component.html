@@ -1,28 +1,32 @@
-<img src="assets/images/lionize_logo_large.png" [routerLink]="['/admin']" /> <!--TODO fix routerLink-->
-<button mat-icon-button color="primary" [class.rotated]="isLeftMenuOpen" (click)="toggleLeftMenu()">
-    <mat-icon>menu</mat-icon>
-</button>
-<div class="nav-menu"></div>
-<div class="user-actions flex-row-vertical-centered">
-    <span class="horizontal-margin-5">{{user?.username}}</span>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu" [overlapTrigger]="false">
-        <button mat-menu-item>
-            <mat-icon>settings_applications</mat-icon>
-            <span>Settings</span>
-        </button>
-        <button mat-menu-item [routerLink]="['/admin/providers']">
-            <mat-icon>build</mat-icon>
-            <span>Providers</span>
-        </button>
-        <button mat-menu-item (click)="openDialog()">
-            <mat-icon>power_settings_new</mat-icon>
-            <span>Sign out</span>
-        </button>
-    </mat-menu>
-    <button mat-icon-button color="primary" [class.rotated]="isRightMenuOpen" (click)="toggleRightMenu()">
+<!-- TODO use <header> tag -->
+<div class="header-wrapper full-height">
+    <!--TODO fix routerLink-->
+    <img src="assets/images/lionize_logo_large.png" [routerLink]="['/admin']" />
+    <button mat-icon-button color="primary" [class.rotated]="isLeftMenuOpen" (click)="toggleLeftMenu()">
         <mat-icon>menu</mat-icon>
     </button>
+    <div class="nav-menu"></div>
+    <div class="user-actions flex-row-vertical-centered">
+        <span class="horizontal-margin-5">{{user?.username}}</span>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" [overlapTrigger]="false">
+            <button mat-menu-item>
+                <mat-icon>settings_applications</mat-icon>
+                <span>Settings</span>
+            </button>
+            <button mat-menu-item [routerLink]="['/admin/providers']">
+                <mat-icon>build</mat-icon>
+                <span>Providers</span>
+            </button>
+            <button mat-menu-item (click)="openDialog()">
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Sign out</span>
+            </button>
+        </mat-menu>
+        <button mat-icon-button color="primary" [class.rotated]="isRightMenuOpen" (click)="toggleRightMenu()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
 </div>

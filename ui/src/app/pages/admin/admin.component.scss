@@ -5,11 +5,12 @@
     @extend .full-flex-row;
 }
 .admin-container {
-    width: $desktop-hd;
-    margin: 0 auto;
-    background-color: rgba($primary, 0.2);
     @extend .full-flex-column;
-    @media screen and (max-width: $desktop-hd) {
-        width: 100%;
+    .admin-wrapper {
+        width: $desktop-hd;
+        margin: 0 auto;
+        @media screen and (max-width: $desktop-hd) {
+            width: 100%;
+        }
     }
 }

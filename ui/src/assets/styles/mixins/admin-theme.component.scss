@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin admin-theme-component($theme) {
+    $primary: map-get($theme, primary);
+
+    .admin-container {
+        .admin-wrapper {
+            background-color: mat-color($primary, 50);
+        }
+    }
+}
