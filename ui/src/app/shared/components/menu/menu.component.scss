@@ -5,21 +5,23 @@
     .menu-container {
         // display: none;
         flex-direction: column;
+        // FIXME
         padding: $padding-small;
         background-color: $pure-white;
         &.left {
-            //TODO make configurable
+            //TODO make all styles configurable
             width: $left-menu-width;
             background-color: $pure-white;
         }
         &.right {
-            //TODO make configurable
+            //TODO make all styles configurable
             width: $right-menu-width;
             position: absolute;
             top: 0;
             right: 0;
             bottom: 0;
             z-index: 3;
+            // background-color: rgba($pure-black, 0.8);
         }
         &.open {
             display: flex;

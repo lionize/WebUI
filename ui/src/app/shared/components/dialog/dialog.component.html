@@ -1,9 +1,8 @@
-<h2 mat-dialog-title>{{data.title}}</h2>
-
-<mat-dialog-content>{{data.content}}</mat-dialog-content>
-
-<mat-dialog-actions class="flex justify-space-between">
-    <button mat-flat-button color="primary" *ngFor="let item of data.buttons" 
-        (click)="buttonClick(item)">{{item}}
-    </button>  <!--{{ item === 'YES' ? 'accent' : 'primary'}}-->
-</mat-dialog-actions>
+<div class="dialog-container">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+    <mat-dialog-content>{{data.content}}</mat-dialog-content>
+    <mat-dialog-actions class="flex justify-space-between">
+        <button mat-flat-button color="primary" *ngFor="let item of data.buttons" (click)="buttonClick(item)">{{item}}
+        </button>
+    </mat-dialog-actions>
+</div>

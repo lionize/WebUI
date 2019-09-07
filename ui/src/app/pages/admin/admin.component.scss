@@ -8,6 +8,7 @@
     @extend .full-flex-column;
     .admin-wrapper {
         width: $desktop-hd;
+        height: calc(100vh - #{$header-height});
         margin: 0 auto;
         @media screen and (max-width: $desktop-hd) {
             width: 100%;

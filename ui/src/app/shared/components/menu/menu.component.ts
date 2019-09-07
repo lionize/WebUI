@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/store/state/app.state';
 import { selectMenu } from 'src/app/store/selectors/menu.selectors';
@@ -20,6 +20,7 @@ export class MenuComponent implements OnInit {
 
     constructor(
         private store: Store<IAppState>,
+        private elementRef: ElementRef
     ) {
 
     }
@@ -28,9 +29,11 @@ export class MenuComponent implements OnInit {
         this.menu$.subscribe((menu: TMenu) => {
             if (menu.direction === MENU_DIRECTIONS.LEFT) {
                 this.leftMenu = menu;
+                // this.elementRef.nativeElement.classList.add('open');
             }
             if (menu.direction === MENU_DIRECTIONS.RIGHT) {
                 this.rightMenu = menu;
+                // this.elementRef.nativeElement.classList.remove('open');
             }
         });
     }
