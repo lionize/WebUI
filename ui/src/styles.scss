@@ -12,10 +12,20 @@
 
 @import 'assets/styles/themes/eisenhower-theme';
 
-@import './app/app-theme.component'; 
+@import 'assets/styles/mixins/app-theme.component'; 
+@import 'assets/styles/mixins/admin-theme.component'; 
+@import 'assets/styles/mixins/footer-theme.component'; 
+@import 'assets/styles/mixins/header-theme.component'; 
+@import 'assets/styles/mixins/li-auth-theme.component'; 
+@import 'assets/styles/mixins/menu-theme.component'; 
 
 @mixin custom-theme($theme) {
     @include app-theme-component($theme);
+    @include admin-theme-component($theme);
+    @include footer-theme-component($theme);
+    @include header-theme-component($theme);
+    @include li-auth-theme-component($theme);
+    @include menu-theme-component($theme);
 }
 
 @include angular-material-theme($eisenhower); 
@@ -64,15 +74,15 @@ body {
 .grid {
     display: grid;
 }
-.primary-color {
-    color: $primary;
-}
+// .primary-color {
+//     color: $primary;
+// }
 .horizontal-margin-5 {
     margin: 0 5px !important;
 }
-.bordered-bottom {
-    border-bottom: 1px solid $primary;
-} 
+// .bordered-bottom {
+//     border-bottom: 1px solid $primary;
+// } 
 .border-box {
     box-sizing: border-box;
 }

@@ -2,31 +2,37 @@
 @import 'src/assets/styles/common';
 
 :host {
-    @extend .flex-row-vertical-centered;
-    background-color: $primary;
     position: sticky;
     top: 0;
     z-index: 3;
     height: $header-height;
-    > img {
-        height: 100%;
-        cursor: pointer;
+    .header-wrapper {
+        @extend .flex-row-vertical-centered;
+        width: $desktop-hd;
+        margin: 0 auto;
+        @media screen and (max-width: $desktop-hd) {
+            width: 100%;
+        }
+        > img {
+            height: 100%;
+            cursor: pointer;
+        }
+        .rotated {
+            .mat-icon {
+                transform: rotate(90deg);
+            }
+        }
+        .nav-menu {
+            flex: auto;
+        }
+        .user-actions {
+            > span {
+                @extend .header-user;
+            }
+        }
+        .mat-icon {
+            color: $pure-white;
+        }
     }
     //TODO make generic
-    .rotated {
-        .mat-icon {
-            transform: rotate(90deg);
-        }
-    }
-    .nav-menu {
-        flex: auto;
-    }
-    .user-actions {
-        > span {
-            @extend .header-user;
-        }
-    }
-    .mat-icon {
-        color: $pure-white;
-    }
 }
