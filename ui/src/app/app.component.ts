@@ -19,7 +19,8 @@ export class AppComponent implements OnInit {
     ) {
         router.events.subscribe((event: Event) => {
             if (event instanceof NavigationEnd) {
-                //TODO handle app loading indicator here
+                // TODO handle app loading indicator here
+                // TODO cancel all request here
                 this.handleRouteChanges();
             }
         });

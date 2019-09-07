@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Lionize } from 'src/app/shared/models/habitica/Lionize';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 
 @Component({
     selector: 'providers',
@@ -8,12 +11,30 @@ import { Component, OnInit } from '@angular/core';
 
 export class ProvidersComponent implements OnInit {
 
-    constructor() {
+    constructor(
+        public dialog: MatDialog,
+    ) {
         
     }
 
     ngOnInit() {
 
+    }
+
+    openDialog(type: string): void {
+        const dialogRef = this.dialog.open(PopupComponent, {
+            // TODO make configurable
+            height: '400px',
+            width: '600px',
+            data: {
+                // TODO use enum
+                title: `Add ${type}`,
+                component: 'li-habitica-form'
+            }
+        });
+        dialogRef.afterClosed().subscribe((data) => {
+            // TODO save and get providers
+        });
     }
     
 }   

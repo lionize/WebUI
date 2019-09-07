@@ -37,13 +37,13 @@ export class HeaderComponent implements OnInit {
         this.toggleMenuIcons();
     }
 
-    private signOut() {
+    private signOut(): void {
         this.authenticationService.signOut();
         this.router.navigate(['/landing']);
         this.store.dispatch(new ResetApp());
     }
 
-    private toggleMenuIcons() {
+    private toggleMenuIcons(): void {
         this.menu$.subscribe((menu: TMenu) => {
             if (menu.direction === MENU_DIRECTIONS.LEFT) {
                 this.isLeftMenuOpen = menu.isOpen;
@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
         });
     }
 
-    openDialog() {
+    openDialog(): void {
         const dialogRef = this.dialog.open(DialogComponent, {
             data: {
                 title: "LOG OUT",
@@ -62,15 +62,15 @@ export class HeaderComponent implements OnInit {
                 buttons: ["YES", "NO"]
             }
         });
-        dialogRef.afterClosed().subscribe(data => data && this.signOut());
+        dialogRef.afterClosed().subscribe((data) => data && this.signOut());
     }
 
-    toggleLeftMenu() {
+    toggleLeftMenu(): void {
         this.isLeftMenuOpen = !this.isLeftMenuOpen;
         this.store.dispatch(new ToggleMenu({ isOpen: this.isLeftMenuOpen, direction: MENU_DIRECTIONS.LEFT }));
     }
 
-    toggleRightMenu() {
+    toggleRightMenu(): void {
         this.isRightMenuOpen = !this.isRightMenuOpen;
         this.store.dispatch(new ToggleMenu({ isOpen: this.isRightMenuOpen, direction: MENU_DIRECTIONS.RIGHT }));
     }

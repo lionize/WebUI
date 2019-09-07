@@ -99,10 +99,7 @@ body {
     text-align: center;
 }
 
-//reset styles
-//TODO place in separate file
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+// FIXME
+.mat-dialog-container {
+    display: flex !important;
 }
