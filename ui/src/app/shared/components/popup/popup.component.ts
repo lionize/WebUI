@@ -1,8 +1,17 @@
-import { Component, OnInit, Inject, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import {
+    Component,
+    Inject,
+    ViewChild,
+    ViewContainerRef,
+    ComponentFactoryResolver,
+    ComponentRef,
+    AfterViewInit,
+    OnDestroy
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/habitica/habitica.component';
-import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components/microsoft/microsoft.component';
-import { GoogleComponent } from 'src/app/shared/components/dynamic-components/google/google.component';
+import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/providers/habitica/habitica.component';
+import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components/providers/microsoft/microsoft.component';
+import { GoogleComponent } from 'src/app/shared/components/dynamic-components/providers/google/google.component';
 
 @Component({
     selector: 'li-popup',
@@ -10,8 +19,16 @@ import { GoogleComponent } from 'src/app/shared/components/dynamic-components/go
     styleUrls: ['./popup.component.scss']
 })
 
-export class PopupComponent implements OnInit {
+export class PopupComponent implements AfterViewInit, OnDestroy {
     @ViewChild('container', { read: ViewContainerRef, static: true }) viewContainerRef: ViewContainerRef;
+    cmpRef: ComponentRef<Component>;
+    componentsArray = [
+        HabiticaComponent,
+        MicrosoftComponent,
+        GoogleComponent,
+    ];
+    dataToTransfer;
+    private isViewInitialized: boolean = false;
 
     constructor(
         public dialogRef: MatDialogRef<PopupComponent>,
@@ -21,19 +38,30 @@ export class PopupComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngAfterViewInit() {
+        this.isViewInitialized = true;
         this.loadComponent(this.data.component);
     }
 
+    ngOnDestroy() {
+        if (this.cmpRef) {
+            this.cmpRef.destroy();
+        }
+    }
+
     yesClick(): void {
-        this.dialogRef.close(true);
+        this.dialogRef.close({ success: true, result: this.dataToTransfer });
     }
 
     noClick(): void {
-        this.dialogRef.close(false);
+        this.dialogRef.close({ success: false });
     }
 
     private loadComponent(component): void {
+        if (!this.isViewInitialized) {
+            return;
+        }
+
         // FIXME
         let componentName;
         switch (component) {
@@ -50,11 +78,16 @@ export class PopupComponent implements OnInit {
                 break;
 
             default:
+                componentName = HabiticaComponent;
                 break;
         }
+
         const factory = this.componentFactoryResolver.resolveComponentFactory(componentName);
-        const ref = this.viewContainerRef.createComponent(factory);
+        // FIXME type any
+        const ref: any = this.viewContainerRef.createComponent(factory);
+        this.cmpRef = ref;
         ref.changeDetectorRef.detectChanges();
+        ref.instance.dataChange.subscribe((value) => this.dataToTransfer = value);
     }
 
 }
