@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Lionize } from 'src/app/shared/models/habitica/Lionize';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
+import { ProvidersService } from './providers.service';
 
 @Component({
     selector: 'providers',
@@ -13,8 +14,9 @@ export class ProvidersComponent implements OnInit {
 
     constructor(
         public dialog: MatDialog,
+        private providerService: ProvidersService,
     ) {
-        
+
     }
 
     ngOnInit() {
@@ -26,6 +28,7 @@ export class ProvidersComponent implements OnInit {
             // TODO make configurable
             height: '400px',
             width: '600px',
+            disableClose: true,
             data: {
                 // TODO use enum
                 component: component,
@@ -34,7 +37,21 @@ export class ProvidersComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe((data) => {
             // TODO save and get providers
+            if (data && data.success) {
+                this.saveProvider(data.result);
+            }
         });
     }
-    
+
+    saveProvider(data): void {
+        const payload: Lionize.HabiticaTaskProvider.ApiModels.V1.SettingsSetterRequest = {
+            HabiticaUserID: data.HabiticaUserID,
+            HabiticaApiToken: data.HabiticaApiToken
+        }
+        this.providerService.saveHabitica(payload)
+            .subscribe((data) => {
+                
+            });
+    }
+
 }   

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -16,13 +17,14 @@ import { PopupComponent } from 'src/app/shared/components/popup/popup.component'
 import { LICardComponent } from 'src/app/shared/components/business-components/li-card/li-card.component';
 import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
 // TODO move dynamic components to separate module
-import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/habitica/habitica.component';
-import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components/microsoft/microsoft.component';
-import { GoogleComponent } from 'src/app/shared/components/dynamic-components/google/google.component';
+import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/providers/habitica/habitica.component';
+import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components/providers/microsoft/microsoft.component';
+import { GoogleComponent } from 'src/app/shared/components/dynamic-components/providers/google/google.component';
 
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule, ReactiveFormsModule,
         AdminRoutingModule, 
         SharedModule,
         MatButtonModule, MatDialogModule, MatCardModule
