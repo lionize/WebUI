@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 import { appReducers, clearState } from 'src/app/store/reducers/app.reducers';
 
 import { AuthGuard } from 'src/app/shared/guards/auth.guard';
-import { AuthenticationModule } from './pages/authentication/authentication.module';
+import { AuthenticationModule } from 'src/app/pages/authentication/authentication.module';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';

@@ -56,6 +56,9 @@ export class HeaderComponent implements OnInit {
 
     openDialog(): void {
         const dialogRef = this.dialog.open(DialogComponent, {
+            // TODO make configurable
+            height: '200px',
+            width: '300px',
             data: {
                 title: "LOG OUT",
                 content: "Are you sure you want to logout ?",

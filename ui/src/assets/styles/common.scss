@@ -1,3 +1,55 @@
+/////////common styles/////////
+.full-height {
+    height: 100%;
+}
+.full-width {
+    width: 100%;
+}
+.vertical-margin-5 {
+    margin: 5px 0 !important;
+}
+.horizontal-margin-5 {
+    margin: 0 5px !important;
+}
+.flex {
+    display: flex;
+}
+.flex-direction-column {
+    flex-direction: column;
+}
+.flex-direction-row {
+    flex-direction: row;
+}
+.justify-space-between {
+    justify-content: space-between;
+}
+.justrify-space-around {
+    justify-content: space-around;
+}
+.justify-center {
+    justify-content: center;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.grid {
+    display: grid;
+}
+.border-box {
+    box-sizing: border-box;
+}
+.position-relative {
+    position: relative;
+}
+.overflow-x-hidden {
+    overflow-x: hidden;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.text-center {
+    text-align: center;
+}
 .flex-row-vertical-centered {
     display: flex;
     flex-direction: row;

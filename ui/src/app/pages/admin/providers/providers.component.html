@@ -1,4 +1,17 @@
 <!-- TODO use enums for type -->
-<button mat-flat-button color="primary" (click)="openDialog('Habitica')">Add Habitica</button>
-<button mat-flat-button color="primary" (click)="openDialog('Microsoft To-Do')">Add Microsoft To-Do</button>
-<button mat-flat-button color="primary" (click)="openDialog('Google Tasks')">Add Google Tasks</button>
+<div class="providers-container">
+    <div class="providers-buttons flex-all-centered">
+        <button mat-button color="primary" class="horizontal-margin-5" (click)="openDialog('Habitica')">
+            <mat-icon>add</mat-icon>
+            Habitica
+        </button>
+        <button mat-button color="primary" class="horizontal-margin-5" (click)="openDialog('Microsoft')">
+            <mat-icon>add</mat-icon>
+            Microsoft To-Do
+        </button>
+        <button mat-button color="primary" class="horizontal-margin-5" (click)="openDialog('Google')">
+            <mat-icon>add</mat-icon>
+            Google Tasks
+        </button>
+    </div>
+</div>

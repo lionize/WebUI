@@ -21,15 +21,15 @@ export class ProvidersComponent implements OnInit {
 
     }
 
-    openDialog(type: string): void {
+    openDialog(component: string): void {
         const dialogRef = this.dialog.open(PopupComponent, {
             // TODO make configurable
             height: '400px',
             width: '600px',
             data: {
                 // TODO use enum
-                title: `Add ${type}`,
-                component: 'li-habitica-form'
+                component: component,
+                title: `Add ${component}`,
             }
         });
         dialogRef.afterClosed().subscribe((data) => {

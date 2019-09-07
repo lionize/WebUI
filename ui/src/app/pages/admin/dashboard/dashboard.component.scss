@@ -4,7 +4,7 @@
     flex: auto;
     //TODO create one container for all paddings
     padding: $padding-medium;
-    height: calc(100vh - #{$header-height});
+    // height: calc(100vh - #{$header-height});
     overflow-y: auto;
     .matrix-container {
         grid-template-columns: 1fr 1fr;
