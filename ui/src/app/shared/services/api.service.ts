@@ -92,6 +92,22 @@ export class ApiService {
             );
     }
 
+    put(url: string): Observable<any> {
+        return this.http.delete<any>(url)
+            .pipe(
+                timeout(5000),
+                takeUntil(this.subscription$),
+                map(
+                    (response: any) => {
+                        if (response.isError) {
+                            this.handleError(response);
+                        }
+                        return response;
+                    }),
+                catchError(error => throwError(error))
+            );
+    }
+
     cancelRequest(): void {
         this.subscription$.next();
     }

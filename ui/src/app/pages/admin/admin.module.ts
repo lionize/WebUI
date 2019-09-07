@@ -12,6 +12,7 @@ import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProvidersComponent } from 'src/app/pages/admin/providers/providers.component';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
+import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { LICardComponent } from 'src/app/shared/components/business-components/li-card/li-card.component';
 import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
 
@@ -27,6 +28,7 @@ import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
         DashboardComponent,
         ProvidersComponent,
         DialogComponent,
+        PopupComponent,
         MenuComponent,
         LICardComponent,
     ],
@@ -34,7 +36,10 @@ import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
         AdminComponent
     ],
     providers: [],
-    entryComponents: [DialogComponent]
+    entryComponents: [
+        DialogComponent,
+        PopupComponent,
+    ]
 })
 
 export class AdminModule { }
