@@ -1,8 +1,8 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { routerReducer } from '@ngrx/router-store';
-import { IAppState, initialAppState } from 'src/app/store/state/app.state';
+import { IAppState } from 'src/app/store/state/app.state';
 import { menuReducers } from './menu.reducers';
-import { AppActions, APP_ACTIONS } from 'src/app/store/actions/app.actions';
+import { APP_ACTIONS } from 'src/app/store/actions/app.actions';
 
 export const appReducers: ActionReducerMap<IAppState, any> = {
     menu: menuReducers,

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { validation_messages } from 'src/app/shared/validation.messages';
 // import { Lionize } from 'src/app/shared/models/habitica/Lionize';
@@ -12,18 +12,14 @@ import { validation_messages } from 'src/app/shared/validation.messages';
 export class HabiticaComponent implements OnInit {
     form: FormGroup;
     validationMessages = validation_messages;
-    // FIXME
-    // outputted data
-    // data: Lionize.HabiticaTaskProvider.ApiModels.V1.SettingsSetterRequest = {
-    //     HabiticaUserID: null,
-    //     HabiticaApiToken: null,
-    // };
+    // TODO create type or use backend models
+    @Input() data: { habiticaUserID: string, id: string };
     @Output() dataChange: EventEmitter<any> = new EventEmitter();
 
     constructor(
         private formBuilder: FormBuilder,
     ) {
-            
+
     }
 
     ngOnInit() {

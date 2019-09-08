@@ -3,6 +3,8 @@ import { Lionize } from 'src/app/shared/models/habitica/Lionize';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { ProvidersService } from './providers.service';
+import { ProviderTypes } from './providers.models';
+import { TPopup } from 'src/app/shared/components/popup/popup.model';
 
 @Component({
     selector: 'providers',
@@ -12,6 +14,7 @@ import { ProvidersService } from './providers.service';
 
 export class ProvidersComponent implements OnInit {
     // TODO use types (backend classes)
+    providerTypes: typeof ProviderTypes = ProviderTypes;
     providers = {
         habitica: [],
         microsoft: [],
@@ -29,17 +32,17 @@ export class ProvidersComponent implements OnInit {
         this.getHabitica();
     }
 
-    openDialog(component: string): void {
+    openPopup(component: string): void {
+        const data: TPopup = {
+            component: component,
+            title: `Add ${component}`,
+        }
         const dialogRef = this.dialog.open(PopupComponent, {
             // TODO make configurable
             height: '400px',
             width: '600px',
             disableClose: true,
-            data: {
-                // TODO use enum
-                component: component,
-                title: `Add ${component}`,
-            }
+            data: data
         });
         dialogRef.afterClosed().subscribe((data) => {
             // TODO save and get providers

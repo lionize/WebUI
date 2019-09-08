@@ -14,7 +14,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProvidersComponent } from 'src/app/pages/admin/providers/providers.component';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
-import { LICardComponent } from 'src/app/shared/components/business-components/li-card/li-card.component';
+import { CardComponent } from 'src/app/shared/components/business-components/card/card.component';
+import { ProviderCardComponent } from 'src/app/shared/components/business-components/provider-card/provider-card.component';
 import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
 // TODO move dynamic components to separate module
 import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/providers/habitica/habitica.component';
@@ -36,7 +37,8 @@ import { GoogleComponent } from 'src/app/shared/components/dynamic-components/pr
         DialogComponent,
         PopupComponent,
         MenuComponent,
-        LICardComponent,
+        CardComponent,
+        ProviderCardComponent,
         // TODO move dynamic components to separate module
         HabiticaComponent,
         MicrosoftComponent,

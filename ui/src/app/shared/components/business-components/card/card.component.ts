@@ -3,11 +3,11 @@ import { IMatrixDetail } from 'src/app/shared/constants';
 
 @Component({
     selector: 'li-card',
-    templateUrl: './li-card.component.html',
-    styleUrls: ['./li-card.component.scss']
+    templateUrl: './card.component.html',
+    styleUrls: ['./card.component.scss']
 })
 
-export class LICardComponent implements OnInit {
+export class CardComponent implements OnInit {
 
     @Input() data: IMatrixDetail;
 
