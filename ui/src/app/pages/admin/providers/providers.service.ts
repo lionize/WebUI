@@ -13,8 +13,15 @@ export class ProvidersService {
     ) {
     }
 
-    saveHabitica(payload): Observable<Lionize.HabiticaTaskProvider.ApiModels.V1.SettingsGetterResponse> {
+    // TODO type Observable and response
+    saveHabitica(payload): Observable<any> {
         return this.apiService.post(`${environment.habiticaTaskProviderService}Settings`, payload)
+            .pipe(map((response) => response));
+    }
+
+    // TODO type Observable and response
+    getHabitica(): Observable<any> {
+        return this.apiService.get(`${environment.habiticaTaskProviderService}Settings`)
             .pipe(map((response) => response));
     }
 

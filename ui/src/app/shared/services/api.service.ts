@@ -35,7 +35,7 @@ export class ApiService {
                 takeUntil(this.subscription$),
                 map(
                     (response: any) => {
-                        if (response.isError) {
+                        if (response && response.isError) {
                             this.handleError(response);
                         }
                         return response;
@@ -51,7 +51,7 @@ export class ApiService {
                 takeUntil(this.subscription$),
                 map(
                     (response: any) => {
-                        if (response.isError) {
+                        if (response && response.isError) {
                             this.handleError(response);
                         }
                         return response;
@@ -67,7 +67,7 @@ export class ApiService {
                 takeUntil(this.subscription$),
                 map(
                     (response: any) => {
-                        if (response.isError) {
+                        if (response && response.isError) {
                             this.handleError(response);
                         }
                         return response;
@@ -83,7 +83,7 @@ export class ApiService {
                 takeUntil(this.subscription$),
                 map(
                     (response: any) => {
-                        if (response.isError) {
+                        if (response && response.isError) {
                             this.handleError(response);
                         }
                         return response;
@@ -99,7 +99,7 @@ export class ApiService {
                 takeUntil(this.subscription$),
                 map(
                     (response: any) => {
-                        if (response.isError) {
+                        if (response && response.isError) {
                             this.handleError(response);
                         }
                         return response;
