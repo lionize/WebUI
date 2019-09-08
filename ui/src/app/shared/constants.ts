@@ -10,7 +10,8 @@ export enum API_URLS {
     SIGN_IN = 'Accounts/SignIn'
 }
 
-//TODO place in separate file
+// TODO place in separate file
+// TODO change all types, interfaces names (remove 'I' and 'T')
 export interface IMatrixDetail {
     type: MATRIX;
     title: string;

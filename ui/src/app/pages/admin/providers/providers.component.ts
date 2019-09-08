@@ -11,6 +11,12 @@ import { ProvidersService } from './providers.service';
 })
 
 export class ProvidersComponent implements OnInit {
+    // TODO use types (backend classes)
+    providers = {
+        habitica: [],
+        microsoft: [],
+        google: []
+    };
 
     constructor(
         public dialog: MatDialog,
@@ -20,7 +26,7 @@ export class ProvidersComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.getHabitica();
     }
 
     openDialog(component: string): void {
@@ -38,19 +44,27 @@ export class ProvidersComponent implements OnInit {
         dialogRef.afterClosed().subscribe((data) => {
             // TODO save and get providers
             if (data && data.success) {
-                this.saveProvider(data.result);
+                this.saveHabitica(data.result);
             }
         });
     }
 
-    saveProvider(data): void {
+    // TODO use generic method for all providers
+    getHabitica(): void {
+        this.providerService.getHabitica()
+            .subscribe((data) => {
+                this.providers.habitica = data;
+            });
+    }
+
+    saveHabitica(data): void {
         const payload: Lionize.HabiticaTaskProvider.ApiModels.V1.SettingsSetterRequest = {
             HabiticaUserID: data.HabiticaUserID,
             HabiticaApiToken: data.HabiticaApiToken
         }
         this.providerService.saveHabitica(payload)
             .subscribe((data) => {
-                
+                this.getHabitica();
             });
     }
 

@@ -23,8 +23,9 @@ export class AuthGuard implements CanLoad, CanActivate {
 
     private checkLogin(): boolean {
         //FIXME
-        const user: TSigInUser = JSON.parse(localStorage.getItem('user'));
-        if (this.authenticationService.isLoggedIn || (user && user.accessToken)) {
+        // const user: TSigInUser = JSON.parse(localStorage.getItem('user'));
+        const currentUser = this.authenticationService.currentUserValue;
+        if (currentUser) {
             return true;
         }
         //FIXME

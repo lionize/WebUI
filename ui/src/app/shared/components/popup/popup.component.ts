@@ -27,7 +27,7 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
         MicrosoftComponent,
         GoogleComponent,
     ];
-    dataToTransfer;
+    outputData;
     private isViewInitialized: boolean = false;
 
     constructor(
@@ -50,7 +50,7 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
     }
 
     yesClick(): void {
-        this.dialogRef.close({ success: true, result: this.dataToTransfer });
+        this.dialogRef.close({ success: true, result: this.outputData });
     }
 
     noClick(): void {
@@ -87,7 +87,7 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
         const ref: any = this.viewContainerRef.createComponent(factory);
         this.cmpRef = ref;
         ref.changeDetectorRef.detectChanges();
-        ref.instance.dataChange.subscribe((value) => this.dataToTransfer = value);
+        ref.instance.dataChange.subscribe((value) => this.outputData = value);
     }
 
 }
