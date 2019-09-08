@@ -1,24 +1,22 @@
 <!-- TODO use enums for type -->
 <div class="providers-container">
-    <div class="providers-buttons flex-all-centered">
-        <button mat-button color="primary" class="horizontal-margin-5" (click)="openDialog('Habitica')">
+    <div class="providers-buttons flex-all-centered flex-wrap">
+        <button mat-button color="primary" class="horizontal-margin-5" (click)="openPopup('Habitica')">
             <mat-icon>add</mat-icon>
             Habitica
         </button>
-        <button mat-button color="primary" class="horizontal-margin-5" (click)="openDialog('Microsoft')">
+        <button mat-button color="primary" class="horizontal-margin-5" (click)="openPopup('Microsoft')">
             <mat-icon>add</mat-icon>
             Microsoft To-Do
         </button>
-        <button mat-button color="primary" class="horizontal-margin-5" (click)="openDialog('Google')">
+        <button mat-button color="primary" class="horizontal-margin-5" (click)="openPopup('Google')">
             <mat-icon>add</mat-icon>
             Google Tasks
         </button>
     </div>
-</div>
-<!-- TODO beautify -->
-<div>
-    <div *ngFor="let item of providers.habitica">
-        <div>ID: {{item.id}}</div>
-        <div>Habitica User ID: {{item.habiticaUserID}}</div>
+    <div class="provider-cards-container grid">
+        <ng-container *ngFor="let item of providers.habitica">
+            <li-provider-card [type]="providerTypes.HABITICA" [data]="item"></li-provider-card>
+        </ng-container>
     </div>
 </div>

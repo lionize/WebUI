@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-
 import { TMenu } from 'src/app/shared/components/menu/menu.model';
 
 export enum MENU_ACTIONS {

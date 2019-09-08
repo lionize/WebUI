@@ -6,7 +6,8 @@ import {
     ComponentFactoryResolver,
     ComponentRef,
     AfterViewInit,
-    OnDestroy
+    OnDestroy,
+    Input
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/providers/habitica/habitica.component';
@@ -36,6 +37,10 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
         private componentFactoryResolver: ComponentFactoryResolver
     ) {
 
+    }
+
+    ngOnChanges() {
+        this.loadComponent(this.data.component);
     }
 
     ngAfterViewInit() {
@@ -88,6 +93,8 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
         this.cmpRef = ref;
         ref.changeDetectorRef.detectChanges();
         ref.instance.dataChange.subscribe((value) => this.outputData = value);
+        ref.instance.data = this.data.data;
+        // FIXME ERROR TypeError: Cannot read property 'subscribe' of undefined
     }
 
 }

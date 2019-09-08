@@ -1,0 +1,15 @@
+<mat-card class="provider-card-container">
+    <mat-card-header>
+        <mat-card-title>{{type}}</mat-card-title>
+        <mat-card-subtitle>{{data?.habiticaUserID}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{data?.id}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button color="primary" (click)="openPopup(type, data)">
+            <mat-icon>edit</mat-icon>
+            Edit
+        </button>
+    </mat-card-actions>
+</mat-card>

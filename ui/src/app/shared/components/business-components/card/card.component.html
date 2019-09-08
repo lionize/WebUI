@@ -1,4 +1,4 @@
-<mat-card class="li-card-container" [style.borderColor]="data?.color">
+<mat-card class="card-container" [style.borderColor]="data?.color">
     <mat-card-header>
         <mat-card-title>{{data.title}}</mat-card-title>
         <mat-card-subtitle>{{data.subTitle}}</mat-card-subtitle>
@@ -7,6 +7,6 @@
         <p></p>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-flat-button color="default">New task</button>
+        <button mat-button color="primary">New task</button>
     </mat-card-actions>
 </mat-card>

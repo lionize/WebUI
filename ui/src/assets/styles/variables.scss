@@ -19,7 +19,8 @@ $header-height: 50px;
 $desktop-hd: 1280px;
 $desktop: 1024px;
 $tablet: 768px;
-$mobile: 300px;
+$mobile-landscape: 568px;
+$mobile: 320px;
 
 :export {
     urgentImportant: $urgent-important;

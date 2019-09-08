@@ -8,12 +8,12 @@
     overflow-y: auto;
     .matrix-container {
         grid-template-columns: 1fr 1fr;
-        grid-column-gap: $padding-large;
-        grid-row-gap: $padding-large;
+        grid-column-gap: 15px;
+        grid-row-gap: 15px;
         @media screen and (max-width: $tablet) {
             grid-template-columns: 1fr;
-            grid-column-gap: $padding-small;
-            grid-row-gap: $padding-small;
+            grid-column-gap: 10px;
+            grid-row-gap: 10px;
         }
     }
 }

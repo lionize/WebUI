@@ -1,0 +1,22 @@
+@import "src/assets/styles/variables";
+@import "src/assets/styles/common";
+
+:host {
+    display: block;
+    min-width: 120px;
+    min-height: 80px;
+    .provider-card-container {
+        .mat-card-header {
+            .mat-card-title,
+            .mat-card-subtitle {
+                width: 100%;
+                @extend .text-ellipsis;
+            }
+        }
+        .mat-card-content {
+            > p {
+                @extend .text-ellipsis;
+            }
+        }
+    }
+}
