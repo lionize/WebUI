@@ -36,6 +36,7 @@ export class ProvidersComponent implements OnInit {
         const data: TPopup = {
             component: component,
             title: `Add ${component}`,
+            data: {}
         }
         const dialogRef = this.dialog.open(PopupComponent, {
             // TODO make configurable
@@ -65,7 +66,7 @@ export class ProvidersComponent implements OnInit {
             HabiticaUserID: data.HabiticaUserID,
             HabiticaApiToken: data.HabiticaApiToken
         }
-        this.providerService.saveHabitica(payload)
+        this.providerService.postHabitica(payload)
             .subscribe((data) => {
                 this.getHabitica();
             });

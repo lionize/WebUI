@@ -1,5 +1,5 @@
 <div class="form">
-    <form [formGroup]="form" autocomplete="off">
+    <form [formGroup]="form">
         <div class="flex flex-direction-column">
             <mat-form-field class="vertical-margin-5">
                 <input matInput placeholder="Habitica user ID" formControlName="HabiticaUserID" required>
@@ -11,7 +11,7 @@
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="vertical-margin-5">
-                <input matInput placeholder="Habitica API token" formControlName="HabiticaApiToken" type="password" required>
+                <input matInput autocomplete="new-password" placeholder="Habitica API token" formControlName="HabiticaApiToken" type="password" required>
                 <mat-error *ngFor="let validation of validationMessages.HabiticaApiToken">
                     <mat-error *ngIf="form.get('HabiticaApiToken').hasError(validation.type) && 
                                     (form.get('HabiticaApiToken').dirty || form.get('HabiticaApiToken').touched)">

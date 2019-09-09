@@ -22,8 +22,9 @@ export class ApiService {
     }
 
     private handleError(error) {
-        //TODO show button instead empty text
-        //TODO handle other errors
+        // TODO show button instead empty text
+        // TODO handle other errors
+        // TODO move error handling
         this.snackBar.open(error.errorMessage, '');
         return error;
     }
@@ -44,7 +45,7 @@ export class ApiService {
             );
     }
 
-    post(url: string, body: object): Observable<any> {
+    post(url: string, body: any): Observable<any> {
         return this.http.post<any>(url, body)
             .pipe(
                 timeout(5000),
@@ -60,7 +61,7 @@ export class ApiService {
             );
     }
 
-    patch(url: string, body: object): Observable<any> {
+    patch(url: string, body: any): Observable<any> {
         return this.http.patch<any>(url, body)
             .pipe(
                 timeout(5000),
@@ -92,8 +93,8 @@ export class ApiService {
             );
     }
 
-    put(url: string): Observable<any> {
-        return this.http.delete<any>(url)
+    put(url: string, body: any): Observable<any> {
+        return this.http.put<any>(url, body)
             .pipe(
                 timeout(5000),
                 takeUntil(this.subscription$),

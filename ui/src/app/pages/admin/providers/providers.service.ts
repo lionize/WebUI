@@ -11,17 +11,24 @@ export class ProvidersService {
     constructor(
         private apiService: ApiService
     ) {
-    }
 
-    // TODO type Observable and response
-    saveHabitica(payload): Observable<any> {
-        return this.apiService.post(`${environment.habiticaTaskProviderService}Settings`, payload)
-            .pipe(map((response) => response));
     }
 
     // TODO type Observable and response
     getHabitica(): Observable<any> {
         return this.apiService.get(`${environment.habiticaTaskProviderService}Settings`)
+            .pipe(map((response) => response));
+    }
+
+    // TODO type Observable and response
+    postHabitica(payload): Observable<any> {
+        return this.apiService.post(`${environment.habiticaTaskProviderService}Settings`, payload)
+            .pipe(map((response) => response));
+    }
+
+    // TODO type Observable and response
+    putHabitica(id, payload): Observable<any> {
+        return this.apiService.put(`${environment.habiticaTaskProviderService}Settings/${id}`, payload)
             .pipe(map((response) => response));
     }
 

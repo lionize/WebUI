@@ -56,6 +56,7 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
 
     yesClick(): void {
         this.dialogRef.close({ success: true, result: this.outputData });
+        this.outputData
     }
 
     noClick(): void {
@@ -91,9 +92,9 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
         // FIXME type any
         const ref: any = this.viewContainerRef.createComponent(factory);
         this.cmpRef = ref;
-        ref.changeDetectorRef.detectChanges();
         ref.instance.dataChange.subscribe((value) => this.outputData = value);
         ref.instance.data = this.data.data;
+        ref.changeDetectorRef.detectChanges();
         // FIXME ERROR TypeError: Cannot read property 'subscribe' of undefined
     }
 
