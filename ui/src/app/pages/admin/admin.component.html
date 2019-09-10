@@ -1,8 +1,10 @@
 <div class="admin-container">
     <header></header>
     <!--FIXME overflow-x-hidden blinks the main container-->
-    <div class="admin-wrapper full-flex-row position-relative overflow-x-hidden">
+    <div class="full-flex-row position-relative overflow-x-hidden">
         <menu></menu>
-        <router-outlet></router-outlet>
+        <div class="admin-wrapper">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>

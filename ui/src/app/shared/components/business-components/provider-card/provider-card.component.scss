@@ -9,7 +9,7 @@
         .mat-card-header {
             .mat-card-title,
             .mat-card-subtitle {
-                width: 100%;
+                width: calc(100% - 5px);
                 @extend .text-ellipsis;
             }
         }
