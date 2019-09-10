@@ -1,11 +1,8 @@
 @import "src/assets/styles/variables";
+@import 'src/assets/styles/common';
 
 :host {
-    flex: auto;
-    //TODO create one container for all paddings
-    padding: $padding-medium;
-    // height: calc(100vh - #{$header-height});
-    overflow-y: auto;
+    @extend .full-flex-column;
     .matrix-container {
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 15px;

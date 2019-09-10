@@ -11,14 +11,27 @@ export class ErrorInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
-            // TODO test
             if (err.status === 401) {
-                // auto logout if 401 response returned from api
-                this.authenticationService.signOut();
-                // TODO make request for getting accessToken (with refreshToken)
-                location.reload(true);
+                const currentUser = this.authenticationService.currentUserValue;
+                if (currentUser && currentUser.refreshToken) {
+                    // TODO use switchMap for another request
+                    this.authenticationService.refresh({ refreshToken: currentUser.refreshToken })
+                        .subscribe((response) => {
+                            if (response.isError) {
+                                this.authenticationService.signOut({
+                                    accessToken: currentUser.accessToken,
+                                    refreshToken: currentUser.accessToken
+                                });
+                                location.reload(true);
+                            }
+                            else {
+                                // TODO repeat failed requests again
+                                location.reload();
+                            }
+                        });
+                }
             }
-            
+
             // FIXME
             const error = err.statusText || err.message;
             return throwError(error);

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
-import { TClientUserLogin } from 'src/app/pages/authentication/user.model';
+import { TClientUserLogin, TSigInUser } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
 import { ResetApp } from 'src/app/store/actions/app.actions';
 import { ToggleMenu } from 'src/app/store/actions/menu.actions';
@@ -18,7 +18,7 @@ import { selectMenu } from 'src/app/store/selectors/menu.selectors';
 })
 
 export class HeaderComponent implements OnInit {
-    user: TClientUserLogin;
+    user: TSigInUser;
     isLeftMenuOpen: boolean = false;
     isRightMenuOpen: boolean = false;
     MENU_DIRECTIONS: MENU_DIRECTIONS;
@@ -33,14 +33,22 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.user = JSON.parse(localStorage.getItem('user'));
+        this.user = this.authenticationService.currentUserValue;
         this.toggleMenuIcons();
     }
 
     private signOut(): void {
-        this.authenticationService.signOut();
-        this.router.navigate(['/landing']);
-        this.store.dispatch(new ResetApp());
+        const payload = {
+            accessToken: this.user.accessToken,
+            refreshToken: this.user.accessToken
+        }
+        this.authenticationService.signOut(payload)
+            .subscribe((response) => {
+                if (!response.isError) {
+                    this.router.navigate(['/landing']);
+                    this.store.dispatch(new ResetApp());
+                }
+            });
     }
 
     private toggleMenuIcons(): void {

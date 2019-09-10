@@ -1,9 +1,8 @@
 @import "src/assets/styles/variables";
+@import 'src/assets/styles/common';
 
 :host {
-    flex: auto;
-    //TODO create one container for all paddings
-    padding: $padding-medium;
+    @extend .full-flex-column;
     .providers-container {
         .providers-buttons {
             // TODO use variable

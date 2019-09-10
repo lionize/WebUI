@@ -7,7 +7,9 @@ export enum MATRIX {
 
 export enum API_URLS {
     SIGN_UP = 'Accounts/SignUp',
-    SIGN_IN = 'Accounts/SignIn'
+    SIGN_IN = 'Accounts/SignIn',
+    SIGN_OUT = 'Accounts/SignOut',
+    REFRESH = 'Accounts/Refresh'
 }
 
 // TODO place in separate file

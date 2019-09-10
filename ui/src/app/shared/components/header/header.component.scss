@@ -8,11 +8,6 @@
     height: $header-height;
     .header-wrapper {
         @extend .flex-row-vertical-centered;
-        width: $desktop-hd;
-        margin: 0 auto;
-        @media screen and (max-width: $desktop-hd) {
-            width: 100%;
-        }
         > img {
             height: 100%;
             cursor: pointer;
@@ -34,5 +29,4 @@
             color: $pure-white;
         }
     }
-    //TODO make generic
 }
