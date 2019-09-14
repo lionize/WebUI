@@ -20,9 +20,9 @@ export type TSignUpUser = {
 export type TSigInUser = {
     username: string;
     accessToken: string;
+    refreshToken: string;
     identityToken?: string;
     tokenType?: string;
-    refreshToken: string;
     isError?: boolean;
     errorMessage?: string;
 }

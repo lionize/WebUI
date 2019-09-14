@@ -3,8 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { validation_messages } from 'src/app/shared/validation.messages';
 import { PatternValidator, PasswordsMatchingValidator } from 'src/app/shared/helpers/form.validators';
-import { TClientUserRegister, TClientUserLogin, TSigInUser } from 'src/app/pages/authentication/user.model';
+import { TClientUserRegister, TClientUserLogin, TSigInUser, TSignUpUser } from 'src/app/pages/authentication/user.model';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
+import { map } from 'rxjs/operators';
 
 enum MODES {
     SIGN_IN = 'SIGN_IN',
@@ -12,12 +13,12 @@ enum MODES {
 }
 
 @Component({
-    selector: 'li-auth',
-    templateUrl: './li-auth.component.html',
-    styleUrls: ['./li-auth.component.scss']
+    selector: 'li-auth-form',
+    templateUrl: './auth-form.component.html',
+    styleUrls: ['./auth-form.component.scss']
 })
 
-export class LIAuthComponent implements OnInit {
+export class AuthFormComponent implements OnInit {
     @Input() mode: MODES;
     MODES = MODES;
     form: FormGroup;
@@ -47,6 +48,7 @@ export class LIAuthComponent implements OnInit {
             }
             this.loading = true;
             this.authenticationService.signUp(payload)
+                .pipe(map((response: TSignUpUser) => response))
                 .subscribe(
                     (response) => {
                         this.loading = false;
@@ -71,6 +73,19 @@ export class LIAuthComponent implements OnInit {
             }
             this.loading = true;
             this.authenticationService.signIn(payload)
+                .pipe(map((response: TSigInUser) => {
+                    if (!response.isError) {
+                        const user: TSigInUser = {
+                            username: payload.username,
+                            accessToken: response.accessToken,
+                            refreshToken: response.refreshToken
+                        }
+                        localStorage.setItem('user', JSON.stringify(user));
+                        // this.currentUserSubject.next(user);
+                        this.authenticationService.setCurrentUserValue(user);
+                    }
+                    return response;
+                }))
                 .subscribe(
                     (response) => {
                         this.loading = false;
