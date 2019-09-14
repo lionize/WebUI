@@ -11,13 +11,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 
 import { AuthenticationRoutingModule } from './authentication.routing.module';
-import { AuthenticationService } from './authentication.service';
-import { JwtInterceptor } from 'src/app/shared/helpers/jwt.interceptors';
+// import { AuthenticationService } from './authentication.service';
+import { JWTInterceptor } from 'src/app/shared/helpers/jwt.interceptors';
 import { ErrorInterceptor } from 'src/app/shared/helpers/error.interceptor';
+import { TokenInterceptor } from 'src/app/shared/helpers/token.interceptor';
 import { AuthenticationComponent } from './authentication.component';
 import { SignInComponent } from './signin/signin.component';
 import { SignUpComponent } from './signup/signup.component';
-import { LIAuthComponent } from 'src/app/shared/components/li-auth/li-auth.component';
+import { AuthFormComponent } from 'src/app/shared/components/auth-form/auth-form.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
@@ -33,15 +34,16 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
         AuthenticationComponent,
         SignInComponent,
         SignUpComponent,
-        LIAuthComponent,
+        AuthFormComponent,
     ],
     exports: [
         AuthenticationComponent
     ],
     providers: [
         // AuthenticationService,
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        // { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true },
+        // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     ],
     entryComponents: []
 })

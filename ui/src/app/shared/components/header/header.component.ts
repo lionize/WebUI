@@ -10,6 +10,7 @@ import { ToggleMenu } from 'src/app/store/actions/menu.actions';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { MENU_DIRECTIONS, TMenu } from 'src/app/shared/components/menu/menu.model';
 import { selectMenu } from 'src/app/store/selectors/menu.selectors';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'header',
@@ -43,8 +44,11 @@ export class HeaderComponent implements OnInit {
             refreshToken: this.user.accessToken
         }
         this.authenticationService.signOut(payload)
+            .pipe(map((response: TSigInUser) => response))
             .subscribe((response) => {
                 if (!response.isError) {
+                    this.authenticationService.setCurrentUserValue(null);
+                    localStorage.removeItem('user');
                     this.router.navigate(['/landing']);
                     this.store.dispatch(new ResetApp());
                 }
