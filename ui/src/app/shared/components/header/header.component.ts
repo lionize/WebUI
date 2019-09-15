@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
-import { TClientUserLogin, TSigInUser } from 'src/app/pages/authentication/user.model';
+import { UISigninUser, SigInUser } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
 import { ResetApp } from 'src/app/store/actions/app.actions';
 import { ToggleMenu } from 'src/app/store/actions/menu.actions';
@@ -19,7 +19,7 @@ import { map } from 'rxjs/operators';
 })
 
 export class HeaderComponent implements OnInit {
-    user: TSigInUser;
+    user: SigInUser;
     isLeftMenuOpen: boolean = false;
     isRightMenuOpen: boolean = false;
     MENU_DIRECTIONS: MENU_DIRECTIONS;
@@ -34,17 +34,19 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.user = this.authenticationService.currentUserValue;
+        this.user = this.authenticationService.geCurrentUserValue();
         this.toggleMenuIcons();
     }
 
     private signOut(): void {
-        const payload = {
+        const payload: SigInUser = {
             accessToken: this.user.accessToken,
             refreshToken: this.user.accessToken
         }
         this.authenticationService.signOut(payload)
-            .pipe(map((response: TSigInUser) => response))
+            .pipe(
+                map((response: SigInUser) => response)
+            )
             .subscribe((response) => {
                 if (!response.isError) {
                     this.authenticationService.setCurrentUserValue(null);
@@ -72,8 +74,8 @@ export class HeaderComponent implements OnInit {
             height: '200px',
             width: '300px',
             data: {
-                title: "LOG OUT",
-                content: "Are you sure you want to logout ?",
+                title: "SIGN OUT",
+                content: "Are you sure you want to sign out ?",
                 buttons: ["YES", "NO"]
             }
         });

@@ -1,81 +1,45 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { API_URLS } from 'src/app/shared/constants';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { TSigInUser, TSignUpUser } from './user.model';
+import { SigInUser, SignUpUser, UISigninUser, UISignupUser } from './user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<TSigInUser>;
-    public currentUser: Observable<TSigInUser>;
+    private currentUserSubject: BehaviorSubject<SigInUser>;
+    currentUser$: Observable<SigInUser>;
 
     constructor(
         private apiService: ApiService
     ) {
-        this.currentUserSubject = new BehaviorSubject<TSigInUser>(JSON.parse(localStorage.getItem('user')));
-        this.currentUser = this.currentUserSubject.asObservable();
+        this.currentUserSubject = new BehaviorSubject<SigInUser>(JSON.parse(localStorage.getItem('user')));
+        this.currentUser$ = this.currentUserSubject.asObservable();
     }
 
-    // TODO change to method
-    get currentUserValue(): TSigInUser {
+    geCurrentUserValue(): SigInUser {
         return this.currentUserSubject.value;
     }
 
-    setCurrentUserValue(user: TSigInUser): void {
+    setCurrentUserValue(user: SigInUser): void {
         this.currentUserSubject.next(user);
     }
 
-    signUp(payload): Observable<TSignUpUser> {
-        return this.apiService.post(`${environment.signUpBase}${API_URLS.SIGN_UP}`, payload);
-            // .pipe(map((response: TSignUpUser) => response));
+    signUp(user: UISignupUser): Observable<SignUpUser> {
+        return this.apiService.post(`${environment.signUpBase}${API_URLS.SIGN_UP}`, user);
     }
 
-    signIn(payload): Observable<TSigInUser> {
-        return this.apiService.post(`${environment.signInBase}${API_URLS.SIGN_IN}`, payload);
-            // .pipe(map((response: TSigInUser) => {
-            //     if (!response.isError) {
-            //         const user: TSigInUser = {
-            //             username: payload.username,
-            //             accessToken: response.accessToken,
-            //             refreshToken: response.refreshToken
-            //         }
-            //         localStorage.setItem('user', JSON.stringify(user));
-            //         this.currentUserSubject.next(user);
-            //     }
-            //     return response;
-            // }));
+    signIn(user: UISigninUser): Observable<SigInUser> {
+        return this.apiService.post(`${environment.signInBase}${API_URLS.SIGN_IN}`, user);
     }
 
-    // FIXME Observable type
-    signOut(payload): Observable<TSigInUser> {
-        // localStorage.removeItem('user');
-        // this.currentUserSubject.next(null);
-        return this.apiService.post(`${environment.signInBase}${API_URLS.SIGN_OUT}`, payload);
-            // .pipe(map((response: TSigInUser) => {
-            //     if (!response.isError) {
-            //         this.currentUserSubject.next(null);
-            //     }
-            //     return response;
-            // }));
+    signOut(user: SigInUser): Observable<SigInUser> {
+        return this.apiService.post(`${environment.signInBase}${API_URLS.SIGN_OUT}`, user);
     }
 
-    // FIXME Observable type
-    refresh(payload): Observable<TSigInUser> {
-        return this.apiService.post(`${environment.signInBase}${API_URLS.REFRESH}`, payload)
-            // .pipe(map((response: TSigInUser) => {
-            //     if (!response.isError) {
-            //         const user: TSigInUser = {
-            //             ...response,
-            //             username: this.currentUserValue.username
-            //         }
-            //         localStorage.setItem('user', JSON.stringify(user));
-            //         this.currentUserSubject.next(user);
-            //     }
-            //     return response;
-            // }));
+    refresh(user: SigInUser): Observable<SigInUser> {
+        return this.apiService.post(`${environment.signInBase}${API_URLS.REFRESH}`, user);
     }
 
 }

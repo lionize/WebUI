@@ -16,7 +16,7 @@
     </div>
     <div class="provider-cards-container grid">
         <ng-container *ngFor="let item of providers.habitica">
-            <li-provider-card [type]="providerTypes.HABITICA" [data]="item"></li-provider-card>
+            <li-provider-card [type]="providerTypes.HABITICA" [data]="item" (dataChange)="onDataChange($event)"></li-provider-card>
         </ng-container>
     </div>
 </div>

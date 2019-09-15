@@ -3,7 +3,7 @@ import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpErrorResponse
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { catchError, switchMap, filter, take, map } from 'rxjs/operators';
+import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { Router } from '@angular/router';
 
@@ -13,21 +13,21 @@ export class TokenInterceptor implements HttpInterceptor {
     private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
     constructor(
-        public authService: AuthenticationService,
+        public authenticationService: AuthenticationService,
         private router: Router,
     ) {
 
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.authService.currentUserValue && this.authService.currentUserValue.accessToken) {
-            request = this.addToken(request, this.authService.currentUserValue.accessToken);
+        if (this.authenticationService.geCurrentUserValue() && this.authenticationService.geCurrentUserValue().accessToken) {
+            request = this.addToken(request, this.authenticationService.geCurrentUserValue().accessToken);
         }
 
         return next.handle(request)
             .pipe(
                 catchError(error => {
-                    // TODO also handle other error codes
+                    // TODO also handle other error codes (find in comments in this file)
                     if (error instanceof HttpErrorResponse && error.status === 401) {
                         return this.handleError(request, next);
                     }
@@ -39,13 +39,17 @@ export class TokenInterceptor implements HttpInterceptor {
         if (!this.isRefreshing) {
             this.isRefreshing = true;
             this.refreshTokenSubject.next(null);
-            this.authService.setCurrentUserValue({...this.authService.currentUserValue, accessToken: null});
-            return this.authService.refresh({ refreshToken: this.authService.currentUserValue.refreshToken })
+            this.authenticationService.setCurrentUserValue({...this.authenticationService.geCurrentUserValue(), accessToken: null});
+            return this.authenticationService.refresh({ refreshToken: this.authenticationService.geCurrentUserValue().refreshToken })
                 .pipe(
                     switchMap((user) => {
                         this.isRefreshing = false;
                         this.refreshTokenSubject.next(user.refreshToken);
-                        this.authService.setCurrentUserValue(user);
+                        user = {
+                            ...user,
+                            username: this.authenticationService.geCurrentUserValue().username
+                        }
+                        this.authenticationService.setCurrentUserValue(user);
                         localStorage.setItem('user', JSON.stringify(user));
                         // FIXME next request cancels
                         return next.handle(this.addToken(request, user.accessToken));
@@ -53,7 +57,7 @@ export class TokenInterceptor implements HttpInterceptor {
                     catchError(error => {
                         this.router.navigate(['/auth/signin']);
                         localStorage.removeItem('user');
-                        this.authService.setCurrentUserValue(null);
+                        this.authenticationService.setCurrentUserValue(null);
                         return throwError(error);
                     })
                 );
@@ -81,3 +85,42 @@ export class TokenInterceptor implements HttpInterceptor {
         }
     }
 }
+
+// catchError((error) => {
+//     // let resultObservable = empty();
+//     if (error instanceof HttpErrorResponse) {
+//         // A client-side or network error occurred. Handle it accordingly.
+//         this.router.navigate(['/auth/signin']);
+//     } else {
+//         // The backend returned an unsuccessful response code.
+//         const message = error.message || error.statusText;
+
+//         switch (error.status) {
+//             case 401:
+//             case 451:
+//                 this.router.navigate(['/auth/signin']);
+//                 localStorage.removeItem('user');
+//                 this.authenticationService.setCurrentUserValue(null);
+//                 // resultObservable = throwError(error);
+//                 break;
+//             case 412:
+//                 // TODO handle
+//                 break;
+//             case 0:
+//                 // TODO handle
+//                 // resultObservable = throwError(error);
+//                 break;
+//             case 500:
+//             case 502:
+//             case 504:
+//                 // TODO handle
+//                 // resultObservable = throwError(error);
+//                 break;
+//             default:
+//                 // TODO handle
+//                 // resultObservable = throwError(error);
+//                 console.error(message);
+//         }
+//     }
+//     return throwError(error);
+// })

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { Lionize } from 'src/app/shared/models/habitica/Lionize';
+// import { Lionize } from 'src/app/shared/models/habitica/Lionize';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ProvidersService {
@@ -14,22 +13,16 @@ export class ProvidersService {
 
     }
 
-    // TODO type Observable and response
     getHabitica(): Observable<any> {
-        return this.apiService.get(`${environment.habiticaTaskProviderService}Settings`)
-            .pipe(map((response) => response));
+        return this.apiService.get(`${environment.habiticaTaskProviderService}Settings`);
     }
 
-    // TODO type Observable and response
-    postHabitica(payload): Observable<any> {
-        return this.apiService.post(`${environment.habiticaTaskProviderService}Settings`, payload)
-            .pipe(map((response) => response));
+    postHabitica(payload: any): Observable<any> {
+        return this.apiService.post(`${environment.habiticaTaskProviderService}Settings`, payload);
     }
 
-    // TODO type Observable and response
-    putHabitica(id, payload): Observable<any> {
-        return this.apiService.put(`${environment.habiticaTaskProviderService}Settings/${id}`, payload)
-            .pipe(map((response) => response));
+    putHabitica(id: string, payload: any): Observable<any> {
+        return this.apiService.put(`${environment.habiticaTaskProviderService}Settings/${id}`, payload);
     }
 
 }

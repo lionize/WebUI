@@ -46,7 +46,6 @@ export class ProvidersComponent implements OnInit {
             data: data
         });
         dialogRef.afterClosed().subscribe((data) => {
-            // TODO save and get providers
             if (data && data.success) {
                 this.saveHabitica(data.result);
             }
@@ -57,19 +56,22 @@ export class ProvidersComponent implements OnInit {
     getHabitica(): void {
         this.providerService.getHabitica()
             .subscribe((data) => {
-                this.providers.habitica = data;
+                this.providers = {
+                    ...this.providers,
+                    habitica: data
+                }
             });
     }
 
-    saveHabitica(data): void {
-        const payload: Lionize.HabiticaTaskProvider.ApiModels.V1.SettingsSetterRequest = {
-            HabiticaUserID: data.HabiticaUserID,
-            HabiticaApiToken: data.HabiticaApiToken
-        }
-        this.providerService.postHabitica(payload)
-            .subscribe((data) => {
-                this.getHabitica();
-            });
+    private saveHabitica({data, id, type}): void {
+        type === 'put' ?
+            this.providerService.putHabitica(id, data).subscribe((response) => this.getHabitica())
+            :
+            this.providerService.postHabitica(data).subscribe((response) => this.getHabitica());
+    }
+
+    onDataChange(data) {
+        this.saveHabitica(data);
     }
 
 }   
