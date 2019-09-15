@@ -36,7 +36,7 @@ export class HabiticaComponent implements OnInit {
     }
 
     private subscribeToValueChanges(): void {
-        this.form.valueChanges.subscribe((data) => this.dataChange.emit({ ...data, id: this.data.id }));
+        this.form.valueChanges.subscribe((data) => this.dataChange.emit({ data: data, id: this.data.id }));
     }
 
 }

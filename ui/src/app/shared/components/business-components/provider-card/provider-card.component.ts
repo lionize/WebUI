@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TPopup } from 'src/app/shared/components/popup/popup.model';
-import { ProvidersService } from 'src/app/pages/admin/providers/providers.service';
 import { Lionize } from 'src/app/shared/models/habitica/Lionize';
 
 @Component({
@@ -15,6 +14,8 @@ export class ProviderCardComponent implements OnInit {
     @Input() type: string;
     // TODO use interface
     @Input() data: any = {};
+    // TODO think about to use NgRX for data sharing
+    @Output() dataChange: EventEmitter<any> = new EventEmitter();
     // FIXME
     providers = {
         habitica: [],
@@ -24,7 +25,6 @@ export class ProviderCardComponent implements OnInit {
 
     constructor(
         public dialog: MatDialog,
-        private providerService: ProvidersService,
     ) {
 
     }
@@ -53,22 +53,13 @@ export class ProviderCardComponent implements OnInit {
         });
     }
 
-    saveHabitica(data): void {
-        const payload: Lionize.HabiticaTaskProvider.ApiModels.V1.SettingsSetterRequest = {
-            HabiticaUserID: data.HabiticaUserID,
-            HabiticaApiToken: data.HabiticaApiToken
-        }
-        this.providerService.putHabitica(data.id, payload)
-            .subscribe((data) => {
-                this.getHabitica();
-            });
+    private saveHabitica(result): void {
+        // const payload: Lionize.HabiticaTaskProvider.ApiModels.V1.SettingsSetterRequest = {
+        //     HabiticaUserID: result.data.HabiticaUserID,
+        //     HabiticaApiToken: result.data.HabiticaApiToken,
+        // }
+        // TODO use enum for type: 'put'
+        this.dataChange.emit({ data: result.data, id: result.id, type: 'put' });
     }
 
-    // TODO use generic method for all providers
-    getHabitica(): void {
-        this.providerService.getHabitica()
-            .subscribe((data) => {
-                this.providers.habitica = data;
-            });
-    }
 }   

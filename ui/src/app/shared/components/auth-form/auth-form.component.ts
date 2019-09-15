@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { validation_messages } from 'src/app/shared/validation.messages';
 import { PatternValidator, PasswordsMatchingValidator } from 'src/app/shared/helpers/form.validators';
-import { TClientUserRegister, TClientUserLogin, TSigInUser, TSignUpUser } from 'src/app/pages/authentication/user.model';
+import { UISignupUser, UISigninUser, SigInUser, SignUpUser } from 'src/app/pages/authentication/user.model';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { map } from 'rxjs/operators';
 
@@ -42,13 +42,13 @@ export class AuthFormComponent implements OnInit {
             event.preventDefault();
         }
         else {
-            const payload: TClientUserRegister = {
+            const payload: UISignupUser = {
                 username: this.form.get('username').value,
                 password: this.form.get('password').value
             }
             this.loading = true;
             this.authenticationService.signUp(payload)
-                .pipe(map((response: TSignUpUser) => response))
+                .pipe(map((response: SignUpUser) => response))
                 .subscribe(
                     (response) => {
                         this.loading = false;
@@ -67,15 +67,15 @@ export class AuthFormComponent implements OnInit {
             event.preventDefault();
         }
         else {
-            const payload: TClientUserLogin = {
+            const payload: UISigninUser = {
                 username: this.form.get('username').value,
                 password: this.form.get('password').value
             }
             this.loading = true;
             this.authenticationService.signIn(payload)
-                .pipe(map((response: TSigInUser) => {
+                .pipe(map((response: SigInUser) => {
                     if (!response.isError) {
-                        const user: TSigInUser = {
+                        const user: SigInUser = {
                             username: payload.username,
                             accessToken: response.accessToken,
                             refreshToken: response.refreshToken
