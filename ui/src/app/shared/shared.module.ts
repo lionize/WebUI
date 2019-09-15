@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+// import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
+// import { NotificationService } from './components/notifications/notification.service';
 
 @NgModule({
     imports: [
@@ -21,16 +23,20 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
         MatInputModule, MatMenuModule
     ],
     declarations: [
-        HeaderComponent
+        HeaderComponent,
+        // SimpleNotificationComponent
     ],
     exports: [
         MatButtonModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatProgressSpinnerModule, MatSnackBarModule,
         MatInputModule,
-        HeaderComponent
+        HeaderComponent,
     ],
     providers: [
-
+        // providedIn: 'root' doesn't work in NotificationService
+        // NotificationService
     ],
-    entryComponents: []
+    entryComponents: [
+        // SimpleNotificationComponent
+    ]
 })
 export class SharedModule { }

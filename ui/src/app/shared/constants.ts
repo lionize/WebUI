@@ -1,8 +1,8 @@
 export enum MATRIX {
-    DO_FIRST = 'DO_FIRST',
-    SCHEDULE = 'SCHEDULE',
-    DELEGATE = 'DELEGATE',
-    DONT_DO = 'DONT_DO',
+    DO_FIRST = 'Do first',
+    SCHEDULE = 'Schedule',
+    DELEGATE = 'Delegate',
+    DONT_DO = 'Don\'t do'
 }
 
 export enum API_URLS {
@@ -10,6 +10,14 @@ export enum API_URLS {
     SIGN_IN = 'Accounts/SignIn',
     SIGN_OUT = 'Accounts/SignOut',
     REFRESH = 'Accounts/Refresh'
+}
+
+export enum HTTP_REQUEST_TYPES {
+    GET = 'get',
+    POST = 'post',
+    PUT = 'put',
+    PATCH = 'patch',
+    DELETE = 'delete'
 }
 
 // TODO place in separate file

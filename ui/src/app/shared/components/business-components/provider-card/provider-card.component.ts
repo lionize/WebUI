@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
-import { TPopup } from 'src/app/shared/components/popup/popup.model';
+import { Popup } from 'src/app/shared/components/popup/popup.model';
 import { Lionize } from 'src/app/shared/models/habitica/Lionize';
+import { HTTP_REQUEST_TYPES } from 'src/app/shared/constants';
 
 @Component({
     selector: 'li-provider-card',
@@ -34,7 +35,7 @@ export class ProviderCardComponent implements OnInit {
     }
 
     openPopup(component, data): void {
-        const popupData: TPopup = {
+        const popupData: Popup = {
             component: component,
             title: `Edit ${component}`,
             data: data
@@ -54,12 +55,7 @@ export class ProviderCardComponent implements OnInit {
     }
 
     private saveHabitica(result): void {
-        // const payload: Lionize.HabiticaTaskProvider.ApiModels.V1.SettingsSetterRequest = {
-        //     HabiticaUserID: result.data.HabiticaUserID,
-        //     HabiticaApiToken: result.data.HabiticaApiToken,
-        // }
-        // TODO use enum for type: 'put'
-        this.dataChange.emit({ data: result.data, id: result.id, type: 'put' });
+        this.dataChange.emit({ data: result.data, id: result.id, type: HTTP_REQUEST_TYPES.PUT });
     }
 
 }   
