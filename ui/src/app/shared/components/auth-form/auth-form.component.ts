@@ -5,7 +5,11 @@ import { validation_messages } from 'src/app/shared/validation.messages';
 import { PatternValidator, PasswordsMatchingValidator } from 'src/app/shared/helpers/form.validators';
 import { UISignupUser, UISigninUser, SigInUser, SignUpUser } from 'src/app/pages/authentication/user.model';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
-import { map } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
+import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
+import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { throwError } from 'rxjs/internal/observable/throwError';
 
 enum MODES {
     SIGN_IN = 'SIGN_IN',
@@ -22,13 +26,15 @@ export class AuthFormComponent implements OnInit {
     @Input() mode: MODES;
     MODES = MODES;
     form: FormGroup;
-    loading: boolean = false;
+    // loading: boolean = false;
+    isLoading = new BehaviorSubject(false);
     validationMessages = validation_messages;
 
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        private notificationService: NotificationService,
     ) {
 
     }
@@ -38,6 +44,7 @@ export class AuthFormComponent implements OnInit {
     }
 
     signUp(event?): void {
+        this.isLoading.next(true);
         if (event) {
             event.preventDefault();
         }
@@ -46,23 +53,28 @@ export class AuthFormComponent implements OnInit {
                 username: this.form.get('username').value,
                 password: this.form.get('password').value
             }
-            this.loading = true;
             this.authenticationService.signUp(payload)
-                .pipe(map((response: SignUpUser) => response))
-                .subscribe(
-                    (response) => {
-                        this.loading = false;
-                        if (!response.isError) {
-                            this.router.navigate(['/auth/login']);
+                .pipe(
+                    tap(() => this.isLoading.next(false)),
+                    map((response: SignUpUser) => {
+                        if (response.isError) {
+                            this.notificationService.showNotificationFromComponent(SimpleNotificationComponent,
+                                { data: response.errorMessage }
+                            );
                         }
-                    },
-                    (error) => {
-                        this.loading = false;
-                    });
+                        return response;
+                    })
+                )
+                .subscribe((response) => {
+                    if (!response.isError) {
+                        this.router.navigate(['/auth/login']);
+                    }
+                });
         }
     }
 
     signIn(event?): void {
+        this.isLoading.next(true);
         if (event) {
             event.preventDefault();
         }
@@ -71,31 +83,32 @@ export class AuthFormComponent implements OnInit {
                 username: this.form.get('username').value,
                 password: this.form.get('password').value
             }
-            this.loading = true;
             this.authenticationService.signIn(payload)
-                .pipe(map((response: SigInUser) => {
-                    if (!response.isError) {
-                        const user: SigInUser = {
-                            username: payload.username,
-                            accessToken: response.accessToken,
-                            refreshToken: response.refreshToken
-                        }
-                        localStorage.setItem('user', JSON.stringify(user));
-                        // this.currentUserSubject.next(user);
-                        this.authenticationService.setCurrentUserValue(user);
-                    }
-                    return response;
-                }))
-                .subscribe(
-                    (response) => {
-                        this.loading = false;
+                .pipe(
+                    tap(() => this.isLoading.next(false)),
+                    map((response: SigInUser) => {
                         if (!response.isError) {
-                            this.router.navigate(['/admin']);
+                            const user: SigInUser = {
+                                username: payload.username,
+                                accessToken: response.accessToken,
+                                refreshToken: response.refreshToken
+                            }
+                            localStorage.setItem('user', JSON.stringify(user));
+                            this.authenticationService.setCurrentUserValue(user);
                         }
-                    },
-                    (error) => {
-                        this.loading = false;
-                    });
+                        else {
+                            this.notificationService.showNotificationFromComponent(SimpleNotificationComponent,
+                                { data: response.errorMessage }
+                            );
+                        }
+                        return response;
+                    })
+                )
+                .subscribe((response) => {
+                    if (!response.isError) {
+                        this.router.navigate(['/admin']);
+                    }
+                });
         }
     }
 
