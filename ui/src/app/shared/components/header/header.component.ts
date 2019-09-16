@@ -10,7 +10,8 @@ import { ToggleMenu } from 'src/app/store/actions/menu.actions';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { MENU_DIRECTIONS, TMenu } from 'src/app/shared/components/menu/menu.model';
 import { selectMenu } from 'src/app/store/selectors/menu.selectors';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { AppLoading } from 'src/app/store/actions/main.actions';
 
 @Component({
     selector: 'header',
@@ -39,12 +40,14 @@ export class HeaderComponent implements OnInit {
     }
 
     private signOut(): void {
+        this.store.dispatch(new AppLoading({ isAppLoading: true }));
         const payload: SigInUser = {
             accessToken: this.user.accessToken,
             refreshToken: this.user.accessToken
         }
         this.authenticationService.signOut(payload)
             .pipe(
+                tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
                 map((response: SigInUser) => response)
             )
             .subscribe((response) => {
