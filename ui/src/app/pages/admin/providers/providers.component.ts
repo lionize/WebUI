@@ -10,6 +10,9 @@ import { SimpleNotificationComponent } from 'src/app/shared/components/notificat
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { map, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { IAppState } from 'src/app/store/state/app.state';
+import { AppLoading } from 'src/app/store/actions/main.actions';
 
 @Component({
     selector: 'providers',
@@ -31,7 +34,8 @@ export class ProvidersComponent implements OnInit {
         public dialog: MatDialog,
         private providerService: ProvidersService,
         private notificationService: NotificationService,
-        public snackBar: MatSnackBar
+        public snackBar: MatSnackBar,
+        private store: Store<IAppState>,
     ) {
 
     }
@@ -61,16 +65,20 @@ export class ProvidersComponent implements OnInit {
     }
 
     private getAllProviders(): void {
+        this.store.dispatch(new AppLoading({ isAppLoading: true }));
         this.providerService.getAllProviders()
+            .pipe(
+                tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
+            )
             .subscribe((response) => this.providers = response);
     }
 
     private saveHabitica({ data, id, type }): void {
-        // this.isLoading.next(true);
+        this.store.dispatch(new AppLoading({ isAppLoading: true }));
         type === HTTP_REQUEST_TYPES.PUT ?
             this.providerService.putHabitica(id, data)
                 .pipe(
-                    // tap(() => this.isLoading.next(false)),
+                    tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
                     map((response) => {
                         // TODO check error
                         // if (response.isError) {

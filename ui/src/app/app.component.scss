@@ -9,5 +9,8 @@
         .mat-spinner {
             @extend .fixed-all-center;
         }
+        &.app-loading {
+            opacity: 0.25;
+        }
     }
 }
