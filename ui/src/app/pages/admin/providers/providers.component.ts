@@ -8,6 +8,8 @@ import { HTTP_REQUEST_TYPES } from 'src/app/shared/constants';
 import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'providers',
@@ -23,6 +25,7 @@ export class ProvidersComponent implements OnInit {
         microsoft: [],
         google: []
     };
+    // isLoading = new BehaviorSubject(false);
 
     constructor(
         public dialog: MatDialog,
@@ -35,9 +38,6 @@ export class ProvidersComponent implements OnInit {
 
     ngOnInit() {
         this.getAllProviders();
-        // this.notificationService.showNotificationFromComponent(SimpleNotificationComponent,
-        //     { data: 'Notification for providers' }
-        // );
     }
 
     openPopup(component: string): void {
@@ -66,10 +66,35 @@ export class ProvidersComponent implements OnInit {
     }
 
     private saveHabitica({ data, id, type }): void {
+        // this.isLoading.next(true);
         type === HTTP_REQUEST_TYPES.PUT ?
-            this.providerService.putHabitica(id, data).subscribe((response) => this.getAllProviders())
+            this.providerService.putHabitica(id, data)
+                .pipe(
+                    // tap(() => this.isLoading.next(false)),
+                    map((response) => {
+                        // TODO check error
+                        // if (response.isError) {
+                        this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                            { data: 'Setting updated' }
+                        );
+                        // }
+                    })
+                )
+                .subscribe((response) => this.getAllProviders())
             :
-            this.providerService.postHabitica(data).subscribe((response) => this.getAllProviders());
+            this.providerService.postHabitica(data)
+                .pipe(
+                    // tap(() => this.isLoading.next(false)),
+                    map((response) => {
+                        // TODO check error
+                        // if (response.isError) {
+                        this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                            { data: 'Setting created' }
+                        );
+                        // }
+                    })
+                )
+                .subscribe((response) => this.getAllProviders());
     }
 
     onDataChange(data) {

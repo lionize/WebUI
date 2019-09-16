@@ -9,11 +9,13 @@ import { HttpClient } from '@angular/common/http';
 // import { throwError } from 'rxjs/internal/observable/throwError';
 // import { Subject } from 'rxjs/internal/Subject';
 import { Observable } from 'rxjs/internal/Observable';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs/internal/Subject';
 // import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-    // private subscription$: Subject<boolean> = new Subject<boolean>();
+    private subscription$: Subject<boolean> = new Subject<boolean>();
 
     constructor(
         private http: HttpClient,
@@ -30,26 +32,26 @@ export class ApiService {
     // }
 
     get(url: string): Observable<any> {
-        return this.http.get<any>(url);
-            // .pipe(
-            //     timeout(5000),
-            //     takeUntil(this.subscription$),
-            //     map(
-            //         (response: any) => {
-            //             if (response && response.isError) {
-            //                 this.handleError(response);
-            //             }
-            //             return response;
-            //         }),
-            //     catchError(error => throwError(error))
-            // );
+        return this.http.get<any>(url)
+            .pipe(
+                // timeout(5000),
+                takeUntil(this.subscription$),
+                // map(
+                //     (response: any) => {
+                //         if (response && response.isError) {
+                //             this.handleError(response);
+                //         }
+                //         return response;
+                //     }),
+                // catchError(error => throwError(error))
+            );
     }
 
     post(url: string, body: any): Observable<any> {
-        return this.http.post<any>(url, body);
-            // .pipe(
+        return this.http.post<any>(url, body)
+            .pipe(
             //     timeout(5000),
-            //     takeUntil(this.subscription$),
+                takeUntil(this.subscription$),
             //     map(
             //         (response: any) => {
             //             if (response && response.isError) {
@@ -58,14 +60,14 @@ export class ApiService {
             //             return response;
             //         }),
             //     catchError((error) => throwError(error))
-            // );
+            );
     }
 
     patch(url: string, body: any): Observable<any> {
-        return this.http.patch<any>(url, body);
-            // .pipe(
+        return this.http.patch<any>(url, body)
+            .pipe(
             //     timeout(5000),
-            //     takeUntil(this.subscription$),
+                takeUntil(this.subscription$),
             //     map(
             //         (response: any) => {
             //             if (response && response.isError) {
@@ -74,14 +76,14 @@ export class ApiService {
             //             return response;
             //         }),
             //     catchError(error => throwError(error))
-            // );
+            );
     }
 
     delete(url: string): Observable<any> {
-        return this.http.delete<any>(url);
-            // .pipe(
+        return this.http.delete<any>(url)
+            .pipe(
             //     timeout(5000),
-            //     takeUntil(this.subscription$),
+                takeUntil(this.subscription$),
             //     map(
             //         (response: any) => {
             //             if (response && response.isError) {
@@ -90,14 +92,14 @@ export class ApiService {
             //             return response;
             //         }),
             //     catchError(error => throwError(error))
-            // );
+            );
     }
 
     put(url: string, body: any): Observable<any> {
-        return this.http.put<any>(url, body);
-            // .pipe(
+        return this.http.put<any>(url, body)
+            .pipe(
             //     timeout(5000),
-            //     takeUntil(this.subscription$),
+                takeUntil(this.subscription$),
             //     map(
             //         (response: any) => {
             //             if (response && response.isError) {
@@ -106,12 +108,12 @@ export class ApiService {
             //             return response;
             //         }),
             //     catchError(error => throwError(error))
-            // );
+            );
     }
 
-    // cancelRequest(): void {
-    //     this.subscription$.next();
-    // }
+    cancelRequest(): void {
+        this.subscription$.next();
+    }
 
 }
 
