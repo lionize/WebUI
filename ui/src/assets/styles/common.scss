@@ -26,6 +26,9 @@
 .justrify-space-around {
     justify-content: space-around;
 }
+.justrify-flex-end {
+    justify-content: flex-end;
+}
 .justify-center {
     justify-content: center;
 }
@@ -85,4 +88,10 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+.fixed-all-center {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }

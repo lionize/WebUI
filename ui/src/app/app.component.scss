@@ -4,4 +4,10 @@
 :host {
     min-height: 100vh;
     @extend .full-flex-column;
+    .app-container {
+        @extend .full-flex-column;
+        .mat-spinner {
+            @extend .fixed-all-center;
+        }
+    }
 }

@@ -1,15 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
+import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { validation_messages } from 'src/app/shared/validation.messages';
 import { PatternValidator, PasswordsMatchingValidator } from 'src/app/shared/helpers/form.validators';
 import { UISignupUser, UISigninUser, SigInUser, SignUpUser } from 'src/app/pages/authentication/user.model';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
-import { map, catchError, tap } from 'rxjs/operators';
-import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
-import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { throwError } from 'rxjs/internal/observable/throwError';
 
 enum MODES {
     SIGN_IN = 'SIGN_IN',
@@ -26,8 +25,7 @@ export class AuthFormComponent implements OnInit {
     @Input() mode: MODES;
     MODES = MODES;
     form: FormGroup;
-    // loading: boolean = false;
-    isLoading = new BehaviorSubject(false);
+    // isLoading = new BehaviorSubject(false);
     validationMessages = validation_messages;
 
     constructor(
@@ -44,7 +42,7 @@ export class AuthFormComponent implements OnInit {
     }
 
     signUp(event?): void {
-        this.isLoading.next(true);
+        // this.isLoading.next(true);
         if (event) {
             event.preventDefault();
         }
@@ -55,10 +53,10 @@ export class AuthFormComponent implements OnInit {
             }
             this.authenticationService.signUp(payload)
                 .pipe(
-                    tap(() => this.isLoading.next(false)),
+                    // tap(() => this.isLoading.next(false)),
                     map((response: SignUpUser) => {
                         if (response.isError) {
-                            this.notificationService.showNotificationFromComponent(SimpleNotificationComponent,
+                            this.notificationService.showNotificationToaster(SimpleNotificationComponent,
                                 { data: response.errorMessage }
                             );
                         }
@@ -74,7 +72,7 @@ export class AuthFormComponent implements OnInit {
     }
 
     signIn(event?): void {
-        this.isLoading.next(true);
+        // this.isLoading.next(true);
         if (event) {
             event.preventDefault();
         }
@@ -85,7 +83,7 @@ export class AuthFormComponent implements OnInit {
             }
             this.authenticationService.signIn(payload)
                 .pipe(
-                    tap(() => this.isLoading.next(false)),
+                    // tap(() => this.isLoading.next(false)),
                     map((response: SigInUser) => {
                         if (!response.isError) {
                             const user: SigInUser = {
@@ -97,7 +95,7 @@ export class AuthFormComponent implements OnInit {
                             this.authenticationService.setCurrentUserValue(user);
                         }
                         else {
-                            this.notificationService.showNotificationFromComponent(SimpleNotificationComponent,
+                            this.notificationService.showNotificationToaster(SimpleNotificationComponent,
                                 { data: response.errorMessage }
                             );
                         }

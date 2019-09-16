@@ -19,9 +19,9 @@ export class NotificationService {
     }
 
     // TODO fix component type
-    showNotificationFromComponent(component, config?): void {
+    showNotificationToaster(component, config?): void {
         this.snackBar.openFromComponent(component, {
-            duration: config.duration | 5000,
+            duration: config.duration | 30000,
             data: config.data
             // TODO add css class
             // panelClass: [''],

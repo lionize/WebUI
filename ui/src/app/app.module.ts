@@ -16,8 +16,9 @@ import { ApiService } from 'src/app/shared/services/api.service';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 // TODO think about to move to separate module all notification stuff
-import { MatSnackBarModule, /*MAT_SNACK_BAR_DEFAULT_OPTIONS*/ } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { NotificationService } from './shared/components/notifications/notification.service';
 
@@ -28,7 +29,7 @@ import { NotificationService } from './shared/components/notifications/notificat
     ],
     imports: [
         BrowserModule, BrowserAnimationsModule, HttpClientModule,
-        MatSnackBarModule, MatButtonModule,
+        MatSnackBarModule, MatButtonModule, MatProgressSpinnerModule,
         StoreModule.forRoot(appReducers, { metaReducers: [clearState] }),
         StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
