@@ -6,10 +6,10 @@ import { DialogComponent } from 'src/app/shared/components/dialog/dialog.compone
 import { UISigninUser, SigInUser } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
 import { ResetApp } from 'src/app/store/actions/app.actions';
-import { ToggleMenu } from 'src/app/store/actions/menu.actions';
+import { ToggleLeftMenu, ToggleRightMenu } from 'src/app/store/actions/menu.actions';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
-import { MENU_DIRECTIONS, TMenu } from 'src/app/shared/components/menu/menu.model';
-import { selectMenu } from 'src/app/store/selectors/menu.selectors';
+import { LeftMenu } from 'src/app/shared/components/menu/menu.model';
+import { selectLeftMenu } from 'src/app/store/selectors/menu.selectors';
 import { map, tap } from 'rxjs/operators';
 import { AppLoading } from 'src/app/store/actions/main.actions';
 
@@ -23,8 +23,7 @@ export class HeaderComponent implements OnInit {
     user: SigInUser;
     isLeftMenuOpen: boolean = false;
     isRightMenuOpen: boolean = false;
-    MENU_DIRECTIONS: MENU_DIRECTIONS;
-    menu$ = this.store.pipe(select(selectMenu));
+    menu$ = this.store.pipe(select(selectLeftMenu));
 
     constructor(
         public dialog: MatDialog,
@@ -61,13 +60,8 @@ export class HeaderComponent implements OnInit {
     }
 
     private toggleMenuIcons(): void {
-        this.menu$.subscribe((menu: TMenu) => {
-            if (menu.direction === MENU_DIRECTIONS.LEFT) {
-                this.isLeftMenuOpen = menu.isOpen;
-            }
-            if (menu.direction === MENU_DIRECTIONS.RIGHT) {
-                this.isRightMenuOpen = menu.isOpen;
-            }
+        this.menu$.subscribe((menu: LeftMenu) => {
+            this.isLeftMenuOpen = menu.isOpen;
         });
     }
 
@@ -87,12 +81,12 @@ export class HeaderComponent implements OnInit {
 
     toggleLeftMenu(): void {
         this.isLeftMenuOpen = !this.isLeftMenuOpen;
-        this.store.dispatch(new ToggleMenu({ isOpen: this.isLeftMenuOpen, direction: MENU_DIRECTIONS.LEFT }));
+        this.store.dispatch(new ToggleLeftMenu({ isOpen: this.isLeftMenuOpen }));
     }
 
     toggleRightMenu(): void {
         this.isRightMenuOpen = !this.isRightMenuOpen;
-        this.store.dispatch(new ToggleMenu({ isOpen: this.isRightMenuOpen, direction: MENU_DIRECTIONS.RIGHT }));
+        this.store.dispatch(new ToggleRightMenu({ isOpen: this.isRightMenuOpen }));
     }
 
 }

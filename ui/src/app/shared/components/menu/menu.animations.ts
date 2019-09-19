@@ -1,6 +1,6 @@
 import { transition, animate, style, state, trigger } from '@angular/animations';
 
-export const leftOpenCloseAnimation = trigger('leftOpenCloseAnimation', [
+export const leftMenuToggleAnimation = trigger('leftMenuToggleAnimation', [
     state('open', style({
         marginLeft: '0'
     })),
@@ -12,7 +12,7 @@ export const leftOpenCloseAnimation = trigger('leftOpenCloseAnimation', [
     ])
 ]);
 
-export const rightOpenCloseAnimation = trigger('rightOpenCloseAnimation', [
+export const rightMenuToggleAnimation = trigger('rightMenuToggleAnimation', [
     state('open', style({
         transform: 'translateX(0)'
     })),

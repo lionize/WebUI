@@ -1,8 +1,0 @@
-<div class="left menu-container" [class.open]="leftMenu?.isOpen && leftMenu?.direction === MENU_DIRECTIONS.LEFT"
-    [@leftOpenCloseAnimation]="(leftMenu?.isOpen && leftMenu?.direction === MENU_DIRECTIONS.LEFT) ? 'open' : 'close'">
-    <h2 class="text-center">Backlog</h2>
-</div>
-<div class="right menu-container" [class.open]="rightMenu?.isOpen && rightMenu?.direction === MENU_DIRECTIONS.RIGHT"
-    [@rightOpenCloseAnimation]="(rightMenu?.isOpen && rightMenu?.direction === MENU_DIRECTIONS.RIGHT) ? 'open' : 'close'">
-    <h2 class="text-center">Archive</h2>
-</div>

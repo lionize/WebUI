@@ -18,7 +18,8 @@ import { DialogComponent } from 'src/app/shared/components/dialog/dialog.compone
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { CardComponent } from 'src/app/shared/components/business-components/card/card.component';
 import { ProviderCardComponent } from 'src/app/shared/components/business-components/provider-card/provider-card.component';
-import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
+import { LeftMenuComponent } from 'src/app/shared/components/menu/left-menu/left-menu.component';
+import { RightMenuComponent } from 'src/app/shared/components/menu/right-menu/right-menu.component';
 import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/providers/habitica/habitica.component';
 import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components/providers/microsoft/microsoft.component';
 import { GoogleComponent } from 'src/app/shared/components/dynamic-components/providers/google/google.component';
@@ -37,7 +38,8 @@ import { GoogleComponent } from 'src/app/shared/components/dynamic-components/pr
         ProvidersComponent,
         DialogComponent,
         PopupComponent,
-        MenuComponent,
+        LeftMenuComponent,
+        RightMenuComponent,
         CardComponent,
         ProviderCardComponent,
         // TODO move dynamic components to separate module

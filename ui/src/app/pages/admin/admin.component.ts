@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/store/state/app.state';
-import { ToggleMenu } from 'src/app/store/actions/menu.actions';
-import { MENU_DIRECTIONS } from 'src/app/shared/components/menu/menu.model';
+import { ToggleLeftMenu } from 'src/app/store/actions/menu.actions';
 
 @Component({
     selector: 'admin',
@@ -23,7 +22,6 @@ export class AdminComponent implements OnInit {
     }
 
     closeSidenav() {
-        debugger
-        this.store.dispatch(new ToggleMenu({ isOpen: false, direction: MENU_DIRECTIONS.LEFT }));
+        this.store.dispatch(new ToggleLeftMenu({ isOpen: false }));
     }
 }   
