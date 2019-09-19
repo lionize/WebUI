@@ -28,7 +28,7 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
     ],
     exports: [
         MatButtonModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatProgressSpinnerModule, MatSnackBarModule,
-        MatInputModule,
+        MatInputModule, MatMenuModule,
         HeaderComponent,
     ],
     providers: [
