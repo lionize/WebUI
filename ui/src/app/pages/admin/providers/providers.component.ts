@@ -9,10 +9,11 @@ import { NotificationService } from 'src/app/shared/components/notifications/not
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/store/state/app.state';
 import { AppLoading } from 'src/app/store/actions/main.actions';
+import { throwError } from 'rxjs/internal/observable/throwError';
 
 @Component({
     selector: 'providers',
@@ -69,6 +70,13 @@ export class ProvidersComponent implements OnInit {
         this.providerService.getAllProviders()
             .pipe(
                 tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
+                catchError((error) => {
+                    this.store.dispatch(new AppLoading({ isAppLoading: false }));
+                    this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                        { data: error.message || error.statusText }
+                    );
+                    return throwError(error);
+                })
             )
             .subscribe((response) => this.providers = response);
     }

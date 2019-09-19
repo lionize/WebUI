@@ -8,7 +8,7 @@
     @extend .full-flex-column;
     .admin-wrapper {
         @extend .full-flex-column;
-        max-width: $desktop-hd;
+        // max-width: $desktop-hd;
         width: 100%;
         height: calc(100vh - #{$header-height});
         margin: 0 auto;

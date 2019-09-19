@@ -1,9 +1,7 @@
-export enum MENU_DIRECTIONS {
-    LEFT = 'LEFT',
-    RIGHT = 'RIGHT',
+export type LeftMenu = {
+    isOpen: boolean;
 }
 
-export type TMenu = {
+export type RightMenu = {
     isOpen: boolean;
-    direction: string;
 }

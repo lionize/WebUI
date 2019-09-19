@@ -4,7 +4,12 @@ import { IMenuState } from 'src/app/store/state/menu.state';
 
 const menuState = (state: IAppState) => state.menu;
 
-export const selectMenu = createSelector(
+export const selectLeftMenu = createSelector(
     menuState,
-    (state: IMenuState) => state.menu
+    (state: IMenuState) => state.leftMenu
+);
+
+export const selectRightMenu = createSelector(
+    menuState,
+    (state: IMenuState) => state.rightMenu
 );

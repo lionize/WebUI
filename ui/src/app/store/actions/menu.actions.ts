@@ -1,13 +1,19 @@
 import { Action } from '@ngrx/store';
-import { TMenu } from 'src/app/shared/components/menu/menu.model';
+import { LeftMenu, RightMenu } from 'src/app/shared/components/menu/menu.model';
 
 export enum MENU_ACTIONS {
-    OPEN_MENU = '[MENU] Open Menu'
+    OPEN_LEFT_MENU = '[MENU] Open Left Menu',
+    OPEN_RIGHT_MENU = '[MENU] Open Right Menu'
 }
 
-export class ToggleMenu implements Action {
-    public readonly type = MENU_ACTIONS.OPEN_MENU;
-    constructor(public payload: TMenu) { }
+export class ToggleLeftMenu implements Action {
+    public readonly type = MENU_ACTIONS.OPEN_LEFT_MENU;
+    constructor(public payload: LeftMenu) { }
 }
 
-export type MenuActions = ToggleMenu;
+export class ToggleRightMenu implements Action {
+    public readonly type = MENU_ACTIONS.OPEN_RIGHT_MENU;
+    constructor(public payload: RightMenu) { }
+}
+
+export type MenuActions = ToggleLeftMenu | ToggleRightMenu;

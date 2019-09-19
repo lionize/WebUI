@@ -1,12 +1,15 @@
-import { TMenu } from 'src/app/shared/components/menu/menu.model';
+import { LeftMenu, RightMenu } from 'src/app/shared/components/menu/menu.model';
 
 export interface IMenuState {
-    menu: TMenu;
+    leftMenu: LeftMenu;
+    rightMenu: RightMenu
 }
 
 export const initialMenuState: IMenuState = {
-    menu: {
+    leftMenu: {
         isOpen: false,
-        direction: 'left'
+    },
+    rightMenu: {
+        isOpen: false,
     }
 };
