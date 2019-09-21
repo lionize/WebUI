@@ -8,8 +8,8 @@ import { IAppState } from 'src/app/store/state/app.state';
 import { ResetApp } from 'src/app/store/actions/app.actions';
 import { ToggleLeftMenu, ToggleRightMenu } from 'src/app/store/actions/menu.actions';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
-import { LeftMenu } from 'src/app/shared/components/menu/menu.model';
-import { selectLeftMenu } from 'src/app/store/selectors/menu.selectors';
+import { LeftMenu, RightMenu } from 'src/app/shared/components/menu/menu.model';
+import { selectLeftMenu, selectRightMenu } from 'src/app/store/selectors/menu.selectors';
 import { map, tap } from 'rxjs/operators';
 import { AppLoading } from 'src/app/store/actions/main.actions';
 
@@ -23,7 +23,8 @@ export class HeaderComponent implements OnInit {
     user: SigInUser;
     isLeftMenuOpen: boolean = false;
     isRightMenuOpen: boolean = false;
-    menu$ = this.store.pipe(select(selectLeftMenu));
+    leftMenu$ = this.store.pipe(select(selectLeftMenu));
+    rightMenu$ = this.store.pipe(select(selectRightMenu));
 
     constructor(
         public dialog: MatDialog,
@@ -35,7 +36,8 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.authenticationService.geCurrentUserValue();
-        this.toggleMenuIcons();
+        this.toggleLeftMenuIcons();
+        this.toggleRightMenuIcons();
     }
 
     private signOut(): void {
@@ -59,9 +61,15 @@ export class HeaderComponent implements OnInit {
             });
     }
 
-    private toggleMenuIcons(): void {
-        this.menu$.subscribe((menu: LeftMenu) => {
+    private toggleLeftMenuIcons(): void {
+        this.leftMenu$.subscribe((menu: LeftMenu) => {
             this.isLeftMenuOpen = menu.isOpen;
+        });
+    }
+
+    private toggleRightMenuIcons(): void {
+        this.rightMenu$.subscribe((menu: RightMenu) => {
+            this.isRightMenuOpen = menu.isOpen;
         });
     }
 

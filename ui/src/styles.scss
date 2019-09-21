@@ -17,7 +17,7 @@
 @import 'assets/styles/mixins/footer-theme.component'; 
 @import 'assets/styles/mixins/header-theme.component'; 
 @import 'assets/styles/mixins/auth-form-theme.component'; 
-@import 'assets/styles/mixins/menu-theme.component'; 
+@import 'assets/styles/mixins/right-menu-theme.component'; 
 
 @mixin custom-theme($theme) {
     @include app-theme-component($theme);
@@ -25,7 +25,7 @@
     @include footer-theme-component($theme);
     @include header-theme-component($theme);
     @include auth-form-theme-component($theme);
-    @include menu-theme-component($theme);
+    @include right-menu-theme-component($theme);
 }
 
 @include angular-material-theme($eisenhower); 

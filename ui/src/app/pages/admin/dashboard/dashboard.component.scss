@@ -4,13 +4,23 @@
 :host {
     @extend .full-flex-column;
     .matrix-container {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(4, 1fr);
         grid-column-gap: 15px;
         grid-row-gap: 15px;
         @media screen and (max-width: $tablet) {
             grid-template-columns: 1fr;
             grid-column-gap: 10px;
             grid-row-gap: 10px;
+        }
+        .column-container {
+            > h2 {
+                margin: 10px 0;
+                font-size: 20px;
+                text-align: center;
+            }
+            li-card {
+                margin-bottom: 10px;
+            }
         }
     }
 }

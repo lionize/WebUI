@@ -4,6 +4,7 @@ import { IAppState } from 'src/app/store/state/app.state';
 import { selectRightMenu } from 'src/app/store/selectors/menu.selectors';
 import { RightMenu } from 'src/app/shared/components/menu/menu.model';
 import { rightMenuToggleAnimation } from '../menu.animations';
+import { ToggleRightMenu } from 'src/app/store/actions/menu.actions';
 
 @Component({
     selector: 'li-right-menu',
@@ -26,6 +27,10 @@ export class RightMenuComponent implements OnInit {
         this.menu$.subscribe((menu: RightMenu) => {
             this.rightMenu = menu;
         });
+    }
+
+    closeRightMenu(): void {
+        this.store.dispatch(new ToggleRightMenu({ isOpen: false }));
     }
 
 }

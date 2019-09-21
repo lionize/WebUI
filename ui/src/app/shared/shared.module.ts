@@ -12,7 +12,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
-// import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 // import { NotificationService } from './components/notifications/notification.service';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
     ],
     declarations: [
         HeaderComponent,
-        // SimpleNotificationComponent
     ],
     exports: [
         MatButtonModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatProgressSpinnerModule, MatSnackBarModule,
@@ -36,7 +34,7 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
         // NotificationService
     ],
     entryComponents: [
-        // SimpleNotificationComponent
+        
     ]
 })
 export class SharedModule { }

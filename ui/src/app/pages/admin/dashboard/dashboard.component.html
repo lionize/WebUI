@@ -1,7 +1,24 @@
-<!-- <button mat-flat-button color="primary" [routerLink]="['/landing']">LANDING</button> -->
 <div class="matrix-container grid">
-    <li-card [data]="matrixDetailed[0]"></li-card>
-    <li-card [data]="matrixDetailed[1]"></li-card>
-    <li-card [data]="matrixDetailed[2]"></li-card>
-    <li-card [data]="matrixDetailed[3]"></li-card>
+    <div class="column-container">
+        <h2>Do first column</h2>
+        <li-card [data]="matrixDetailed[0]"></li-card>
+        <li-card [data]="matrixDetailed[0]"></li-card>
+    </div>
+    <div class="column-container">
+        <h2>Schedule column</h2>
+        <li-card [data]="matrixDetailed[1]"></li-card>
+        <li-card [data]="matrixDetailed[1]"></li-card>
+        <li-card [data]="matrixDetailed[1]"></li-card>
+    </div>
+    <div class="column-container">
+        <h2>Delegate column</h2>
+        <li-card [data]="matrixDetailed[2]"></li-card>
+    </div>
+    <div class="column-container">
+        <h2>Don't do column</h2>
+        <li-card [data]="matrixDetailed[3]"></li-card>
+        <li-card [data]="matrixDetailed[3]"></li-card>
+        <li-card [data]="matrixDetailed[3]"></li-card>
+        <li-card [data]="matrixDetailed[3]"></li-card>
+    </div>
 </div>
