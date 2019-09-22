@@ -4,15 +4,10 @@
 :host {
     @extend .full-flex-column;
     .matrix-container {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: 1fr 1fr;
         grid-column-gap: 15px;
         grid-row-gap: 15px;
         flex: auto;
-        @media screen and (max-width: $desktop) {
-            grid-template-columns: 1fr 1fr;
-            grid-column-gap: 15px;
-            grid-row-gap: 15px;
-        }
         @media screen and (max-width: $tablet) {
             grid-template-columns: 1fr;
             grid-column-gap: 10px;
@@ -21,6 +16,7 @@
         .column-container {
             padding: 5px;
             height: 100%;
+            min-height: 250px;
             > h2 {
                 margin: 10px 0;
                 font-size: 20px;
