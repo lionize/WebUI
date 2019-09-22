@@ -68,7 +68,6 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
             return;
         }
 
-        // FIXME
         let componentName;
         switch (component) {
             case 'Habitica':
@@ -89,8 +88,7 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
         }
 
         const factory = this.componentFactoryResolver.resolveComponentFactory(componentName);
-        // FIXME type any
-        const ref: any = this.viewContainerRef.createComponent(factory);
+        const ref = this.viewContainerRef.createComponent(factory) as any;
         this.cmpRef = ref;
         ref.instance.dataChange.subscribe((value) => this.outputData = value);
         ref.instance.data = this.data.data;

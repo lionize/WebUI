@@ -7,12 +7,20 @@
         grid-template-columns: repeat(4, 1fr);
         grid-column-gap: 15px;
         grid-row-gap: 15px;
+        flex: auto;
+        @media screen and (max-width: $desktop) {
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 15px;
+            grid-row-gap: 15px;
+        }
         @media screen and (max-width: $tablet) {
             grid-template-columns: 1fr;
             grid-column-gap: 10px;
             grid-row-gap: 10px;
         }
         .column-container {
+            padding: 5px;
+            height: 100%;
             > h2 {
                 margin: 10px 0;
                 font-size: 20px;
@@ -20,6 +28,42 @@
             }
             li-card {
                 margin-bottom: 10px;
+            }
+            &.do-first {
+                border: 1px solid $urgent-important;
+                h2 {
+                    color: $urgent-important;
+                }
+                .new-button {
+                    color: $urgent-important;
+                }
+            }
+            &.schedule {
+                border: 1px solid $not-urgent-important;
+                h2 {
+                    color: $not-urgent-important;
+                }
+                .new-button {
+                    color: $not-urgent-important;
+                }
+            }
+            &.delegate {
+                border: 1px solid $urgent-not-important;
+                h2 {
+                    color: $urgent-not-important;
+                }
+                .new-button {
+                    color: $urgent-not-important;
+                }
+            }
+            &.dont-do {
+                border: 1px solid $not-urgent-not-important;
+                h2 {
+                    color: $not-urgent-not-important;
+                }
+                .new-button {
+                    color: $not-urgent-not-important;
+                }
             }
         }
     }

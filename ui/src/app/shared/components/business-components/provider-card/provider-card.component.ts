@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Popup } from 'src/app/shared/components/popup/popup.model';
 import { Lionize } from 'src/app/shared/models/habitica/Lionize';
 import { HTTP_REQUEST_TYPES } from 'src/app/shared/constants';
+import { ProviderDataTypes } from 'src/app/pages/admin/providers/providers.models';
 
 @Component({
     selector: 'li-provider-card',
@@ -18,7 +19,7 @@ export class ProviderCardComponent implements OnInit {
     // TODO think about to use NgRX for data sharing
     @Output() dataChange: EventEmitter<any> = new EventEmitter();
     // FIXME
-    providers = {
+    providers: ProviderDataTypes = {
         habitica: [],
         microsoft: [],
         google: []

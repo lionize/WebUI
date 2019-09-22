@@ -20,7 +20,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
-import { NotificationService } from './shared/components/notifications/notification.service';
 
 @NgModule({
     declarations: [
@@ -36,7 +35,7 @@ import { NotificationService } from './shared/components/notifications/notificat
         AuthenticationModule,
         AppRoutingModule
     ],
-    providers: [AuthGuard, ApiService, NotificationService],
+    providers: [AuthGuard, ApiService],
     entryComponents: [
         SimpleNotificationComponent
     ],

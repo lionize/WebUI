@@ -22,13 +22,12 @@ export class AuthGuard implements CanLoad, CanActivate {
     }
 
     private checkLogin(): boolean {
-        //FIXME
-        // const user: SigInUser = JSON.parse(localStorage.getItem('user'));
         const currentUser = this.authenticationService.geCurrentUserValue();
+        
         if (currentUser) {
             return true;
         }
-        //FIXME
+
         this.router.navigate(['/auth/signin']);
         return false;
     }

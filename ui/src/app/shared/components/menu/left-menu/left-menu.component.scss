@@ -2,14 +2,13 @@
 
 :host {
     display: flex;
+    flex-direction: column;
+    background-color: $pure-white;
+    width: $left-menu-width;
+    background-color: $pure-white;
+    box-sizing: border-box;
     .left-menu-container {
-        flex-direction: column;
+        flex: auto;
         padding: $padding-small;
-        background-color: $pure-white;
-        width: $left-menu-width;
-        background-color: $pure-white;
-        // &.open {
-        //     display: flex;
-        // }
     }
 }

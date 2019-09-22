@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-// @Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: 'root' })
 export class NotificationService {
 
     constructor(
@@ -18,10 +18,9 @@ export class NotificationService {
         this.snackBar.open(message, 'X', { panelClass: ['error'] });
     }
 
-    // TODO fix component type
     showNotificationToaster(component, config?): void {
         this.snackBar.openFromComponent(component, {
-            duration: config.duration | 30000,
+            duration: config.duration | 5000,
             data: config.data
             // TODO add css class
             // panelClass: [''],

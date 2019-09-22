@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/store/state/app.state';
 import { selectRightMenu } from 'src/app/store/selectors/menu.selectors';
@@ -15,7 +15,7 @@ import { ToggleRightMenu } from 'src/app/store/actions/menu.actions';
 
 export class RightMenuComponent implements OnInit {
     menu$ = this.store.pipe(select(selectRightMenu));
-    rightMenu: RightMenu;
+    private state: 'open' | 'close' = 'close';
 
     constructor(
         private store: Store<IAppState>
@@ -24,13 +24,15 @@ export class RightMenuComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.menu$.subscribe((menu: RightMenu) => {
-            this.rightMenu = menu;
-        });
+        this.menu$.subscribe((menu: RightMenu) => this.state = menu.isOpen ? 'open' : 'close');
     }
 
     closeRightMenu(): void {
         this.store.dispatch(new ToggleRightMenu({ isOpen: false }));
+    }
+
+    @HostBinding('@rightMenuToggleAnimation') get getToggleDrawer(): string {
+        return this.state === 'open' ? 'open' : 'close';
     }
 
 }
