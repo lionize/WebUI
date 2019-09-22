@@ -51,7 +51,6 @@ export class TokenInterceptor implements HttpInterceptor {
                         }
                         this.authenticationService.setCurrentUserValue(user);
                         localStorage.setItem('user', JSON.stringify(user));
-                        // FIXME next request cancels
                         return next.handle(this.addToken(request, user.accessToken));
                     }),
                     catchError(error => {

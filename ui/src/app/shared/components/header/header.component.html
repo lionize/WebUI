@@ -2,9 +2,6 @@
 <div class="header-wrapper full-height">
     <!--TODO fix routerLink-->
     <img src="assets/images/lionize_logo_large.png" [routerLink]="['/admin']" />
-    <button mat-icon-button color="primary" [class.rotated]="isLeftMenuOpen" (click)="toggleLeftMenu()">
-        <mat-icon>menu</mat-icon>
-    </button>
     <div class="nav-menu"></div>
     <div class="user-actions flex-row-vertical-centered">
         <span class="horizontal-margin-5">{{user?.username}}</span>

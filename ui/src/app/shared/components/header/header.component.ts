@@ -3,13 +3,13 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
-import { UISigninUser, SigInUser } from 'src/app/pages/authentication/user.model';
+import { SigInUser } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
 import { ResetApp } from 'src/app/store/actions/app.actions';
-import { ToggleLeftMenu, ToggleRightMenu } from 'src/app/store/actions/menu.actions';
+import { ToggleRightMenu } from 'src/app/store/actions/menu.actions';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
-import { LeftMenu, RightMenu } from 'src/app/shared/components/menu/menu.model';
-import { selectLeftMenu, selectRightMenu } from 'src/app/store/selectors/menu.selectors';
+import { RightMenu } from 'src/app/shared/components/menu/menu.model';
+import { selectRightMenu } from 'src/app/store/selectors/menu.selectors';
 import { map, tap } from 'rxjs/operators';
 import { AppLoading } from 'src/app/store/actions/main.actions';
 
@@ -21,9 +21,7 @@ import { AppLoading } from 'src/app/store/actions/main.actions';
 
 export class HeaderComponent implements OnInit {
     user: SigInUser;
-    isLeftMenuOpen: boolean = false;
     isRightMenuOpen: boolean = false;
-    leftMenu$ = this.store.pipe(select(selectLeftMenu));
     rightMenu$ = this.store.pipe(select(selectRightMenu));
 
     constructor(
@@ -36,7 +34,6 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.authenticationService.geCurrentUserValue();
-        this.toggleLeftMenuIcons();
         this.toggleRightMenuIcons();
     }
 
@@ -61,12 +58,6 @@ export class HeaderComponent implements OnInit {
             });
     }
 
-    private toggleLeftMenuIcons(): void {
-        this.leftMenu$.subscribe((menu: LeftMenu) => {
-            this.isLeftMenuOpen = menu.isOpen;
-        });
-    }
-
     private toggleRightMenuIcons(): void {
         this.rightMenu$.subscribe((menu: RightMenu) => {
             this.isRightMenuOpen = menu.isOpen;
@@ -85,11 +76,6 @@ export class HeaderComponent implements OnInit {
             }
         });
         dialogRef.afterClosed().subscribe((data) => data && this.signOut());
-    }
-
-    toggleLeftMenu(): void {
-        this.isLeftMenuOpen = !this.isLeftMenuOpen;
-        this.store.dispatch(new ToggleLeftMenu({ isOpen: this.isLeftMenuOpen }));
     }
 
     toggleRightMenu(): void {
