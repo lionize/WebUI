@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { ProvidersService } from './providers.service';
-import { ProviderTypes } from './providers.models';
+import { ProviderTypes, ProviderDataTypes } from './providers.models';
 import { Popup } from 'src/app/shared/components/popup/popup.model';
 import { HTTP_REQUEST_TYPES } from 'src/app/shared/constants';
 import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { map, tap, catchError } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/store/state/app.state';
@@ -24,12 +23,11 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 export class ProvidersComponent implements OnInit {
     // TODO use types (backend classes)
     providerTypes: typeof ProviderTypes = ProviderTypes;
-    providers = {
+    providers: ProviderDataTypes = {
         habitica: [],
         microsoft: [],
         google: []
     };
-    // isLoading = new BehaviorSubject(false);
 
     constructor(
         public dialog: MatDialog,

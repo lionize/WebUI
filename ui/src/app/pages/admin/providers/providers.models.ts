@@ -3,3 +3,9 @@ export enum ProviderTypes {
     MICROSOFT_TO_DO = 'Microsoft Todo',
     GOOGLE_TASKS = 'Google Tasks'
 }
+
+export type ProviderDataTypes = {
+    habitica: any[];
+    microsoft: any[];
+    google: any[];
+}
