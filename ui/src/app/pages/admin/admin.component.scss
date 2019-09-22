@@ -9,13 +9,13 @@
     .admin-wrapper {
         @extend .full-flex-column;
         // max-width: $desktop-hd;
-        width: 100%;
+        // width: 100%;
         height: calc(100vh - #{$header-height});
         margin: 0 auto;
         padding: $padding-medium;
         overflow-y: auto;
         @media screen and (max-width: $desktop-hd) {
-            width: 100%;
+            // width: 100%;
             padding: $padding-small;
         }
     }

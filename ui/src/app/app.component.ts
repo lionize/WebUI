@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, Event, NavigationEnd, NavigationStart } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/store/state/app.state';
-import { ToggleLeftMenu } from 'src/app/store/actions/menu.actions';
+import { ToggleLeftMenu, ToggleRightMenu } from 'src/app/store/actions/menu.actions';
 import { ApiService } from './shared/services/api.service';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { selectMain } from 'src/app/store/selectors/main.selectors';
@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
 
     private handleRouteChanges() {
         this.store.dispatch(new ToggleLeftMenu({ isOpen: false }));
+        this.store.dispatch(new ToggleRightMenu({ isOpen: false }));
     }
 
     private subscribeToMainActions(): void {

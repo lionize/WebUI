@@ -1,4 +1,9 @@
-<div class="right-menu-container" [class.open]="rightMenu?.isOpen"
+<div class="right-menu-container"
     [@rightMenuToggleAnimation]="rightMenu?.isOpen ? 'open' : 'close'">
-    <h2 class="text-center">Archive</h2>
+    <div class="flex flex-direction-row justify-space-between">
+        <h2 class="flex-all-centered flex-auto">Archive</h2>
+        <button mat-icon-button (click)="closeRightMenu()">
+            <mat-icon>arrow_forward</mat-icon>
+        </button>
+    </div>
 </div>

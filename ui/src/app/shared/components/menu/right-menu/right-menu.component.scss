@@ -3,19 +3,14 @@
 :host {
     display: flex;
     .right-menu-container {
-        // display: none;
         flex-direction: column;
-        // FIXME
         padding: $padding-small;
         background-color: $pure-white;
         width: $right-menu-width;
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
         bottom: 0;
         z-index: 3;
-        &.open {
-            display: flex;
-        }
     }
 }

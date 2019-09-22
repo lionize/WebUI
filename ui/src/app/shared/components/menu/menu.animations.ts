@@ -5,7 +5,7 @@ export const leftMenuToggleAnimation = trigger('leftMenuToggleAnimation', [
         marginLeft: '0'
     })),
     state('close', style({
-        marginLeft: '-240px'
+        marginLeft: '-300px'
     })),
     transition('open <=> close', [
         animate(250)
