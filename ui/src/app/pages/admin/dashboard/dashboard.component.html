@@ -1,42 +1,49 @@
-<div class="matrix-container grid">
-    <div class="column-container do-first">
-        <h2>Do first</h2>
-        <div class="tasks-container">
-            <!-- <li-task-card [data]="matrixDetailed[0]"></li-task-card> -->
+<button mat-icon-button color="primary" class="left-menu-button" [class.rotated]="isLeftMenuOpen"
+    (click)="toggleLeftMenu()">
+    <mat-icon>menu</mat-icon>
+</button>
+<div class="dashboard-container">
+    <li-left-menu></li-left-menu>
+    <div class="matrix-container grid">
+        <div class="column-container do-first">
+            <h2>Do first</h2>
+            <div class="tasks-container">
+                <!-- <li-task-card [data]="matrixDetailed[0]"></li-task-card> -->
+            </div>
+            <button mat-button color="primary" class="new-button">
+                <mat-icon>add</mat-icon>
+                New task
+            </button>
         </div>
-        <button mat-button color="primary" class="new-button">
-            <mat-icon>add</mat-icon>
-            New task
-        </button>
-    </div>
-    <div class="column-container schedule">
-        <h2>Schedule</h2>
-        <div class="tasks-container">
-            <!-- <li-task-card [data]="matrixDetailed[1]"></li-task-card> -->
+        <div class="column-container schedule">
+            <h2>Schedule</h2>
+            <div class="tasks-container">
+                <!-- <li-task-card [data]="matrixDetailed[1]"></li-task-card> -->
+            </div>
+            <button mat-button color="primary" class="new-button">
+                <mat-icon>add</mat-icon>
+                New task
+            </button>
         </div>
-        <button mat-button color="primary" class="new-button">
-            <mat-icon>add</mat-icon>
-            New task
-        </button>
-    </div>
-    <div class="column-container delegate">
-        <h2>Delegate</h2>
-        <div class="tasks-container">
-            <!-- <li-task-card [data]="matrixDetailed[2]"></li-task-card> -->
+        <div class="column-container delegate">
+            <h2>Delegate</h2>
+            <div class="tasks-container">
+                <!-- <li-task-card [data]="matrixDetailed[2]"></li-task-card> -->
+            </div>
+            <button mat-button color="primary" class="new-button">
+                <mat-icon>add</mat-icon>
+                New task
+            </button>
         </div>
-        <button mat-button color="primary" class="new-button">
-            <mat-icon>add</mat-icon>
-            New task
-        </button>
-    </div>
-    <div class="column-container dont-do">
-        <h2>Don't do</h2>
-        <div class="tasks-container">
-            <!-- <li-task-card [data]="matrixDetailed[3]"></li-task-card> -->
+        <div class="column-container dont-do">
+            <h2>Don't do</h2>
+            <div class="tasks-container">
+                <!-- <li-task-card [data]="matrixDetailed[3]"></li-task-card> -->
+            </div>
+            <button mat-button color="primary" class="new-button">
+                <mat-icon>add</mat-icon>
+                New task
+            </button>
         </div>
-        <button mat-button color="primary" class="new-button">
-            <mat-icon>add</mat-icon>
-            New task
-        </button>
     </div>
 </div>
