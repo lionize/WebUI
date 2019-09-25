@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
@@ -11,6 +11,7 @@ import { UISignupUser, UISigninUser, SigInUser, SignUpUser } from 'src/app/pages
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { IAppState } from 'src/app/store/state/app.state';
 import { AppLoading } from 'src/app/store/actions/main.actions';
+import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
 
 enum MODES {
     SIGN_IN = 'SIGN_IN',
@@ -23,11 +24,12 @@ enum MODES {
     styleUrls: ['./auth-form.component.scss']
 })
 
-export class AuthFormComponent implements OnInit {
+export class AuthFormComponent implements OnInit, OnDestroy {
     @Input() mode: MODES;
     MODES = MODES;
     form: FormGroup;
     validationMessages = validation_messages;
+    private destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
 
     constructor(
         private formBuilder: FormBuilder,
@@ -41,6 +43,11 @@ export class AuthFormComponent implements OnInit {
 
     ngOnInit() {
         this.createForm();
+    }
+
+    ngOnDestroy() {
+        this.destroy$.next(true);
+        this.destroy$.complete();
     }
 
     signUp(event?): void {
@@ -63,7 +70,8 @@ export class AuthFormComponent implements OnInit {
                             );
                         }
                         return response;
-                    })
+                    }),
+                    takeUntil(this.destroy$),
                 )
                 .subscribe((response) => {
                     if (!response.isError) {
@@ -102,7 +110,8 @@ export class AuthFormComponent implements OnInit {
                             );
                         }
                         return response;
-                    })
+                    }),
+                    takeUntil(this.destroy$)
                 )
                 .subscribe((response) => {
                     if (!response.isError) {

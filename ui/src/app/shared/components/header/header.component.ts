@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs/internal/Observable';
+import { map, tap } from 'rxjs/operators';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { SigInUser } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
@@ -10,7 +12,6 @@ import { ToggleRightMenu } from 'src/app/store/actions/menu.actions';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { RightMenu } from 'src/app/shared/components/menu/menu.model';
 import { selectRightMenu } from 'src/app/store/selectors/menu.selectors';
-import { map, tap } from 'rxjs/operators';
 import { AppLoading } from 'src/app/store/actions/main.actions';
 
 @Component({
@@ -22,7 +23,7 @@ import { AppLoading } from 'src/app/store/actions/main.actions';
 export class HeaderComponent implements OnInit {
     user: SigInUser;
     isRightMenuOpen: boolean = false;
-    rightMenu$ = this.store.pipe(select(selectRightMenu));
+    rightMenu$: Observable<RightMenu> = this.store.pipe(select(selectRightMenu));
 
     constructor(
         public dialog: MatDialog,

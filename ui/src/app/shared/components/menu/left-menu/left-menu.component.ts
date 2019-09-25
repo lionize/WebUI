@@ -1,5 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs/internal/Observable';
 import { IAppState } from 'src/app/store/state/app.state';
 import { selectLeftMenu } from 'src/app/store/selectors/menu.selectors';
 import { LeftMenu } from 'src/app/shared/components/menu/menu.model';
@@ -13,7 +14,7 @@ import { leftMenuToggleAnimation } from '../menu.animations';
 })
 
 export class LeftMenuComponent implements OnInit {
-    menu$ = this.store.pipe(select(selectLeftMenu));
+    menu$: Observable<LeftMenu> = this.store.pipe(select(selectLeftMenu));
     private state: 'open' | 'close' = 'close';
 
     constructor(

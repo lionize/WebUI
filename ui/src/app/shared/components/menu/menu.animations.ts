@@ -2,7 +2,7 @@ import { transition, animate, style, state, trigger } from '@angular/animations'
 
 export const leftMenuToggleAnimation = trigger('leftMenuToggleAnimation', [
     state('open', style({
-        marginLeft: '0'
+        marginLeft: '-10px'
     })),
     state('close', style({
         marginLeft: '-310px'

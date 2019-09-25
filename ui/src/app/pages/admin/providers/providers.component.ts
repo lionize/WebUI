@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { throwError } from 'rxjs/internal/observable/throwError';
+import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
+import { map, tap, catchError, takeUntil } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { ProvidersService } from './providers.service';
 import { ProviderTypes, ProviderDataTypes } from './providers.models';
-import { Popup } from 'src/app/shared/components/popup/popup.model';
 import { HTTP_REQUEST_TYPES } from 'src/app/shared/constants';
 import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { map, tap, catchError } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import { IAppState } from 'src/app/store/state/app.state';
 import { AppLoading } from 'src/app/store/actions/main.actions';
-import { throwError } from 'rxjs/internal/observable/throwError';
+import { IAppState } from 'src/app/store/state/app.state';
+import { Popup } from 'src/app/shared/components/popup/popup.model';
+import { GetAllProviders } from 'src/app/store/actions/providers.actions';
+import { selectProviders } from 'src/app/store/selectors/providers.selectors';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
     selector: 'providers',
@@ -20,7 +24,7 @@ import { throwError } from 'rxjs/internal/observable/throwError';
     styleUrls: ['./providers.component.scss']
 })
 
-export class ProvidersComponent implements OnInit {
+export class ProvidersComponent implements OnInit, OnDestroy {
     // TODO use types (backend classes)
     providerTypes: typeof ProviderTypes = ProviderTypes;
     providers: ProviderDataTypes = {
@@ -28,6 +32,9 @@ export class ProvidersComponent implements OnInit {
         microsoft: [],
         google: []
     };
+    private destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
+    // TODO switch to providers$
+    providers$: Observable<ProviderDataTypes> = this.store.pipe(select(selectProviders));
 
     constructor(
         public dialog: MatDialog,
@@ -41,6 +48,11 @@ export class ProvidersComponent implements OnInit {
 
     ngOnInit() {
         this.getAllProviders();
+    }
+
+    ngOnDestroy() {
+        this.destroy$.next(true);
+        this.destroy$.complete();
     }
 
     openPopup(component: string): void {
@@ -65,9 +77,11 @@ export class ProvidersComponent implements OnInit {
 
     private getAllProviders(): void {
         this.store.dispatch(new AppLoading({ isAppLoading: true }));
+        // this.store.dispatch(new GetAllProviders());
         this.providerService.getAllProviders()
             .pipe(
                 tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
+                takeUntil(this.destroy$),
                 catchError((error) => {
                     this.store.dispatch(new AppLoading({ isAppLoading: false }));
                     this.notificationService.showNotificationToaster(SimpleNotificationComponent,
@@ -85,6 +99,7 @@ export class ProvidersComponent implements OnInit {
             this.providerService.putHabitica(id, data)
                 .pipe(
                     tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
+                    takeUntil(this.destroy$),
                     map((response) => {
                         // TODO check error
                         // if (response.isError) {
@@ -92,13 +107,21 @@ export class ProvidersComponent implements OnInit {
                             { data: 'Setting updated' }
                         );
                         // }
+                    }),
+                    catchError((error) => {
+                        this.store.dispatch(new AppLoading({ isAppLoading: false }));
+                        this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                            { data: error.message || error.statusText }
+                        );
+                        return throwError(error);
                     })
                 )
                 .subscribe((response) => this.getAllProviders())
             :
             this.providerService.postHabitica(data)
                 .pipe(
-                    // tap(() => this.isLoading.next(false)),
+                    tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
+                    takeUntil(this.destroy$),
                     map((response) => {
                         // TODO check error
                         // if (response.isError) {
@@ -106,6 +129,13 @@ export class ProvidersComponent implements OnInit {
                             { data: 'Setting created' }
                         );
                         // }
+                    }),
+                    catchError((error) => {
+                        this.store.dispatch(new AppLoading({ isAppLoading: false }));
+                        this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                            { data: error.message || error.statusText }
+                        );
+                        return throwError(error);
                     })
                 )
                 .subscribe((response) => this.getAllProviders());
