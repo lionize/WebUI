@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'li-microsoft',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class MicrosoftComponent implements OnInit {
+    @Input() data;
+    @Output() dataChange: EventEmitter<any> = new EventEmitter();
 
     constructor() {
             

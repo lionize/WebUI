@@ -93,7 +93,6 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
         ref.instance.dataChange.subscribe((value) => this.outputData = value);
         ref.instance.data = this.data.data;
         ref.changeDetectorRef.detectChanges();
-        // FIXME ERROR TypeError: Cannot read property 'subscribe' of undefined
     }
 
 }

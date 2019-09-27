@@ -6,6 +6,8 @@ import 'hammerjs';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+// import { EffectsModule } from '@ngrx/effects';
+// import { ProvidersEffects } from './store/effects/providers.effects';
 
 import { environment } from 'src/environments/environment';
 import { appReducers, clearState } from 'src/app/store/reducers/app.reducers';
@@ -30,6 +32,7 @@ import { SimpleNotificationComponent } from 'src/app/shared/components/notificat
         BrowserModule, BrowserAnimationsModule, HttpClientModule,
         MatSnackBarModule, MatButtonModule, MatProgressSpinnerModule,
         StoreModule.forRoot(appReducers, { metaReducers: [clearState] }),
+        // EffectsModule.forRoot([ProvidersEffects]),
         StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         AuthenticationModule,

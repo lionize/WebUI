@@ -14,8 +14,8 @@ import { SimpleNotificationComponent } from 'src/app/shared/components/notificat
 import { AppLoading } from 'src/app/store/actions/main.actions';
 import { IAppState } from 'src/app/store/state/app.state';
 import { Popup } from 'src/app/shared/components/popup/popup.model';
-import { GetAllProviders } from 'src/app/store/actions/providers.actions';
-import { selectProviders } from 'src/app/store/selectors/providers.selectors';
+// import { GetAllProviders } from 'src/app/store/actions/providers.actions';
+// import { selectProviders } from 'src/app/store/selectors/providers.selectors';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
@@ -34,7 +34,7 @@ export class ProvidersComponent implements OnInit, OnDestroy {
     };
     private destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
     // TODO switch to providers$
-    providers$: Observable<ProviderDataTypes> = this.store.pipe(select(selectProviders));
+    // providers$: Observable<ProviderDataTypes> = this.store.pipe(select(selectProviders));
 
     constructor(
         public dialog: MatDialog,
@@ -81,14 +81,14 @@ export class ProvidersComponent implements OnInit, OnDestroy {
         this.providerService.getAllProviders()
             .pipe(
                 tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
-                takeUntil(this.destroy$),
                 catchError((error) => {
                     this.store.dispatch(new AppLoading({ isAppLoading: false }));
                     this.notificationService.showNotificationToaster(SimpleNotificationComponent,
                         { data: error.message || error.statusText }
                     );
                     return throwError(error);
-                })
+                }),
+                takeUntil(this.destroy$)
             )
             .subscribe((response) => this.providers = response);
     }
@@ -99,7 +99,6 @@ export class ProvidersComponent implements OnInit, OnDestroy {
             this.providerService.putHabitica(id, data)
                 .pipe(
                     tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
-                    takeUntil(this.destroy$),
                     map((response) => {
                         // TODO check error
                         // if (response.isError) {
@@ -114,7 +113,8 @@ export class ProvidersComponent implements OnInit, OnDestroy {
                             { data: error.message || error.statusText }
                         );
                         return throwError(error);
-                    })
+                    }),
+                    takeUntil(this.destroy$)
                 )
                 .subscribe((response) => this.getAllProviders())
             :
