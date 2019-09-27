@@ -30,14 +30,14 @@ export class ProvidersService {
     getAllProviders(): Observable<any> {
         const habiticaRequest = this.getHabitica();
         // TODO other requests
-        return forkJoin([habiticaRequest])
-            .pipe(
-                map((response) => {
-                    return {
-                        habitica: response[0]
-                    }
-                })
-            );
+        return forkJoin([habiticaRequest]);
+            // .pipe(
+            //     map((response) => {
+            //         return {
+            //             habitica: response[0]
+            //         }
+            //     })
+            // );
     }
 
 }

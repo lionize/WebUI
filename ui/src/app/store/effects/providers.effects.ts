@@ -1,21 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
-import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
-
+import { switchMap, map } from 'rxjs/operators';
+import { of } from 'rxjs/internal/observable/of';
 import { ProviderDataTypes } from 'src/app/pages/admin/providers/providers.models';
 import { ProvidersService } from 'src/app/pages/admin/providers/providers.service';
 import { PROVIDERS_ACTIONS, GetAllProviders, GetAllProvidersSuccess } from '../actions/providers.actions';
 
 @Injectable()
-export class ConfigEffects {
+export class ProvidersEffects {
     @Effect()
     getProviders$ = this.actions$.pipe(
         ofType<GetAllProviders>(PROVIDERS_ACTIONS.GET_ALL_PROVIDERS),
         switchMap(() => this.providersService.getAllProviders()),
-        switchMap((providers: ProviderDataTypes) => {
-            return of(new GetAllProvidersSuccess(providers));
-        })
+        switchMap((providers: ProviderDataTypes) =>  of(new GetAllProvidersSuccess(providers))),
+        map((action) => action.payload),
+        // map((response) => {
+        //     return {
+        //         habitica: response.payload[0]
+        //     }
+        // })
     );
 
     constructor(

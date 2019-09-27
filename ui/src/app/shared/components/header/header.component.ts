@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { SigInUser } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
@@ -13,6 +14,8 @@ import { AuthenticationService } from 'src/app/pages/authentication/authenticati
 import { RightMenu } from 'src/app/shared/components/menu/menu.model';
 import { selectRightMenu } from 'src/app/store/selectors/menu.selectors';
 import { AppLoading } from 'src/app/store/actions/main.actions';
+import { NotificationService } from '../notifications/notification.service';
+import { SimpleNotificationComponent } from '../notifications/simple/simple-notification.component';
 
 @Component({
     selector: 'header',
@@ -29,7 +32,8 @@ export class HeaderComponent implements OnInit {
         public dialog: MatDialog,
         private router: Router,
         private store: Store<IAppState>,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        private notificationService: NotificationService
     ) {
     }
 
@@ -47,7 +51,14 @@ export class HeaderComponent implements OnInit {
         this.authenticationService.signOut(payload)
             .pipe(
                 tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
-                map((response: SigInUser) => response)
+                map((response: SigInUser) => response),
+                catchError((error) => {
+                    this.store.dispatch(new AppLoading({ isAppLoading: false }));
+                    this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                        { data: error.message || error.statusText }
+                    );
+                    return throwError(error);
+                }),
             )
             .subscribe((response) => {
                 if (!response.isError) {

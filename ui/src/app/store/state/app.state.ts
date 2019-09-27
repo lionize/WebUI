@@ -8,14 +8,14 @@ export interface IAppState {
     router?: RouterReducerState;
     menu: IMenuState;
     main: IMainState;
-    providers: IProvidersState
+    // providers: IProvidersState
     //other states
 }
 
 export const initialAppState: IAppState = {
     menu: initialMenuState,
     main: initialMainState,
-    providers: initialProvidersState
+    // providers: initialProvidersState
 };
 
 export function getInitialState(): IAppState {
