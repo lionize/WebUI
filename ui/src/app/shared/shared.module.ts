@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,26 +10,66 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
+import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
+import { TaskCardComponent } from 'src/app/shared/components/business-components/task-card/task-card.component';
+import { ProviderCardComponent } from 'src/app/shared/components/business-components/provider-card/provider-card.component';
+import { LeftMenuComponent } from 'src/app/shared/components/menu/left-menu/left-menu.component';
+import { RightMenuComponent } from 'src/app/shared/components/menu/right-menu/right-menu.component';
+import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/providers/habitica/habitica.component';
+import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components/providers/microsoft/microsoft.component';
+import { GoogleComponent } from 'src/app/shared/components/dynamic-components/providers/google/google.component';
 
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule.forChild([]),
+        FormsModule, ReactiveFormsModule,
         MatButtonModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatProgressSpinnerModule, MatSnackBarModule,
-        MatInputModule
+        MatInputModule, MatMenuModule, MatDialogModule, MatCardModule
     ],
     declarations: [
-        HeaderComponent
+        HeaderComponent,
+        DialogComponent,
+        PopupComponent,
+        LeftMenuComponent,
+        RightMenuComponent,
+        TaskCardComponent,
+        ProviderCardComponent,
+        HabiticaComponent,
+        MicrosoftComponent,
+        GoogleComponent
     ],
     exports: [
+        FormsModule, ReactiveFormsModule,
         MatButtonModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatProgressSpinnerModule, MatSnackBarModule,
-        MatInputModule,
-        HeaderComponent
+        MatInputModule, MatMenuModule, MatDialogModule, MatCardModule,
+        HeaderComponent,
+        DialogComponent,
+        PopupComponent,
+        LeftMenuComponent,
+        RightMenuComponent,
+        TaskCardComponent,
+        ProviderCardComponent,
+        HabiticaComponent,
+        MicrosoftComponent,
+        GoogleComponent
     ],
     providers: [
-
+        
     ],
-    entryComponents: []
+    entryComponents: [
+        DialogComponent,
+        PopupComponent,
+        HabiticaComponent,
+        MicrosoftComponent,
+        GoogleComponent,
+    ]
 })
+
 export class SharedModule { }

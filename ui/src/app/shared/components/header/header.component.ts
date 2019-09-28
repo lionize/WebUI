@@ -1,8 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs/internal/Observable';
+import { map, tap, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
-import { IUserLogin } from 'src/app/pages/public/authentication/user.model';
+import { SigInUser } from 'src/app/pages/authentication/user.model';
+import { IAppState } from 'src/app/store/state/app.state';
+import { ResetApp } from 'src/app/store/actions/app.actions';
+import { ToggleRightMenu } from 'src/app/store/actions/menu.actions';
+import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
+import { RightMenu } from 'src/app/shared/components/menu/menu.model';
+import { selectRightMenu } from 'src/app/store/selectors/menu.selectors';
+import { AppLoading } from 'src/app/store/actions/main.actions';
+import { NotificationService } from '../notifications/notification.service';
+import { SimpleNotificationComponent } from '../notifications/simple/simple-notification.component';
 
 @Component({
     selector: 'header',
@@ -11,39 +24,75 @@ import { IUserLogin } from 'src/app/pages/public/authentication/user.model';
 })
 
 export class HeaderComponent implements OnInit {
-
-    user: IUserLogin;
+    user: SigInUser;
+    isRightMenuOpen: boolean = false;
+    rightMenu$: Observable<RightMenu> = this.store.pipe(select(selectRightMenu));
 
     constructor(
+        public dialog: MatDialog,
         private router: Router,
-        public dialog: MatDialog
+        private store: Store<IAppState>,
+        private authenticationService: AuthenticationService,
+        private notificationService: NotificationService
     ) {
     }
 
     ngOnInit() {
-        this.user = JSON.parse(localStorage.getItem('user'));
+        this.user = this.authenticationService.geCurrentUserValue();
+        this.toggleRightMenuIcons();
     }
 
-    logOut() {
-        localStorage.removeItem('user');
-        this.user = { username: '', password: '' };  //todo fix
-        this.router.navigate(['/auth/login']);
+    private signOut(): void {
+        this.store.dispatch(new AppLoading({ isAppLoading: true }));
+        const payload: SigInUser = {
+            accessToken: this.user.accessToken,
+            refreshToken: this.user.accessToken
+        }
+        this.authenticationService.signOut(payload)
+            .pipe(
+                tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
+                map((response: SigInUser) => response),
+                catchError((error) => {
+                    this.store.dispatch(new AppLoading({ isAppLoading: false }));
+                    this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                        { data: error.message || error.statusText }
+                    );
+                    return throwError(error);
+                }),
+            )
+            .subscribe((response) => {
+                if (!response.isError) {
+                    this.authenticationService.setCurrentUserValue(null);
+                    localStorage.removeItem('user');
+                    this.router.navigate(['/landing']);
+                    this.store.dispatch(new ResetApp());
+                }
+            });
     }
 
-    openDialog() {
+    private toggleRightMenuIcons(): void {
+        this.rightMenu$.subscribe((menu: RightMenu) => {
+            this.isRightMenuOpen = menu.isOpen;
+        });
+    }
+
+    openDialog(): void {
         const dialogRef = this.dialog.open(DialogComponent, {
-            width: "300px",
+            // TODO make configurable
+            height: '200px',
+            width: '300px',
             data: {
-                title: "LOG OUT",
-                content: "Are you sure you want to logout ?",
-                buttons: ["NO", "YES"]
+                title: "SIGN OUT",
+                content: "Are you sure you want to sign out ?",
+                buttons: ["YES", "NO"]
             }
         });
-        dialogRef.afterClosed().subscribe(data => {
-            if (data) {
-                this.logOut();
-            }
-        });
+        dialogRef.afterClosed().subscribe((data) => data && this.signOut());
+    }
+
+    toggleRightMenu(): void {
+        this.isRightMenuOpen = !this.isRightMenuOpen;
+        this.store.dispatch(new ToggleRightMenu({ isOpen: this.isRightMenuOpen }));
     }
 
 }

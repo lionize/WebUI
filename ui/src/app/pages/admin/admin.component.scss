@@ -1,0 +1,21 @@
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/common';
+
+:host {
+    @extend .full-flex-row;
+}
+.admin-container {
+    @extend .full-flex-column;
+    .admin-wrapper {
+        @extend .full-flex-column;
+        width: 100%;
+        flex: auto;
+        height: calc(100vh - #{$header-height});
+        margin: 0 auto;
+        padding: $padding-medium;
+        overflow-y: auto;
+        @media screen and (max-width: $desktop) {
+            padding: $padding-small;
+        }
+    }
+}

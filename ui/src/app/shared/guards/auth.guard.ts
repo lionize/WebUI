@@ -1,23 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
+import { Router, CanActivate, CanLoad } from '@angular/router';
+import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
+import { SigInUser } from 'src/app/pages/authentication/user.model';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanLoad, CanActivate {
 
     constructor(
-        private router: Router
+        private router: Router,
+        private authenticationService: AuthenticationService
     ) {
 
     }
 
     canActivate(): boolean {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user && user.token) {
+        return this.checkLogin();
+    }
+
+    canLoad(): boolean {
+        return this.checkLogin();
+    }
+
+    private checkLogin(): boolean {
+        const currentUser = this.authenticationService.geCurrentUserValue();
+        
+        if (currentUser) {
             return true;
         }
-        else {
-            this.router.navigateByUrl('/landing');
-            return false;
-        }
+
+        this.router.navigate(['/auth/signin']);
+        return false;
     }
 }

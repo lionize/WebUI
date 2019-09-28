@@ -1,0 +1,10 @@
+@import 'src/assets/styles/variables';
+
+.auth-form-container {
+    .form {
+        border-top: 0;
+        padding: $padding-small;
+        width: 300px;
+    }
+}
+

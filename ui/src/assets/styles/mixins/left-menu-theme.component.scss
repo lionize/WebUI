@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+
+@mixin left-menu-theme-component($theme) {
+    $primary: map-get($theme, primary);
+
+    .left-menu-container {
+        &.shadow {
+            box-shadow: 2px 0px 10px mat-color($primary);
+        }
+        mat-icon {
+            color: mat-color($primary);
+        }
+    }
+}

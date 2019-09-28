@@ -1,0 +1,9 @@
+@import "src/assets/styles/variables";
+@import "src/assets/styles/common";
+
+:host {
+    @extend .full-flex-column;
+    .landing-container {
+        flex: auto;
+    }
+}

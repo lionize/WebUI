@@ -1,22 +1,27 @@
-@import "src/assets/styles/variables";
-@import "src/assets/styles/common";
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/common';
 
 :host {
-    @extend .flex-row-vertical-centered;
-    padding-right: $padding-medium;
-    background-color: rgba($primary, 1);
-    > img {
-        height: 50px;
-    }
-    .nav-menu {
-        flex: auto;
-    }
-    .user-actions {
-        > span {
-            @extend .header-user;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    height: $header-height;
+    .header-wrapper {
+        @extend .flex-row-vertical-centered;
+        > img {
+            height: 100%;
+            cursor: pointer;
         }
-    }
-    .mat-icon {
-        color: $pure-white;
+        .nav-menu {
+            flex: auto;
+        }
+        .user-actions {
+            > span {
+                @extend .header-user;
+            }
+        }
+        mat-icon {
+            color: $pure-white;
+        }
     }
 }

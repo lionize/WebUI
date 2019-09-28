@@ -1,1 +1,12 @@
-@import "src/assets/styles/variables";
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/common';
+
+:host {
+    @extend .full-flex-column;
+    .dialog-container {
+        @extend .full-flex-column;
+        .mat-dialog-content {
+            flex: auto;
+        }
+    }
+}

@@ -1,0 +1,27 @@
+@import "src/assets/styles/variables";
+@import 'src/assets/styles/common';
+
+:host {
+    @extend .full-flex-column;
+    .providers-container {
+        .providers-buttons {
+            // TODO use variable
+            padding: 5px;
+            background-color: $pure-white;
+        }
+        .provider-cards-container {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-column-gap: 15px;
+            grid-row-gap: 15px;
+            padding: $padding-small 0;
+            @media screen and (max-width: $tablet) {
+                grid-template-columns: 1fr 1fr;
+                grid-column-gap: 10px;
+                grid-row-gap: 10px;
+            }
+            @media screen and (max-width: $mobile-landscape) {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}

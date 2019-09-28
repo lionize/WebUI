@@ -2,18 +2,32 @@
 @import '~@angular/material/theming';
 @import '~material-design-icons/iconfont/material-icons.css';
 
-@import './assets/styles/mixins';
-@import './assets/styles/fonts';
-@import './assets/styles/variables';
+@import 'assets/styles/variables';
+@import 'assets/styles/mixins';
+@import 'assets/styles/fonts';
+@import 'assets/styles/common';
+@import 'assets/styles/reset.css';
 
 @include mat-core();
 
-@import './assets/styles/themes/eisenhower-theme';
+@import 'assets/styles/themes/eisenhower-theme';
 
-@import './app/app-theme.component'; 
+@import 'assets/styles/mixins/app-theme.component'; 
+@import 'assets/styles/mixins/admin-theme.component'; 
+@import 'assets/styles/mixins/footer-theme.component'; 
+@import 'assets/styles/mixins/header-theme.component'; 
+@import 'assets/styles/mixins/auth-form-theme.component'; 
+@import 'assets/styles/mixins/right-menu-theme.component'; 
+@import 'assets/styles/mixins/left-menu-theme.component'; 
 
 @mixin custom-theme($theme) {
     @include app-theme-component($theme);
+    @include admin-theme-component($theme);
+    @include footer-theme-component($theme);
+    @include header-theme-component($theme);
+    @include auth-form-theme-component($theme);
+    @include right-menu-theme-component($theme);
+    @include left-menu-theme-component($theme);
 }
 
 @include angular-material-theme($eisenhower); 
@@ -23,55 +37,14 @@ html {
     height: 100%;
 }
 body {
-    margin: 0;
     font-family: Roboto-Regular;
 }
 
-/////////common styles/////////
-.full-height {
-    height: 100%;
+// FIXME
+.mat-dialog-container {
+    display: flex !important;
 }
-.full-width {
+.mat-card-header-text {
     width: 100%;
-}
-.vertical-margin-5 {
     margin: 0;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-.flex {
-    display: flex;
-}
-.flex-direction-column {
-    flex-direction: column;
-}
-.flex-direction-row {
-    flex-direction: row;
-}
-.justify-space-between {
-    justify-content: space-between;
-}
-.justrify-space-around {
-    justify-content: space-around;
-}
-.justify-center {
-    justify-content: center;
-}
-.flex-wrap {
-    flex-wrap: wrap;
-}
-.grid {
-    display: grid;
-}
-.primary-color {
-    color: $primary;
-}
-.horizontal-margin-5 {
-    margin: 0 5px !important;
-}
-.bordered-bottom {
-    border-bottom: 1px solid $primary;
-} 
-.border-box {
-    box-sizing: border-box;
 }

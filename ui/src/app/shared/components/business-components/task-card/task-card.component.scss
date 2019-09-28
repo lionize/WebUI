@@ -1,0 +1,9 @@
+:host {
+    display: block;
+    .task-card-container {
+        border-style: solid;
+        border-width: 1px 1px 1px 10px;
+        box-shadow: none;
+        padding: 8px;
+    }
+}

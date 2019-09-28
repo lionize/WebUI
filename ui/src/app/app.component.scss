@@ -1,5 +1,16 @@
+@import "src/assets/styles/variables";
+@import "src/assets/styles/common";
+
 :host {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    @extend .full-flex-column;
+    .app-container {
+        @extend .full-flex-column;
+        .mat-spinner {
+            @extend .fixed-all-center;
+        }
+        &.app-loading {
+            opacity: 0.25;
+        }
+    }
 }

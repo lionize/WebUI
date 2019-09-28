@@ -1,0 +1,24 @@
+<div class="form">
+    <form [formGroup]="form">
+        <div class="flex flex-direction-column">
+            <mat-form-field class="vertical-margin-5">
+                <input matInput placeholder="Habitica user ID" formControlName="HabiticaUserID" required>
+                <mat-error *ngFor="let validation of validationMessages.HabiticaUserID">
+                    <mat-error *ngIf="form.get('HabiticaUserID').hasError(validation.type) && 
+                                    (form.get('HabiticaUserID').dirty || form.get('HabiticaUserID').touched)">
+                        {{validation.message}}
+                    </mat-error>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="vertical-margin-5">
+                <input matInput autocomplete="new-password" placeholder="Habitica API token" formControlName="HabiticaApiToken" type="password" required>
+                <mat-error *ngFor="let validation of validationMessages.HabiticaApiToken">
+                    <mat-error *ngIf="form.get('HabiticaApiToken').hasError(validation.type) && 
+                                    (form.get('HabiticaApiToken').dirty || form.get('HabiticaApiToken').touched)">
+                        {{validation.message}}
+                    </mat-error>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</div>

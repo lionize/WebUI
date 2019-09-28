@@ -1,0 +1,16 @@
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/common';
+
+:host {
+    //TODO change
+    display: flex;
+    height: 70px;
+    border-width: 1px 0 0 0;
+    > div {
+        flex: auto;
+        > img {
+            height: 100%;
+            cursor: pointer;
+        }
+    }
+}

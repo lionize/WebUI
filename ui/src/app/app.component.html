@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<div class="app-container" [class.app-loading]="isLoading | async">
+    <router-outlet></router-outlet>
+</div>
+<div *ngIf="isLoading | async" class="full-absolute-container full-flex-center">
+    <mat-spinner [diameter]="75" [strokeWidth]="5"></mat-spinner>
+</div>

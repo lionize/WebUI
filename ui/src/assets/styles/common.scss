@@ -1,9 +1,119 @@
+/////////common styles/////////
+.full-height {
+    height: 100%;
+}
+.full-width {
+    width: 100%;
+}
+.vertical-margin-5 {
+    margin: 5px 0 !important;
+}
+.horizontal-margin-5 {
+    margin: 0 5px !important;
+}
+.horizontal-padding-5 {
+    padding: 0 5px !important;
+}
+.flex {
+    display: flex;
+}
+.flex-direction-column {
+    flex-direction: column;
+}
+.flex-direction-row {
+    flex-direction: row;
+}
+.justify-space-between {
+    justify-content: space-between;
+}
+.justify-space-around {
+    justify-content: space-around;
+}
+.justify-flex-start {
+    justify-content: flex-start;
+}
+.justify-flex-end {
+    justify-content: flex-end;
+}
+.justify-center {
+    justify-content: center;
+}
+.align-items-center {
+    align-items: center;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.flex-auto {
+    flex: auto;
+}
+.flex-1 {
+    flex: 1;
+}
+.grid {
+    display: grid;
+}
+.border-box {
+    box-sizing: border-box;
+}
+.position-relative {
+    position: relative;
+}
+.overflow-x-hidden {
+    overflow-x: hidden;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.text-center {
+    text-align: center;
+}
 .flex-row-vertical-centered {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
+.flex-all-centered {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 .header-user {
     font: 16px Roboto-Bold;
     color: $pure-white;;
+}
+.full-flex-column {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+}
+.full-flex-row {
+    display: flex;
+    flex-direction: row;
+    flex: auto;
+}
+.full-flex-center {
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+}
+.text-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.fixed-all-center {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.full-absolute-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
