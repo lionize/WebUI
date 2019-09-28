@@ -2,16 +2,16 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map, tap, takeUntil } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
 import { Store } from '@ngrx/store';
 import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
-import { validation_messages } from 'src/app/shared/validation.messages';
+import { VALIDATION_MESSAGES } from 'src/app/shared/messages/validation.messages';
 import { PatternValidator, PasswordsMatchingValidator } from 'src/app/shared/helpers/form.validators';
 import { UISignupUser, UISigninUser, SigInUser, SignUpUser } from 'src/app/pages/authentication/user.model';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { IAppState } from 'src/app/store/state/app.state';
 import { AppLoading } from 'src/app/store/actions/main.actions';
-import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
 
 enum MODES {
     SIGN_IN = 'SIGN_IN',
@@ -28,7 +28,7 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     @Input() mode: MODES;
     MODES = MODES;
     form: FormGroup;
-    validationMessages = validation_messages;
+    validationMessages = VALIDATION_MESSAGES;
     private destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
 
     constructor(

@@ -14,7 +14,7 @@
         </mat-toolbar-row>
     </mat-toolbar>
     <div class="form">
-        <form [formGroup]="form" (ngSubmit)="signUp($event)">
+        <form [formGroup]="form" (ngSubmit)="MODES.SIGN_UP ? signUp($event) : signIn($event)">
             <div class="flex flex-direction-column">
                 <mat-form-field class="vertical-margin-5">
                     <input matInput placeholder="Username" formControlName="username" required>

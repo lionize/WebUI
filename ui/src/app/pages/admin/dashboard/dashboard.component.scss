@@ -2,21 +2,25 @@
 @import 'src/assets/styles/common';
 
 :host {
-    @extend .full-flex-column;
+    @extend .full-flex-row;
     .dashboard-container {
         @extend .full-flex-row;
         li-left-menu {
-            margin-right: 10px;
+            margin-right: 20px;
+            left: 10px;
+            position: relative;
         }
         .matrix-container {
             grid-template-columns: 1fr 1fr;
-            grid-column-gap: 15px;
-            grid-row-gap: 15px;
+            grid-column-gap: $padding-medium;
+            grid-row-gap: $padding-medium;
             flex: auto;
+            @media screen and (max-width: $desktop) {
+                grid-column-gap: $padding-small;
+                grid-row-gap: $padding-small;
+            }
             @media screen and (max-width: $tablet) {
                 grid-template-columns: 1fr;
-                grid-column-gap: 10px;
-                grid-row-gap: 10px;
             }
             .column-container {
                 padding: 5px;
@@ -69,11 +73,9 @@
             }
         }
     }
-    // .left-menu-button {
-    //     position: absolute;
-    //     left: 0;
-    //     top: 0;
-    // }
+    .left-menu-button {
+        z-index: 10;
+    }
     .rotated {
         mat-icon {
             transform: rotate(90deg);

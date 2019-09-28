@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
 import { map, tap, catchError, takeUntil } from 'rxjs/operators';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { ProvidersService } from './providers.service';
@@ -16,7 +16,7 @@ import { IAppState } from 'src/app/store/state/app.state';
 import { Popup } from 'src/app/shared/components/popup/popup.model';
 // import { GetAllProviders } from 'src/app/store/actions/providers.actions';
 // import { selectProviders } from 'src/app/store/selectors/providers.selectors';
-import { Observable } from 'rxjs/internal/Observable';
+import { NOTIFICATION_MESSAGES } from 'src/app/shared/messages/notification.messages';
 
 @Component({
     selector: 'providers',
@@ -33,8 +33,7 @@ export class ProvidersComponent implements OnInit, OnDestroy {
         google: []
     };
     private destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
-    // TODO switch to providers$
-    // providers$: Observable<ProviderDataTypes> = this.store.pipe(select(selectProviders));
+    notificationMessages = NOTIFICATION_MESSAGES;
 
     constructor(
         public dialog: MatDialog,
@@ -84,7 +83,7 @@ export class ProvidersComponent implements OnInit, OnDestroy {
                 catchError((error) => {
                     this.store.dispatch(new AppLoading({ isAppLoading: false }));
                     this.notificationService.showNotificationToaster(SimpleNotificationComponent,
-                        { data: error.message || error.statusText }
+                        { data: this.notificationMessages.common.error }
                     );
                     return throwError(error);
                 }),
@@ -141,7 +140,7 @@ export class ProvidersComponent implements OnInit, OnDestroy {
                 .subscribe((response) => this.getAllProviders());
     }
 
-    onDataChange(data) {
+    onDataChange(data): void {
         this.saveHabitica(data);
     }
 

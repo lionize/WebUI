@@ -14,7 +14,7 @@
         margin: 0 auto;
         padding: $padding-medium;
         overflow-y: auto;
-        @media screen and (max-width: $desktop-hd) {
+        @media screen and (max-width: $desktop) {
             padding: $padding-small;
         }
     }
