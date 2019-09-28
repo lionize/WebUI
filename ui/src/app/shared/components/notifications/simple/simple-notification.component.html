@@ -1,4 +1,6 @@
-<div class="simple-notification-container flex justify-space-between">
-    <div class="flex-row-vertical-centered">{{data}}</div>
-    <button mat-button type="button" color="primary" (click)="okClick()">Close</button>
+<div class="simple-notification-container justify-space-between">
+    <div class="flex-row-vertical-centered horizontal-margin-5">{{data}}</div>
+    <button mat-icon-button type="button" color="primary" (click)="handleClick()">
+        <mat-icon>close</mat-icon>
+    </button>
 </div>

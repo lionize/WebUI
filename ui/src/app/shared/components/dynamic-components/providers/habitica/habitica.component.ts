@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { validation_messages } from 'src/app/shared/validation.messages';
+import { VALIDATION_MESSAGES } from 'src/app/shared/messages/validation.messages';
 // import { Lionize } from 'src/app/shared/models/habitica/Lionize';
 
 @Component({
@@ -11,7 +11,7 @@ import { validation_messages } from 'src/app/shared/validation.messages';
 
 export class HabiticaComponent implements OnInit {
     form: FormGroup;
-    validationMessages = validation_messages;
+    validationMessages = VALIDATION_MESSAGES;
     // TODO create type or use backend models
     @Input() data: { habiticaUserID: string, id: string };
     @Output() dataChange: EventEmitter<any> = new EventEmitter();

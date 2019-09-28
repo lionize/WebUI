@@ -1,11 +1,11 @@
 @import '~@angular/material/theming';
 
-@mixin right-menu-theme-component($theme) {
+@mixin left-menu-theme-component($theme) {
     $primary: map-get($theme, primary);
 
-    .right-menu-container {
+    .left-menu-container {
         &.shadow {
-            box-shadow: -2px 0px 10px mat-color($primary);
+            box-shadow: 2px 0px 10px mat-color($primary);
         }
         mat-icon {
             color: mat-color($primary);

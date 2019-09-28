@@ -20,7 +20,7 @@ export class SimpleNotificationComponent implements OnInit {
         
     }
 
-    okClick() {
+    handleClick(): void {
         this.snackRef.dismiss();
     }
 

@@ -5,6 +5,7 @@
     @extend .full-flex-column;
     .simple-notification-container {
         @extend .full-flex-row;
+        align-items: center;
         > div {
             flex: auto;
         }

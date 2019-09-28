@@ -5,6 +5,7 @@ import { IAppState } from 'src/app/store/state/app.state';
 import { selectLeftMenu } from 'src/app/store/selectors/menu.selectors';
 import { ToggleLeftMenu } from 'src/app/store/actions/menu.actions';
 import { LeftMenu } from 'src/app/shared/components/menu/menu.model';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
     selector: 'dashboard',
@@ -14,8 +15,8 @@ import { LeftMenu } from 'src/app/shared/components/menu/menu.model';
 
 export class DashboardComponent implements OnInit {
     matrixDetailed: IMatrixDetail[] = matrixDetailed;
-    isLeftMenuOpen: boolean = false;
-    leftMenu$ = this.store.pipe(select(selectLeftMenu));
+    isLeftMenuOpen: boolean;
+    leftMenu$: Observable<LeftMenu> = this.store.pipe(select(selectLeftMenu));
 
     constructor(
         private store: Store<IAppState>,

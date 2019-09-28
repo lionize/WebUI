@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 // TODO think about to move to separate module all notification stuff
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 
@@ -30,7 +31,7 @@ import { SimpleNotificationComponent } from 'src/app/shared/components/notificat
     ],
     imports: [
         BrowserModule, BrowserAnimationsModule, HttpClientModule,
-        MatSnackBarModule, MatButtonModule, MatProgressSpinnerModule,
+        MatSnackBarModule, MatButtonModule, MatProgressSpinnerModule, MatIconModule,
         StoreModule.forRoot(appReducers, { metaReducers: [clearState] }),
         // EffectsModule.forRoot([ProvidersEffects]),
         StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
