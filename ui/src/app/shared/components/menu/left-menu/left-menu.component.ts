@@ -15,7 +15,7 @@ import { leftMenuToggleAnimation } from '../menu.animations';
 
 export class LeftMenuComponent implements OnInit {
     menu$: Observable<LeftMenu> = this.store.pipe(select(selectLeftMenu));
-    private state: 'open' | 'close' = 'close';
+    state: 'open' | 'close' = 'close';
 
     constructor(
         private store: Store<IAppState>
