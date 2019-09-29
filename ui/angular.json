@@ -41,11 +41,11 @@
                                 }
                             ],
                             "optimization": true,
-                            "outputHashing": "all",
+                            "outputHashing": "none",
                             "sourceMap": true,
                             "extractCss": true,
                             "namedChunks": true,
-                            "aot": true,
+                            "aot": false,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true

@@ -10,5 +10,12 @@
     .left-menu-container {
         flex: auto;
         padding: $padding-small;
+        .tasks-container {
+            overflow-y: auto;
+            margin: 20px 0;
+            li-task-card {
+                margin-bottom: 10px;
+            }
+        }
     }
 }
