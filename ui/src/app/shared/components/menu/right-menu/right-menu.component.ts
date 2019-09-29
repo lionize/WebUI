@@ -16,7 +16,7 @@ import { ToggleRightMenu } from 'src/app/store/actions/menu.actions';
 
 export class RightMenuComponent implements OnInit {
     menu$: Observable<RightMenu> = this.store.pipe(select(selectRightMenu));
-    private state: 'open' | 'close' = 'close';
+    state: 'open' | 'close' = 'close';
 
     constructor(
         private store: Store<IAppState>
