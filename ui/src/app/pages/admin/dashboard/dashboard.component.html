@@ -6,9 +6,12 @@
     <li-left-menu></li-left-menu>
     <div class="matrix-container grid">
         <div class="column-container do-first">
-            <h2>Do first</h2>
-            <div class="tasks-container">
-                <!-- <li-task-card [data]="matrixDetailed[0]"></li-task-card> -->
+            <h2>DO FIRST</h2>
+            <div id="DO_FIRST" class="tasks-container" cdkDropList [cdkDropListData]="tasks?.DO_FIRST"
+                [cdkDropListConnectedTo]="containerIds" (cdkDropListDropped)="onTaskDrop($event)">
+                <!--TODO use enum instead of .DO_FIRST-->
+                <li-task-card *ngFor="let item of tasks?.DO_FIRST" cdkDrag [cdkDragData]="item" [data]="item">
+                </li-task-card>
             </div>
             <button mat-button color="primary" class="new-button">
                 <mat-icon>add</mat-icon>
@@ -16,9 +19,11 @@
             </button>
         </div>
         <div class="column-container schedule">
-            <h2>Schedule</h2>
-            <div class="tasks-container">
-                <!-- <li-task-card [data]="matrixDetailed[1]"></li-task-card> -->
+            <h2>SCHEDULE</h2>
+            <div id="SCHEDULE" class="tasks-container" cdkDropList [cdkDropListData]="tasks?.SCHEDULE"
+                [cdkDropListConnectedTo]="containerIds" (cdkDropListDropped)="onTaskDrop($event)">
+                <li-task-card *ngFor="let item of tasks?.SCHEDULE" cdkDrag [cdkDragData]="item" [data]="item">
+                </li-task-card>
             </div>
             <button mat-button color="primary" class="new-button">
                 <mat-icon>add</mat-icon>
@@ -26,9 +31,11 @@
             </button>
         </div>
         <div class="column-container delegate">
-            <h2>Delegate</h2>
-            <div class="tasks-container">
-                <!-- <li-task-card [data]="matrixDetailed[2]"></li-task-card> -->
+            <h2>DELEGATE</h2>
+            <div id="DELEGATE" class="tasks-container" cdkDropList [cdkDropListData]="tasks?.DELEGATE"
+                [cdkDropListConnectedTo]="containerIds" (cdkDropListDropped)="onTaskDrop($event)">
+                <li-task-card *ngFor="let item of tasks?.DELEGATE" cdkDrag [cdkDragData]="item" [data]="item">
+                </li-task-card>
             </div>
             <button mat-button color="primary" class="new-button">
                 <mat-icon>add</mat-icon>
@@ -36,9 +43,11 @@
             </button>
         </div>
         <div class="column-container dont-do">
-            <h2>Don't do</h2>
-            <div class="tasks-container">
-                <!-- <li-task-card [data]="matrixDetailed[3]"></li-task-card> -->
+            <h2>DON'T DO</h2>
+            <div id="DONT_DO" class="tasks-container" cdkDropList [cdkDropListData]="tasks?.DONT_DO"
+                [cdkDropListConnectedTo]="containerIds" (cdkDropListDropped)="onTaskDrop($event)">
+                <li-task-card *ngFor="let item of tasks?.DONT_DO" cdkDrag [cdkDragData]="item" [data]="item">
+                </li-task-card>
             </div>
             <button mat-button color="primary" class="new-button">
                 <mat-icon>add</mat-icon>
