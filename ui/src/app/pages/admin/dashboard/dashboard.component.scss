@@ -36,7 +36,7 @@
                     margin-bottom: 10px;
                 }
                 &.do-first {
-                    border: 1px solid $urgent-important;
+                    box-shadow: 0 0 6px $urgent-important;
                     h2 {
                         color: $urgent-important;
                     }
@@ -45,7 +45,7 @@
                     }
                 }
                 &.schedule {
-                    border: 1px solid $not-urgent-important;
+                    box-shadow: 0 0 6px  $not-urgent-important;
                     h2 {
                         color: $not-urgent-important;
                     }
@@ -54,7 +54,7 @@
                     }
                 }
                 &.delegate {
-                    border: 1px solid $urgent-not-important;
+                    box-shadow: 0 0 6px  $urgent-not-important;
                     h2 {
                         color: $urgent-not-important;
                     }
@@ -63,7 +63,7 @@
                     }
                 }
                 &.dont-do {
-                    border: 1px solid $not-urgent-not-important;
+                    box-shadow: 0 0 6px  $not-urgent-not-important;
                     h2 {
                         color: $not-urgent-not-important;
                     }

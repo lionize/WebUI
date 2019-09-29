@@ -23,7 +23,12 @@ import { SimpleNotificationComponent } from 'src/app/shared/components/notificat
 })
 
 export class DashboardComponent implements OnInit, OnDestroy {
-    tasks = {};
+    tasks = {
+        DO_FIRST: [],
+        SCHEDULE: [],
+        DELEGATE: [],
+        DONT_DO: []
+    };
     isLeftMenuOpen: boolean;
     leftMenu$: Observable<LeftMenu> = this.store.pipe(select(selectLeftMenu));
     notificationMessages = NOTIFICATION_MESSAGES;
@@ -88,7 +93,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 }),
                 takeUntil(this.destroy$)
             )
-            .subscribe((data) => {
+            // TODO fix any type
+            .subscribe((data: any) => {
                 this.tasks = data;
                 console.log('TASKS: ', this.tasks);
             });
