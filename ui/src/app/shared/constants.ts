@@ -32,6 +32,7 @@ export interface IMatrixDetail {
     type: MATRIX;
     title: string;
     subTitle: string;
+    description: string;
     color: string;
 }
 
@@ -40,6 +41,7 @@ export interface ITask {
     uuid: string;
     title: string;
     subTitle: string;
+    description: string;
     color: string;
 }
 
