@@ -9,6 +9,13 @@
             margin-right: 20px;
             left: 10px;
             position: relative;
+            .backlog-tasks-container {
+                min-height: 150px;
+                li-task-card {
+                    margin-bottom: 10px;
+                    z-index: 10;
+                }
+            }
         }
         .matrix-container {
             grid-template-columns: 1fr 1fr;
@@ -34,6 +41,9 @@
                 }
                 li-task-card {
                     margin-bottom: 10px;
+                }
+                .tasks-container {
+                    min-height: 150px;
                 }
                 &.do-first {
                     box-shadow: 0 0 6px $urgent-important;

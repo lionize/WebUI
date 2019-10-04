@@ -4,18 +4,15 @@
     display: flex;
     flex-direction: column;
     background-color: $pure-white;
-    width: $left-menu-width;
     background-color: $pure-white;
     box-sizing: border-box;
     .left-menu-container {
+        width: $left-menu-width;
         flex: auto;
         padding: $padding-small;
         .tasks-container {
-            overflow-y: auto;
+            // overflow-y: auto;
             margin: 20px 0;
-            li-task-card {
-                margin-bottom: 10px;
-            }
         }
     }
 }

@@ -27,19 +27,19 @@ export class AuthenticationService {
     }
 
     signUp(user: UISignupUser): Observable<SignUpUser> {
-        return this.apiService.post(`${environment.signUpBase}${API_URLS.SIGN_UP}`, user);
+        return this.apiService.post(`${environment.Identity_Management_Service}${API_URLS.SIGN_UP}`, user);
     }
 
     signIn(user: UISigninUser): Observable<SigInUser> {
-        return this.apiService.post(`${environment.signInBase}${API_URLS.SIGN_IN}`, user);
+        return this.apiService.post(`${environment.Task_Management_Service}${API_URLS.SIGN_IN}`, user);
     }
 
     signOut(user: SigInUser): Observable<SigInUser> {
-        return this.apiService.post(`${environment.signInBase}${API_URLS.SIGN_OUT}`, user);
+        return this.apiService.post(`${environment.Task_Management_Service}${API_URLS.SIGN_OUT}`, user);
     }
 
     refresh(user: SigInUser): Observable<SigInUser> {
-        return this.apiService.post(`${environment.signInBase}${API_URLS.REFRESH}`, user);
+        return this.apiService.post(`${environment.Task_Management_Service}${API_URLS.REFRESH}`, user);
     }
 
 }
