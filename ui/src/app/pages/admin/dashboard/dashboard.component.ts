@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MATRIX_NUM, ITask } from 'src/app/shared/constants';
+import { MATRIX_NUM, ITask, MATRIX_TYPE_COLORS, TASK_TYPES } from 'src/app/shared/common.models';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { tap, catchError, takeUntil, map } from 'rxjs/operators';
@@ -15,6 +15,7 @@ import { AppLoading } from 'src/app/store/actions/main.actions';
 import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
 import { NOTIFICATION_MESSAGES } from 'src/app/shared/messages/notification.messages';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
+import { Utils } from 'src/app/shared/utils';
 
 @Component({
     selector: 'dashboard',
@@ -23,16 +24,20 @@ import { SimpleNotificationComponent } from 'src/app/shared/components/notificat
 })
 
 export class DashboardComponent implements OnInit, OnDestroy {
-    tasks = {
+    matrixTasks = {
         DO_FIRST: [],
         SCHEDULE: [],
         DELEGATE: [],
         DONT_DO: []
     };
+    // TODO check
+    backlogTasks = [];
     isLeftMenuOpen: boolean;
     leftMenu$: Observable<LeftMenu> = this.store.pipe(select(selectLeftMenu));
     notificationMessages = NOTIFICATION_MESSAGES;
     matrixTypes = MATRIX_NUM;
+    MATRIX_TYPE_COLORS: typeof MATRIX_TYPE_COLORS = MATRIX_TYPE_COLORS;
+    TASK_TYPES: typeof TASK_TYPES = TASK_TYPES;
     private destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
 
     constructor(
@@ -45,7 +50,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.toggleLeftMenuIcons();
-        this.getTasks();
+        this.getMatrixTasks();
+        this.getBacklogTasks();
     }
 
     ngOnDestroy() {
@@ -54,7 +60,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     get containerIds(): string[] {
-        return ['DO_FIRST', 'SCHEDULE', 'DELEGATE', 'DONT_DO'];
+        return ['BACKLOG', 'DO_FIRST', 'SCHEDULE', 'DELEGATE', 'DONT_DO'];
     }
 
     toggleLeftMenu(): void {
@@ -68,17 +74,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
         });
     }
 
-    getTasks(): void {
+    getMatrixTasks(): void {
         this.store.dispatch(new AppLoading({ isAppLoading: true }));
         // this.store.dispatch(new GetAllProviders());
-        this.dashboardService.getTasks()
+        this.dashboardService.getMatrixTasks_fake()
             .pipe(
                 tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
                 map((response) => {
                     let result = {};
-                    response.data.map((item, index, self) => {
+                    response.map((item, index, self) => {
                         item.type = MATRIX_NUM[item.type];
-                        item.color = this.mapColors(item, item.type);
+                        item.color = Utils.mapColors(item, item.type);
                         result[item.type] = self.filter((selfItem) => selfItem.type === item.type);
                         return item;
                     });
@@ -95,35 +101,33 @@ export class DashboardComponent implements OnInit, OnDestroy {
             )
             // TODO fix any type
             .subscribe((data: any) => {
-                this.tasks = data;
-                console.log('TASKS: ', this.tasks);
+                this.matrixTasks = data;
+                console.log('MATRIX TASKS: ', this.matrixTasks);
             });
     }
 
-    // TODO move to separate util
-    private mapColors(item, type): string {
-        switch (type) {
-            case MATRIX_NUM[1]:
-                item.color = '#99cc11';
-                break;
-
-            case MATRIX_NUM[2]:
-                item.color = '#4488ee';
-                break;
-
-            case MATRIX_NUM[3]:
-                item.color = '#ffaa22';
-                break;
-
-            case MATRIX_NUM[4]:
-                item.color = '#cc1111';
-                break;
-
-            default:
-                item.color = '#99cc11';
-                break;
-        }
-        return item.color;
+    private getBacklogTasks(): void {
+        this.store.dispatch(new AppLoading({ isAppLoading: true }));
+        this.dashboardService.getBacklogTasks()
+        .pipe(
+            tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
+            map((response) => {
+                return response;
+            }),
+            catchError((error) => {
+                this.store.dispatch(new AppLoading({ isAppLoading: false }));
+                this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                    { data: this.notificationMessages.common.error }
+                );
+                return throwError(error);
+            }),
+            takeUntil(this.destroy$)
+        )
+        // TODO fix any type
+        .subscribe((data: any) => {
+            this.backlogTasks = data;
+            console.log('BACKLOG TASKS: ', this.backlogTasks);
+        });
     }
 
     onTaskDrop(event: CdkDragDrop<ITask[]>) {
@@ -131,14 +135,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {
-            event.item.data.color = event.container.data[0].color;
-            event.item.data.type = event.container.data[0].type;
+            // TODO bad solution, use enum
+            let color = this.MATRIX_TYPE_COLORS[event.container.id];
+            let type;
+            for (let prop in this.MATRIX_TYPE_COLORS) {
+                if (color === this.MATRIX_TYPE_COLORS[prop]) {
+                    type = prop
+                }
+            }
+            event.item.data.color = color;
+            event.item.data.type = type;
             transferArrayItem(event.previousContainer.data,
                 event.container.data,
                 event.previousIndex,
                 event.currentIndex);
         }
 
+        console.log('MATRIX TASKS: ', this.matrixTasks);
     }
 
 }   

@@ -3,6 +3,7 @@
 
 :host {
     display: block;
+    cursor: move;
     .task-card-container {
         display: flex;
         border-style: solid;
@@ -13,14 +14,16 @@
         .task-card-wrapper {
             @extend .full-flex-row;
         }
+        mat-card-title {
+            max-width: 30%;
+            display: flex;
+            align-items: center;
+            margin: 0 8px 8px 0;
+            font: 16px Roboto-Bold;
+        }
         mat-card-content {
             flex: auto;
             margin-bottom: 0;
-            > p {
-                // TODO use theme primary color
-                border: 1px solid #8c8c8c;
-                border-width: 0 0 1px 0;
-            }
         }
     }
 }
