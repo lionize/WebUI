@@ -18,7 +18,7 @@ export class AuthenticationService {
         this.currentUser$ = this.currentUserSubject.asObservable();
     }
 
-    geCurrentUserValue(): SigInUser {
+    get currentUser(): SigInUser {
         return this.currentUserSubject.value;
     }
 

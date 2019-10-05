@@ -19,6 +19,6 @@ export class TaskCardComponent implements OnInit {
 
     ngOnInit() {
         // TODO use theme color dynamically
-        this.data.color = this.type !== this.TASK_TYPES.BACKLOG ? this.data.color : '#8c8c8c';
+        this.data.color = this.type === this.TASK_TYPES.BACKLOG ? '#8c8c8c' : this.data.color;
     }
 }   

@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.user = this.authenticationService.geCurrentUserValue();
+        this.user = this.authenticationService.currentUser;
         this.toggleRightMenuIcons();
     }
 

@@ -73,6 +73,11 @@
     flex-direction: row;
     align-items: center;
 }
+.flex-column-horizontal-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .flex-all-centered {
     display: flex;
     flex-direction: row;
