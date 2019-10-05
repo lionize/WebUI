@@ -3,6 +3,8 @@
 
 :host {
     display: block;
+    width: 280px;
+    position: relative;
     cursor: move;
     .task-card-container {
         display: flex;
@@ -24,6 +26,9 @@
         mat-card-content {
             flex: auto;
             margin-bottom: 0;
+        }
+        mat-card-actions {
+            padding: 0;
         }
     }
 }

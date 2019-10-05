@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
+import { IAppState } from 'src/app/store/state/app.state';
+import { AppLoading } from 'src/app/store/actions/main.actions';
+import { NotificationService } from '../components/notifications/notification.service';
+import { SimpleNotificationComponent } from '../components/notifications/simple/simple-notification.component';
+import { NOTIFICATION_MESSAGES } from '../messages/notification.messages';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -15,13 +21,15 @@ export class TokenInterceptor implements HttpInterceptor {
     constructor(
         public authenticationService: AuthenticationService,
         private router: Router,
+        private store: Store<IAppState>,
+        private notificationService: NotificationService
     ) {
 
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.authenticationService.geCurrentUserValue() && this.authenticationService.geCurrentUserValue().accessToken) {
-            request = this.addToken(request, this.authenticationService.geCurrentUserValue().accessToken);
+        if (this.authenticationService.currentUser && this.authenticationService.currentUser.accessToken) {
+            request = this.addToken(request, this.authenticationService.currentUser.accessToken);
         }
 
         return next.handle(request)
@@ -38,22 +46,28 @@ export class TokenInterceptor implements HttpInterceptor {
     private handleError(request: HttpRequest<any>, next: HttpHandler) {
         if (!this.isRefreshing) {
             this.isRefreshing = true;
+            this.store.dispatch(new AppLoading({ isAppLoading: true }));
             this.refreshTokenSubject.next(null);
-            this.authenticationService.setCurrentUserValue({...this.authenticationService.geCurrentUserValue(), accessToken: null});
-            return this.authenticationService.refresh({ refreshToken: this.authenticationService.geCurrentUserValue().refreshToken })
+            this.authenticationService.setCurrentUserValue({...this.authenticationService.currentUser, accessToken: null});
+            return this.authenticationService.refresh({ refreshToken: this.authenticationService.currentUser.refreshToken })
                 .pipe(
                     switchMap((user) => {
+                        this.store.dispatch(new AppLoading({ isAppLoading: false }));
                         this.isRefreshing = false;
                         this.refreshTokenSubject.next(user.refreshToken);
                         user = {
                             ...user,
-                            username: this.authenticationService.geCurrentUserValue().username
+                            username: this.authenticationService.currentUser.username
                         }
                         this.authenticationService.setCurrentUserValue(user);
                         localStorage.setItem('user', JSON.stringify(user));
+                        this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                            { data: NOTIFICATION_MESSAGES.credentials.refreshCredentials }
+                        );
                         return next.handle(this.addToken(request, user.accessToken));
                     }),
                     catchError(error => {
+                        this.store.dispatch(new AppLoading({ isAppLoading: false }));
                         this.router.navigate(['/auth/signin']);
                         localStorage.removeItem('user');
                         this.authenticationService.setCurrentUserValue(null);

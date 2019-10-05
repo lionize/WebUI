@@ -19,6 +19,7 @@
 @import 'assets/styles/mixins/auth-form-theme.component'; 
 @import 'assets/styles/mixins/right-menu-theme.component'; 
 @import 'assets/styles/mixins/left-menu-theme.component'; 
+@import 'assets/styles/mixins/task-card-theme.component'; 
 
 @mixin custom-theme($theme) {
     @include app-theme-component($theme);
@@ -28,6 +29,7 @@
     @include auth-form-theme-component($theme);
     @include right-menu-theme-component($theme);
     @include left-menu-theme-component($theme);
+    @include task-card-theme-component($theme);
 }
 
 @include angular-material-theme($eisenhower); 

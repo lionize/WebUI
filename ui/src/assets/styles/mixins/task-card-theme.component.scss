@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin task-card-theme-component($theme) {
+    $primary: map-get($theme, primary);
+
+    .task-card-container {
+        mat-icon, mat-card-content {
+            color: mat-color($primary);
+        }
+    }
+}

@@ -22,7 +22,7 @@ export class AuthGuard implements CanLoad, CanActivate {
     }
 
     private checkLogin(): boolean {
-        const currentUser = this.authenticationService.geCurrentUserValue();
+        const currentUser = this.authenticationService.currentUser;
         
         if (currentUser) {
             return true;

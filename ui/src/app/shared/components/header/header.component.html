@@ -6,7 +6,7 @@
     <div class="user-actions flex-row-vertical-centered">
         <mat-icon>fingerprint</mat-icon>
         <span class="horizontal-margin-5">{{user?.username}}</span>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" [overlapTrigger]="false">

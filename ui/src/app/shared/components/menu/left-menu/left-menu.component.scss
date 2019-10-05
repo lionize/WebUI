@@ -1,4 +1,5 @@
 @import "src/assets/styles/variables";
+@import 'src/assets/styles/common';
 
 :host {
     display: flex;
@@ -7,11 +8,12 @@
     background-color: $pure-white;
     box-sizing: border-box;
     .left-menu-container {
+        @extend .full-flex-column;
         width: $left-menu-width;
-        flex: auto;
         padding: $padding-small;
         .tasks-container {
             // overflow-y: auto;
+            @extend .full-flex-column;
             margin: 20px 0;
         }
     }

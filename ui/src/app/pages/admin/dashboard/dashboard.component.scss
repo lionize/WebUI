@@ -10,6 +10,7 @@
             left: 10px;
             position: relative;
             .backlog-tasks-container {
+                flex: auto;
                 min-height: 150px;
                 li-task-card {
                     margin-bottom: 10px;
@@ -30,6 +31,7 @@
                 grid-template-columns: 1fr;
             }
             .column-container {
+                @extend .full-flex-column;
                 padding: 5px;
                 height: 100%;
                 min-height: 250px;
@@ -44,6 +46,13 @@
                 }
                 .tasks-container {
                     min-height: 150px;
+                    flex: auto;
+                    @extend .flex-column-horizontal-centered;
+                }
+                .new-button {
+                    align-self: center;
+                    // TODO create mixin for buttons
+                    max-width: 140px;
                 }
                 &.do-first {
                     box-shadow: 0 0 6px $urgent-important;
