@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:http": "http-server dist/lionize localhost -p 3000",
+    "start:http": "http-server dist/lionize localhost -p 3000 -c-1 -d -i --cors",
     "build": "ng build",
     "build:dev": "ng build --configuration=development",
     "build:prod": "ng build --configuration=production",

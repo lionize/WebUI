@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map, tap, takeUntil } from 'rxjs/operators';
+import { map, tap, takeUntil, catchError } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
+import { throwError } from 'rxjs/internal/observable/throwError';
 import { Store } from '@ngrx/store';
 import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
@@ -12,6 +13,7 @@ import { UISignupUser, UISigninUser, SigInUser, SignUpUser } from 'src/app/pages
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { IAppState } from 'src/app/store/state/app.state';
 import { AppLoading } from 'src/app/store/actions/main.actions';
+import { NOTIFICATION_MESSAGES } from '../../messages/notification.messages';
 
 enum MODES {
     SIGN_IN = 'SIGN_IN',
@@ -26,9 +28,10 @@ enum MODES {
 
 export class AuthFormComponent implements OnInit, OnDestroy {
     @Input() mode: MODES;
-    MODES = MODES;
     form: FormGroup;
-    validationMessages = VALIDATION_MESSAGES;
+    MODES = MODES;
+    VALIDATION_MESSAGES = VALIDATION_MESSAGES;
+    NOTIFICATION_MESSAGES = NOTIFICATION_MESSAGES;
     private destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
 
     constructor(
@@ -63,6 +66,13 @@ export class AuthFormComponent implements OnInit, OnDestroy {
             this.authenticationService.signUp(payload)
                 .pipe(
                     tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
+                    catchError((error) => {
+                        this.store.dispatch(new AppLoading({ isAppLoading: false }));
+                        this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                            { data: this.NOTIFICATION_MESSAGES.common.error }
+                        );
+                        return throwError(error);
+                    }),
                     map((response: SignUpUser) => {
                         if (response.isError) {
                             this.notificationService.showNotificationToaster(SimpleNotificationComponent,
@@ -94,6 +104,13 @@ export class AuthFormComponent implements OnInit, OnDestroy {
             this.authenticationService.signIn(payload)
                 .pipe(
                     tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
+                    catchError((error) => {
+                        this.store.dispatch(new AppLoading({ isAppLoading: false }));
+                        this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                            { data: this.NOTIFICATION_MESSAGES.common.error }
+                        );
+                        return throwError(error);
+                    }),
                     map((response: SigInUser) => {
                         if (!response.isError) {
                             const user: SigInUser = {

@@ -1,18 +1,9 @@
-import {
-    Component,
-    Inject,
-    ViewChild,
-    ViewContainerRef,
-    ComponentFactoryResolver,
-    ComponentRef,
-    AfterViewInit,
-    OnDestroy,
-    Input
-} from '@angular/core';
+import { Component, Inject, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/providers/habitica/habitica.component';
 import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components/providers/microsoft/microsoft.component';
 import { GoogleComponent } from 'src/app/shared/components/dynamic-components/providers/google/google.component';
+import { SimpleDialogComponent } from '../dynamic-components/dialogs/simple-dialog.component';
 
 @Component({
     selector: 'li-popup',
@@ -69,6 +60,7 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
         }
 
         let componentName;
+        
         switch (component) {
             case 'Habitica':
                 componentName = HabiticaComponent;
@@ -80,6 +72,10 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
 
             case 'Google':
                 componentName = GoogleComponent;
+                break;
+
+            case 'SimpleDialog':
+                componentName = SimpleDialogComponent;
                 break;
 
             default:

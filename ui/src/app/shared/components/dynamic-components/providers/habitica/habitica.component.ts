@@ -11,7 +11,7 @@ import { VALIDATION_MESSAGES } from 'src/app/shared/messages/validation.messages
 
 export class HabiticaComponent implements OnInit {
     form: FormGroup;
-    validationMessages = VALIDATION_MESSAGES;
+    VALIDATION_MESSAGES = VALIDATION_MESSAGES;
     // TODO create type or use backend models
     @Input() data: { habiticaUserID: string, id: string };
     @Output() dataChange: EventEmitter<any> = new EventEmitter();

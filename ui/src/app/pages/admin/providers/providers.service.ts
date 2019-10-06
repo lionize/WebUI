@@ -16,15 +16,15 @@ export class ProvidersService {
     }
 
     getHabitica(): Observable<any> {
-        return this.apiService.get(`${environment.habiticaTaskProviderService}Settings`);
+        return this.apiService.get(`${environment.Habitica_Task_Provider_Service}Settings`);
     }
 
     postHabitica(payload: any): Observable<any> {
-        return this.apiService.post(`${environment.habiticaTaskProviderService}Settings`, payload);
+        return this.apiService.post(`${environment.Habitica_Task_Provider_Service}Settings`, payload);
     }
 
     putHabitica(id: string, payload: any): Observable<any> {
-        return this.apiService.put(`${environment.habiticaTaskProviderService}Settings/${id}`, payload);
+        return this.apiService.put(`${environment.Habitica_Task_Provider_Service}Settings/${id}`, payload);
     }
 
     getAllProviders(): Observable<any> {

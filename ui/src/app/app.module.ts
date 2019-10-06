@@ -10,7 +10,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 // import { ProvidersEffects } from './store/effects/providers.effects';
 
 import { environment } from 'src/environments/environment';
-import { appReducers, clearState } from 'src/app/store/reducers/app.reducers';
+import { appReducers } from 'src/app/store/reducers/app.reducers';
 
 import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 import { AuthenticationModule } from 'src/app/pages/authentication/authentication.module';
@@ -32,7 +32,7 @@ import { SimpleNotificationComponent } from 'src/app/shared/components/notificat
     imports: [
         BrowserModule, BrowserAnimationsModule, HttpClientModule,
         MatSnackBarModule, MatButtonModule, MatProgressSpinnerModule, MatIconModule,
-        StoreModule.forRoot(appReducers, { metaReducers: [clearState] }),
+        StoreModule.forRoot(appReducers),
         // EffectsModule.forRoot([ProvidersEffects]),
         StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
         !environment.production ? StoreDevtoolsModule.instrument() : [],

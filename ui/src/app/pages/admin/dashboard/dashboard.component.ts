@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     backlogTasks = [];
     isLeftMenuOpen: boolean;
     leftMenu$: Observable<LeftMenu> = this.store.pipe(select(selectLeftMenu));
-    notificationMessages = NOTIFICATION_MESSAGES;
+    NOTIFICATION_MESSAGES = NOTIFICATION_MESSAGES;
     matrixTypes = MATRIX_NUM;
     MATRIX_TYPE_COLORS: typeof MATRIX_TYPE_COLORS = MATRIX_TYPE_COLORS;
     TASK_TYPES: typeof TASK_TYPES = TASK_TYPES;
@@ -69,14 +69,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     private toggleLeftMenuIcons(): void {
-        this.leftMenu$.subscribe((menu: LeftMenu) => {
-            this.isLeftMenuOpen = menu.isOpen;
-        });
+        this.leftMenu$.subscribe((menu: LeftMenu) => this.isLeftMenuOpen = menu.isOpen);
     }
 
     getMatrixTasks(): void {
         this.store.dispatch(new AppLoading({ isAppLoading: true }));
-        // this.store.dispatch(new GetAllProviders());
         this.dashboardService.getMatrixTasks_fake()
             .pipe(
                 tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
@@ -93,7 +90,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 catchError((error) => {
                     this.store.dispatch(new AppLoading({ isAppLoading: false }));
                     this.notificationService.showNotificationToaster(SimpleNotificationComponent,
-                        { data: this.notificationMessages.common.error }
+                        { data: this.NOTIFICATION_MESSAGES.common.error }
                     );
                     return throwError(error);
                 }),
@@ -117,7 +114,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             catchError((error) => {
                 this.store.dispatch(new AppLoading({ isAppLoading: false }));
                 this.notificationService.showNotificationToaster(SimpleNotificationComponent,
-                    { data: this.notificationMessages.common.error }
+                    { data: this.NOTIFICATION_MESSAGES.common.error }
                 );
                 return throwError(error);
             }),
