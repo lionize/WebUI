@@ -2,17 +2,19 @@
 @import 'src/assets/styles/common';
 
 :host {
+    width: 33.3%;
     display: flex;
     flex-direction: column;
     background-color: $pure-white;
     background-color: $pure-white;
     box-sizing: border-box;
+    @media screen and (max-width: $tablet) {
+        width: 50%;
+    }
     .left-menu-container {
         @extend .full-flex-column;
-        width: $left-menu-width;
         padding: $padding-small;
         .tasks-container {
-            // overflow-y: auto;
             @extend .full-flex-column;
             margin: 20px 0;
         }
