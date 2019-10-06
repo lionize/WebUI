@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { ProviderDataTypes } from 'src/app/pages/admin/providers/providers.models';
+import { PROVIDER_DATA_TYPES } from 'src/app/pages/admin/providers/providers.models';
 
 export enum PROVIDERS_ACTIONS {
     GET_ALL_PROVIDERS = '[PROVIDERS] Get All Providers',
@@ -12,7 +12,7 @@ export class GetAllProviders implements Action {
 
 export class GetAllProvidersSuccess implements Action {
     public readonly type = PROVIDERS_ACTIONS.GET_ALL_PROVIDERS_SUCCESS;
-    constructor(public payload: ProviderDataTypes) { }
+    constructor(public payload: PROVIDER_DATA_TYPES) { }
 }
 
 export type ProvidersActions = GetAllProviders | GetAllProvidersSuccess;
