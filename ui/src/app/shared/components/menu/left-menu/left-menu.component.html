@@ -1,7 +1,6 @@
 <div class="left-menu-container" [class.shadow]="state === 'close'">
     <h2 class="text-center">Backlog</h2>
     <div *ngIf="state === 'open'" class="tasks-container">
-        <!--TODO add backlog tasks here-->
         <ng-content select=".backlog-tasks-container"></ng-content>
     </div>
 </div>

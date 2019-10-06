@@ -13,7 +13,7 @@ import { NotificationService } from 'src/app/shared/components/notifications/not
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { AppLoading } from 'src/app/store/actions/main.actions';
 import { IAppState } from 'src/app/store/state/app.state';
-import { Popup } from 'src/app/shared/components/popup/popup.model';
+import { POPUP } from 'src/app/shared/components/popup/popup.model';
 // import { GetAllProviders } from 'src/app/store/actions/providers.actions';
 // import { selectProviders } from 'src/app/store/selectors/providers.selectors';
 import { NOTIFICATION_MESSAGES } from 'src/app/shared/messages/notification.messages';
@@ -33,7 +33,7 @@ export class ProvidersComponent implements OnInit, OnDestroy {
         google: []
     };
     private destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
-    notificationMessages = NOTIFICATION_MESSAGES;
+    NOTIFICATION_MESSAGES = NOTIFICATION_MESSAGES;
 
     constructor(
         public dialog: MatDialog,
@@ -55,7 +55,7 @@ export class ProvidersComponent implements OnInit, OnDestroy {
     }
 
     openPopup(component: string): void {
-        const data: Popup = {
+        const data: POPUP = {
             component: component,
             title: `Add ${component}`,
             data: {}
@@ -83,7 +83,7 @@ export class ProvidersComponent implements OnInit, OnDestroy {
                 catchError((error) => {
                     this.store.dispatch(new AppLoading({ isAppLoading: false }));
                     this.notificationService.showNotificationToaster(SimpleNotificationComponent,
-                        { data: this.notificationMessages.common.error }
+                        { data: this.NOTIFICATION_MESSAGES.common.error }
                     );
                     return throwError(error);
                 }),

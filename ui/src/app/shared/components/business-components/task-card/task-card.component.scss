@@ -32,3 +32,10 @@
         }
     }
 }
+
+::ng-deep .custom-task-menu {
+    min-height: inherit;
+    .mat-menu-content {
+        padding: 0;
+    }
+}

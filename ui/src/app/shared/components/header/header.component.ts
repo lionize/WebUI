@@ -5,7 +5,6 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { map, tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { SigInUser } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
 import { ResetApp } from 'src/app/store/actions/app.actions';
@@ -16,6 +15,8 @@ import { selectRightMenu } from 'src/app/store/selectors/menu.selectors';
 import { AppLoading } from 'src/app/store/actions/main.actions';
 import { NotificationService } from '../notifications/notification.service';
 import { SimpleNotificationComponent } from '../notifications/simple/simple-notification.component';
+import { PopupComponent } from '../popup/popup.component';
+import { POPUP } from '../popup/popup.model';
 
 @Component({
     selector: 'header',
@@ -71,23 +72,28 @@ export class HeaderComponent implements OnInit {
     }
 
     private toggleRightMenuIcons(): void {
-        this.rightMenu$.subscribe((menu: RightMenu) => {
-            this.isRightMenuOpen = menu.isOpen;
-        });
+        this.rightMenu$.subscribe((menu: RightMenu) => this.isRightMenuOpen = menu.isOpen);
     }
 
-    openDialog(): void {
-        const dialogRef = this.dialog.open(DialogComponent, {
-            // TODO make configurable
+    openPopup(): void {
+        const popupData: POPUP = {
+            component: 'SimpleDialog',
+            title: 'Logout',
+            data: {
+                text: 'Are you sure you want to logout ?'
+            }
+        }
+        const dialogRef = this.dialog.open(PopupComponent, {
             height: '200px',
             width: '300px',
-            data: {
-                title: "SIGN OUT",
-                content: "Are you sure you want to sign out ?",
-                buttons: ["YES", "NO"]
+            disableClose: false,
+            data: popupData
+        });
+        dialogRef.afterClosed().subscribe((data) => {
+            if (data && data.success) {
+                this.signOut();
             }
         });
-        dialogRef.afterClosed().subscribe((data) => data && this.signOut());
     }
 
     toggleRightMenu(): void {

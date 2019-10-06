@@ -15,7 +15,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
-import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { TaskCardComponent } from 'src/app/shared/components/business-components/task-card/task-card.component';
 import { ProviderCardComponent } from 'src/app/shared/components/business-components/provider-card/provider-card.component';
@@ -24,6 +23,7 @@ import { RightMenuComponent } from 'src/app/shared/components/menu/right-menu/ri
 import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/providers/habitica/habitica.component';
 import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components/providers/microsoft/microsoft.component';
 import { GoogleComponent } from 'src/app/shared/components/dynamic-components/providers/google/google.component';
+import { SimpleDialogComponent } from 'src/app/shared/components/dynamic-components/dialogs/simple-dialog.component';
 
 @NgModule({
     imports: [
@@ -35,7 +35,6 @@ import { GoogleComponent } from 'src/app/shared/components/dynamic-components/pr
     ],
     declarations: [
         HeaderComponent,
-        DialogComponent,
         PopupComponent,
         LeftMenuComponent,
         RightMenuComponent,
@@ -43,14 +42,14 @@ import { GoogleComponent } from 'src/app/shared/components/dynamic-components/pr
         ProviderCardComponent,
         HabiticaComponent,
         MicrosoftComponent,
-        GoogleComponent
+        GoogleComponent,
+        SimpleDialogComponent,
     ],
     exports: [
         FormsModule, ReactiveFormsModule,
         MatButtonModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatProgressSpinnerModule, MatSnackBarModule,
         MatInputModule, MatMenuModule, MatDialogModule, MatCardModule,
         HeaderComponent,
-        DialogComponent,
         PopupComponent,
         LeftMenuComponent,
         RightMenuComponent,
@@ -58,17 +57,18 @@ import { GoogleComponent } from 'src/app/shared/components/dynamic-components/pr
         ProviderCardComponent,
         HabiticaComponent,
         MicrosoftComponent,
-        GoogleComponent
+        GoogleComponent,
+        SimpleDialogComponent,
     ],
     providers: [
         
     ],
     entryComponents: [
-        DialogComponent,
         PopupComponent,
         HabiticaComponent,
         MicrosoftComponent,
         GoogleComponent,
+        SimpleDialogComponent,
     ]
 })
 

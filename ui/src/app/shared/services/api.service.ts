@@ -1,120 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import {
-//     map,
-//     catchError,
-//     timeout,
-//     takeUntil
-// } from 'rxjs/operators';
-// import { throwError } from 'rxjs/internal/observable/throwError';
-// import { Subject } from 'rxjs/internal/Subject';
 import { Observable } from 'rxjs/internal/Observable';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs/internal/Subject';
-// import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-    private subscription$: Subject<boolean> = new Subject<boolean>();
 
     constructor(
-        private http: HttpClient,
-        // private snackBar: MatSnackBar
+        private http: HttpClient
     ) {
     }
 
-    // private handleError(error) {
-    //     // TODO show button instead empty text
-    //     // TODO handle other errors
-    //     // TODO move error handling
-    //     this.snackBar.open(error.errorMessage, '');
-    //     return error;
-    // }
-
     get(url: string): Observable<any> {
-        return this.http.get<any>(url)
-            .pipe(
-                // timeout(5000),
-                takeUntil(this.subscription$),
-                // map(
-                //     (response: any) => {
-                //         if (response && response.isError) {
-                //             this.handleError(response);
-                //         }
-                //         return response;
-                //     }),
-                // catchError(error => throwError(error))
-            );
+        return this.http.get<any>(url);
     }
 
     post(url: string, body: any): Observable<any> {
-        return this.http.post<any>(url, body)
-            .pipe(
-            //     timeout(5000),
-                takeUntil(this.subscription$),
-            //     map(
-            //         (response: any) => {
-            //             if (response && response.isError) {
-            //                 this.handleError(response);
-            //             }
-            //             return response;
-            //         }),
-            //     catchError((error) => throwError(error))
-            );
+        return this.http.post<any>(url, body);
     }
 
     patch(url: string, body: any): Observable<any> {
-        return this.http.patch<any>(url, body)
-            .pipe(
-            //     timeout(5000),
-                takeUntil(this.subscription$),
-            //     map(
-            //         (response: any) => {
-            //             if (response && response.isError) {
-            //                 this.handleError(response);
-            //             }
-            //             return response;
-            //         }),
-            //     catchError(error => throwError(error))
-            );
+        return this.http.patch<any>(url, body);
     }
 
     delete(url: string): Observable<any> {
-        return this.http.delete<any>(url)
-            .pipe(
-            //     timeout(5000),
-                takeUntil(this.subscription$),
-            //     map(
-            //         (response: any) => {
-            //             if (response && response.isError) {
-            //                 this.handleError(response);
-            //             }
-            //             return response;
-            //         }),
-            //     catchError(error => throwError(error))
-            );
+        return this.http.delete<any>(url);
     }
 
     put(url: string, body: any): Observable<any> {
-        return this.http.put<any>(url, body)
-            .pipe(
-            //     timeout(5000),
-                takeUntil(this.subscription$),
-            //     map(
-            //         (response: any) => {
-            //             if (response && response.isError) {
-            //                 this.handleError(response);
-            //             }
-            //             return response;
-            //         }),
-            //     catchError(error => throwError(error))
-            );
-    }
-
-    cancelRequest(): void {
-        this.subscription$.next();
+        return this.http.put<any>(url, body);
     }
 
 }
-
-// TODO create notification service
