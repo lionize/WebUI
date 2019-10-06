@@ -4,6 +4,7 @@ import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/
 import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components/providers/microsoft/microsoft.component';
 import { GoogleComponent } from 'src/app/shared/components/dynamic-components/providers/google/google.component';
 import { SimpleDialogComponent } from '../dynamic-components/dialogs/simple-dialog.component';
+import { PROVIDER_TYPES } from 'src/app/pages/admin/providers/providers.models';
 
 @Component({
     selector: 'li-popup',
@@ -21,6 +22,7 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
     ];
     outputData;
     private isViewInitialized: boolean = false;
+    PROVIDER_TYPES: typeof PROVIDER_TYPES = PROVIDER_TYPES;
 
     constructor(
         public dialogRef: MatDialogRef<PopupComponent>,
@@ -62,15 +64,15 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
         let componentName;
         
         switch (component) {
-            case 'Habitica':
+            case PROVIDER_TYPES.HABITICA:
                 componentName = HabiticaComponent;
                 break;
 
-            case 'Microsoft':
+            case PROVIDER_TYPES.HABITICA:
                 componentName = MicrosoftComponent;
                 break;
 
-            case 'Google':
+            case PROVIDER_TYPES.GOOGLE_TASKS:
                 componentName = GoogleComponent;
                 break;
 

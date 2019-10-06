@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { switchMap, map } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
-import { ProviderDataTypes } from 'src/app/pages/admin/providers/providers.models';
+import { PROVIDER_DATA_TYPES } from 'src/app/pages/admin/providers/providers.models';
 import { ProvidersService } from 'src/app/pages/admin/providers/providers.service';
 import { PROVIDERS_ACTIONS, GetAllProviders, GetAllProvidersSuccess } from '../actions/providers.actions';
 
@@ -12,7 +12,7 @@ export class ProvidersEffects {
     getProviders$ = this.actions$.pipe(
         ofType<GetAllProviders>(PROVIDERS_ACTIONS.GET_ALL_PROVIDERS),
         switchMap(() => this.providersService.getAllProviders()),
-        switchMap((providers: ProviderDataTypes) =>  of(new GetAllProvidersSuccess(providers))),
+        switchMap((providers: PROVIDER_DATA_TYPES) =>  of(new GetAllProvidersSuccess(providers))),
         map((action) => action.payload),
         // map((response) => {
         //     return {

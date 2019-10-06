@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { POPUP } from 'src/app/shared/components/popup/popup.model';
 import { Lionize } from 'src/app/shared/models/habitica/Lionize';
 import { HTTP_REQUEST_TYPES } from 'src/app/shared/constants';
-import { ProviderDataTypes } from 'src/app/pages/admin/providers/providers.models';
+import { PROVIDER_DATA_TYPES } from 'src/app/pages/admin/providers/providers.models';
 
 @Component({
     selector: 'li-provider-card',
@@ -17,7 +17,7 @@ export class ProviderCardComponent implements OnInit {
     // TODO use interface
     @Input() data: any = {};
     @Output() dataChange: EventEmitter<any> = new EventEmitter();
-    providers: ProviderDataTypes = {
+    providers: PROVIDER_DATA_TYPES = {
         habitica: [],
         microsoft: [],
         google: []
@@ -40,8 +40,8 @@ export class ProviderCardComponent implements OnInit {
             data: data
         }
         const dialogRef = this.dialog.open(PopupComponent, {
-            height: '400px',
-            width: '600px',
+            height: '300px',
+            width: '500px',
             disableClose: true,
             data: popupData
         });

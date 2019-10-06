@@ -1,22 +1,22 @@
 <!-- TODO use enums for type -->
 <div class="providers-container">
     <div class="providers-buttons flex-all-centered flex-wrap">
-        <button mat-button color="primary" class="horizontal-margin-5" (click)="openPopup('Habitica')">
+        <button mat-button color="primary" class="horizontal-margin-5" (click)="openPopup(PROVIDER_TYPES.HABITICA)">
             <mat-icon>add</mat-icon>
             Habitica
         </button>
-        <button mat-button color="primary" class="horizontal-margin-5" (click)="openPopup('Microsoft')">
+        <button mat-button color="primary" class="horizontal-margin-5" (click)="openPopup(PROVIDER_TYPES.MICROSOFT_TO_DO)">
             <mat-icon>add</mat-icon>
             Microsoft To-Do
         </button>
-        <button mat-button color="primary" class="horizontal-margin-5" (click)="openPopup('Google')">
+        <button mat-button color="primary" class="horizontal-margin-5" (click)="openPopup(PROVIDER_TYPES.GOOGLE_TASKS)">
             <mat-icon>add</mat-icon>
             Google Tasks
         </button>
     </div>
     <div class="provider-cards-container grid">
         <ng-container *ngFor="let item of providers.habitica">
-            <li-provider-card [type]="providerTypes.HABITICA" [data]="item" (dataChange)="onDataChange($event)"></li-provider-card>
+            <li-provider-card [type]="PROVIDER_TYPES.HABITICA" [data]="item" (dataChange)="onDataChange($event)"></li-provider-card>
         </ng-container>
     </div>
 </div>

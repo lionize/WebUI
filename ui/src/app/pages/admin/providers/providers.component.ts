@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { ProvidersService } from './providers.service';
-import { ProviderTypes, ProviderDataTypes } from './providers.models';
+import { PROVIDER_TYPES, PROVIDER_DATA_TYPES } from './providers.models';
 import { HTTP_REQUEST_TYPES } from 'src/app/shared/constants';
 import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
@@ -26,8 +26,8 @@ import { NOTIFICATION_MESSAGES } from 'src/app/shared/messages/notification.mess
 
 export class ProvidersComponent implements OnInit, OnDestroy {
     // TODO use types (backend classes)
-    providerTypes: typeof ProviderTypes = ProviderTypes;
-    providers: ProviderDataTypes = {
+    PROVIDER_TYPES: typeof PROVIDER_TYPES = PROVIDER_TYPES;
+    providers: PROVIDER_DATA_TYPES = {
         habitica: [],
         microsoft: [],
         google: []
@@ -61,9 +61,8 @@ export class ProvidersComponent implements OnInit, OnDestroy {
             data: {}
         }
         const dialogRef = this.dialog.open(PopupComponent, {
-            // TODO make configurable
-            height: '400px',
-            width: '600px',
+            height: '300px',
+            width: '500px',
             disableClose: true,
             data: data
         });
@@ -109,7 +108,7 @@ export class ProvidersComponent implements OnInit, OnDestroy {
                     catchError((error) => {
                         this.store.dispatch(new AppLoading({ isAppLoading: false }));
                         this.notificationService.showNotificationToaster(SimpleNotificationComponent,
-                            { data: error.message || error.statusText }
+                            { data: this.NOTIFICATION_MESSAGES.common.error }
                         );
                         return throwError(error);
                     }),
@@ -132,7 +131,7 @@ export class ProvidersComponent implements OnInit, OnDestroy {
                     catchError((error) => {
                         this.store.dispatch(new AppLoading({ isAppLoading: false }));
                         this.notificationService.showNotificationToaster(SimpleNotificationComponent,
-                            { data: error.message || error.statusText }
+                            { data: this.NOTIFICATION_MESSAGES.common.error }
                         );
                         return throwError(error);
                     })
