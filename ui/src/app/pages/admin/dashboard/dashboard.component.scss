@@ -47,7 +47,6 @@
                 .tasks-container {
                     min-height: 150px;
                     flex: auto;
-                    @extend .flex-column-horizontal-centered;
                 }
                 .new-button {
                     align-self: center;
