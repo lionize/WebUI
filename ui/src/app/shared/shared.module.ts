@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,11 +28,16 @@ import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components
 import { GoogleComponent } from 'src/app/shared/components/dynamic-components/providers/google/google.component';
 import { SimpleDialogComponent } from 'src/app/shared/components/dynamic-components/dialogs/simple-dialog.component';
 
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild([]),
         FormsModule, ReactiveFormsModule,
+        TranslateModule,
         MatButtonModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatProgressSpinnerModule, MatSnackBarModule,
         MatInputModule, MatMenuModule, MatDialogModule, MatCardModule
     ],
@@ -47,6 +55,7 @@ import { SimpleDialogComponent } from 'src/app/shared/components/dynamic-compone
     ],
     exports: [
         FormsModule, ReactiveFormsModule,
+        TranslateModule,
         MatButtonModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatProgressSpinnerModule, MatSnackBarModule,
         MatInputModule, MatMenuModule, MatDialogModule, MatCardModule,
         HeaderComponent,

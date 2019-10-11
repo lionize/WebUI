@@ -1,5 +1,4 @@
 @import 'src/assets/styles/variables';
-@import 'src/assets/styles/common';
 
 :host {
     position: sticky;
@@ -7,17 +6,18 @@
     z-index: 3;
     height: $header-height;
     .header-wrapper {
-        @extend .flex-row-vertical-centered;
         > img {
             height: 100%;
             cursor: pointer;
         }
-        .nav-menu {
-            flex: auto;
+        .navigation-menu {
+            flex: 70%;
         }
-        .user-actions {
-            > span {
-                @extend .header-user;
+        .actions-menu {
+            flex: 30%;
+            .language {
+                // flex: 1;
+                color: $pure-white;
             }
         }
         mat-icon {
