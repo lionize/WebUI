@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { IAppState } from 'src/app/store/state/app.state';
 import { ToggleLeftMenu, ToggleRightMenu } from 'src/app/store/actions/menu.actions';
 import { selectMain } from 'src/app/store/selectors/main.selectors';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-root',
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit {
     constructor(
         private router: Router,
         private store: Store<IAppState>,
-        private cdRef: ChangeDetectorRef
+        private cdRef: ChangeDetectorRef,
+        private translate: TranslateService
     ) {
         router.events.subscribe((event: Event) => {
 
@@ -30,7 +32,8 @@ export class AppComponent implements OnInit {
             
         });
 
-
+        translate.setDefaultLang('en');
+        
     }
 
     ngOnInit() {

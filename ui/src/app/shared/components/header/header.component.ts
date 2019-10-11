@@ -5,6 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { map, tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { TranslateService } from '@ngx-translate/core';
 import { SigInUser } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
 import { ResetApp } from 'src/app/store/actions/app.actions';
@@ -18,6 +19,12 @@ import { SimpleNotificationComponent } from '../notifications/simple/simple-noti
 import { PopupComponent } from '../popup/popup.component';
 import { POPUP } from '../popup/popup.model';
 
+type Language = {
+    key: string;
+    value: string;
+    native: string;
+}
+
 @Component({
     selector: 'header',
     templateUrl: './header.component.html',
@@ -28,19 +35,36 @@ export class HeaderComponent implements OnInit {
     user: SigInUser;
     isRightMenuOpen: boolean = false;
     rightMenu$: Observable<RightMenu> = this.store.pipe(select(selectRightMenu));
+    languages: Language[] = [
+        {
+            key: 'en',
+            value: 'English',
+            native: 'English'
+        },
+        {
+            key: 'ru',
+            value: 'Russian',
+            native: 'Русский'
+        }
+    ];
+    selectedLanguageNative: string = this.languages[0].native;
 
     constructor(
         public dialog: MatDialog,
         private router: Router,
         private store: Store<IAppState>,
         private authenticationService: AuthenticationService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private translateService: TranslateService
     ) {
     }
 
     ngOnInit() {
         this.user = this.authenticationService.currentUser;
         this.toggleRightMenuIcons();
+        const selectedLanguageKey = this.translateService.getDefaultLang();
+        const selectedLanguage = this.languages.find(language => language.key === selectedLanguageKey);
+        this.selectedLanguageNative = selectedLanguage.native;
     }
 
     private signOut(): void {
@@ -99,6 +123,11 @@ export class HeaderComponent implements OnInit {
     toggleRightMenu(): void {
         this.isRightMenuOpen = !this.isRightMenuOpen;
         this.store.dispatch(new ToggleRightMenu({ isOpen: this.isRightMenuOpen }));
+    }
+
+    changeLanguage(language: Language): void {
+        this.translateService.setDefaultLang(language.key);
+        this.selectedLanguageNative = language.native;
     }
 
 }
