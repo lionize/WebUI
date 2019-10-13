@@ -11,13 +11,22 @@
             cursor: pointer;
         }
         .navigation-menu {
-            flex: 70%;
+            flex: auto;
         }
         .actions-menu {
-            flex: 30%;
+            flex: 0;
+            .user-actions {
+                .header-user {
+                    font-size: 16px;
+                    font-family: Roboto-Bold;
+                    color: $pure-white;;
+                }
+            }
             .language {
-                // flex: 1;
                 color: $pure-white;
+                > button {
+                    max-width: 100px;
+                }
             }
         }
         mat-icon {

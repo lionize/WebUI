@@ -6,6 +6,7 @@ import { IAppState } from 'src/app/store/state/app.state';
 import { ToggleLeftMenu, ToggleRightMenu } from 'src/app/store/actions/menu.actions';
 import { selectMain } from 'src/app/store/selectors/main.selectors';
 import { TranslateService } from '@ngx-translate/core';
+import { SignalRService } from './shared/services/signalrService';
 
 @Component({
     selector: 'app-root',
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit {
         private router: Router,
         private store: Store<IAppState>,
         private cdRef: ChangeDetectorRef,
-        private translate: TranslateService
+        private translate: TranslateService,
+        public signalRService: SignalRService
     ) {
         router.events.subscribe((event: Event) => {
 
@@ -29,19 +31,20 @@ export class AppComponent implements OnInit {
                 this.handleRouteChanges();
                 // TODO also close all notification messages
             }
-            
+
         });
 
         translate.setDefaultLang('en');
-        
+
     }
 
     ngOnInit() {
         this.subscribeToMainActions();
+        this.signalRService.startConnection();
+        this.signalRService.addTransferChartDataListener();
     }
 
     private handleRouteChanges() {
-        // FIXME affects on reducer, sets menus isOpen: false
         // this.store.dispatch(new ToggleLeftMenu({ isOpen: false }));
         this.store.dispatch(new ToggleRightMenu({ isOpen: false }));
     }

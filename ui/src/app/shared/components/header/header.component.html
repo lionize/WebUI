@@ -3,10 +3,28 @@
     <!--TODO fix routerLink-->
     <img src="assets/images/lionize_logo_large.png" [routerLink]="['/admin']" />
     <div class="navigation-menu"></div>
-    <div class="actions-menu flex-row-vertical-centered justify-space-between">
-        <div class="user-actions flex-row-vertical-centered">
-            <mat-icon>fingerprint</mat-icon>
-            <span class="header-user horizontal-margin-5">{{user?.username}}</span>
+    <div class="actions-menu flex-row-vertical-centered">
+        <div class="user-actions">
+            <button mat-button class="header-user">
+                {{user?.username}}
+                <mat-icon>fingerprint</mat-icon>
+            </button>
+            <!-- <mat-icon>fingerprint</mat-icon>
+            <span class="header-user horizontal-margin-5">{{user?.username}}</span> -->
+        </div>
+        <!-- TODO move to separate component-->
+        <div class="language">
+            <button mat-button [matMenuTriggerFor]="languageMenu">
+                {{selectedLanguageNative}}
+                <mat-icon>language</mat-icon>
+            </button>
+            <mat-menu #languageMenu="matMenu" [overlapTrigger]="false">
+                <button mat-menu-item *ngFor="let language of languages" (click)="changeLanguage(language)">
+                    <span>{{language.native}}</span>
+                </button>
+            </mat-menu>
+        </div>
+        <div>
             <!-- TODO move to separate component-->
             <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
@@ -23,18 +41,6 @@
                 <button mat-menu-item (click)="openPopup()">
                     <mat-icon>power_settings_new</mat-icon>
                     <span>{{'SIGN_OUT' | translate}}</span>
-                </button>
-            </mat-menu>
-        </div>
-        <!-- TODO move to separate component-->
-        <div class="language">
-            <button mat-icon-button [matMenuTriggerFor]="languageMenu">
-                {{selectedLanguageNative}}
-                <mat-icon>language</mat-icon>
-            </button>
-            <mat-menu #languageMenu="matMenu" [overlapTrigger]="false">
-                <button mat-menu-item *ngFor="let language of languages" (click)="changeLanguage(language)">
-                    <span>{{language.native}}</span>
                 </button>
             </mat-menu>
         </div>
