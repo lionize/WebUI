@@ -1,4 +1,15 @@
 {
-    "SIGN_OUT": "Sign out",
-    "BACKLOG": "Backlog"
+    "COMMON": {
+        "SIGN_OUT": "Sign out"
+    },
+    "LEFT_MENU": {
+        "BACKLOG": "Backlog"
+    },
+    "DASHBOARD": {
+        "DO_FIRST": "DO FIRST",
+        "SCHEDULE": "SCHEDULE",
+        "DELEGATE": "DELEGATE",
+        "DONT_DO": "DON'T DO",
+        "NEW_TASK": "New task"
+    }
 }
