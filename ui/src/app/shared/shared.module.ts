@@ -26,7 +26,7 @@ import { RightMenuComponent } from 'src/app/shared/components/menu/right-menu/ri
 import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/providers/habitica/habitica.component';
 import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components/providers/microsoft/microsoft.component';
 import { GoogleComponent } from 'src/app/shared/components/dynamic-components/providers/google/google.component';
-import { SimpleDialogComponent } from 'src/app/shared/components/dynamic-components/dialogs/simple-dialog.component';
+import { SimpleDialogComponent } from 'src/app/shared/components/dynamic-components/dialogs/simple/simple-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
