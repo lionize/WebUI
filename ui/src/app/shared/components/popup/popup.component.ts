@@ -68,7 +68,7 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
                 componentName = HabiticaComponent;
                 break;
 
-            case PROVIDER_TYPES.HABITICA:
+            case PROVIDER_TYPES.MICROSOFT_TO_DO:
                 componentName = MicrosoftComponent;
                 break;
 
