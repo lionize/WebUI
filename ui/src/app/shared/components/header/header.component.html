@@ -34,7 +34,7 @@
             </button>
             <mat-menu #languageMenu="matMenu" [overlapTrigger]="false">
                 <button mat-menu-item *ngFor="let language of languages" (click)="changeLanguage(language)">
-                    <span>{{language.value}}</span>
+                    <span>{{language.native}}</span>
                 </button>
             </mat-menu>
         </div>

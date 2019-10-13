@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit {
         this.store.dispatch(new AppLoading({ isAppLoading: true }));
         const payload: SigInUser = {
             accessToken: this.user.accessToken,
-            refreshToken: this.user.accessToken
+            refreshToken: this.user.refreshToken
         }
         this.authenticationService.signOut(payload)
             .pipe(
