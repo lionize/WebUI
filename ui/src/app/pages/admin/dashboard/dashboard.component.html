@@ -5,59 +5,64 @@
 <div class="dashboard-container">
     <li-left-menu>
         <div id="BACKLOG" class="backlog-tasks-container" cdkDropList [cdkDropListData]="backlogTasks"
-        [cdkDropListConnectedTo]="containerIds" (cdkDropListDropped)="onTaskDrop($event)">
-            <li-task-card *ngFor="let item of backlogTasks" cdkDrag [cdkDragData]="item" [data]="item" [type]="TASK_TYPES.BACKLOG">
+            [cdkDropListConnectedTo]="containerIds" (cdkDropListDropped)="onTaskDrop($event)">
+            <li-task-card *ngFor="let item of backlogTasks" cdkDrag [cdkDragData]="item" [data]="item"
+                [type]="TASK_TYPES.BACKLOG">
             </li-task-card>
         </div>
     </li-left-menu>
     <div class="matrix-container grid">
         <div class="column-container do-first">
-            <h2>DO FIRST</h2>
+            <h2>{{'DO_FIRST' | translate}}</h2>
             <!--TODO use enum instead of .DO_FIRST-->
             <div id="DO_FIRST" class="tasks-container" cdkDropList [cdkDropListData]="matrixTasks?.DO_FIRST"
                 [cdkDropListConnectedTo]="containerIds" (cdkDropListDropped)="onTaskDrop($event)">
-                <li-task-card *ngFor="let item of matrixTasks?.DO_FIRST" cdkDrag [cdkDragData]="item" [data]="item" [type]="TASK_TYPES.MATRIX">
+                <li-task-card *ngFor="let item of matrixTasks?.DO_FIRST" cdkDrag [cdkDragData]="item" [data]="item"
+                    [type]="TASK_TYPES.MATRIX">
                 </li-task-card>
             </div>
             <button mat-button color="primary" class="new-button">
                 <mat-icon>add</mat-icon>
-                New task
+                {{'NEW_TASK' | translate}}
             </button>
         </div>
         <div class="column-container schedule">
-            <h2>SCHEDULE</h2>
+            <h2>{{'SCHEDULE' | translate}}</h2>
             <div id="SCHEDULE" class="tasks-container" cdkDropList [cdkDropListData]="matrixTasks?.SCHEDULE"
                 [cdkDropListConnectedTo]="containerIds" (cdkDropListDropped)="onTaskDrop($event)">
-                <li-task-card *ngFor="let item of matrixTasks?.SCHEDULE" cdkDrag [cdkDragData]="item" [data]="item" [type]="TASK_TYPES.MATRIX">
+                <li-task-card *ngFor="let item of matrixTasks?.SCHEDULE" cdkDrag [cdkDragData]="item" [data]="item"
+                    [type]="TASK_TYPES.MATRIX">
                 </li-task-card>
             </div>
             <button mat-button color="primary" class="new-button">
                 <mat-icon>add</mat-icon>
-                New task
+                {{'NEW_TASK' | translate}}
             </button>
         </div>
         <div class="column-container delegate">
-            <h2>DELEGATE</h2>
+            <h2>{{'DELEGATE' | translate}}</h2>
             <div id="DELEGATE" class="tasks-container" cdkDropList [cdkDropListData]="matrixTasks?.DELEGATE"
                 [cdkDropListConnectedTo]="containerIds" (cdkDropListDropped)="onTaskDrop($event)">
-                <li-task-card *ngFor="let item of matrixTasks?.DELEGATE" cdkDrag [cdkDragData]="item" [data]="item" [type]="TASK_TYPES.MATRIX">
+                <li-task-card *ngFor="let item of matrixTasks?.DELEGATE" cdkDrag [cdkDragData]="item" [data]="item"
+                    [type]="TASK_TYPES.MATRIX">
                 </li-task-card>
             </div>
             <button mat-button color="primary" class="new-button">
                 <mat-icon>add</mat-icon>
-                New task
+                {{'NEW_TASK' | translate}}
             </button>
         </div>
         <div class="column-container dont-do">
-            <h2>DON'T DO</h2>
+            <h2>{{'DONT_DO' | translate}}</h2>
             <div id="DONT_DO" class="tasks-container" cdkDropList [cdkDropListData]="matrixTasks?.DONT_DO"
                 [cdkDropListConnectedTo]="containerIds" (cdkDropListDropped)="onTaskDrop($event)">
-                <li-task-card *ngFor="let item of matrixTasks?.DONT_DO" cdkDrag [cdkDragData]="item" [data]="item" [type]="TASK_TYPES.MATRIX">
+                <li-task-card *ngFor="let item of matrixTasks?.DONT_DO" cdkDrag [cdkDragData]="item" [data]="item"
+                    [type]="TASK_TYPES.MATRIX">
                 </li-task-card>
             </div>
             <button mat-button color="primary" class="new-button">
                 <mat-icon>add</mat-icon>
-                New task
+                {{'NEW_TASK' | translate}}
             </button>
         </div>
     </div>

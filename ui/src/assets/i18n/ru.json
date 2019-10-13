@@ -1,4 +1,15 @@
 {
-    "SIGN_OUT": "Выйти",
-    "BACKLOG": "Резерв"
+    "COMMON": {
+        "SIGN_OUT": "Выйти"
+    },
+    "LEFT_MENU": {
+        "BACKLOG": "Резерв"
+    },
+    "DASHBOARD": {
+        "DO_FIRST": "DO_FIRST",
+        "SCHEDULE": "SCHEDULE",
+        "DELEGATE": "DELEGATE",
+        "DONT_DO": "DON'T DO",
+        "NEW_TASK": "Новая задача"
+    }
 }

@@ -1,5 +1,5 @@
 <div class="left-menu-container" [class.shadow]="state === 'close'">
-    <h2 class="text-center">{{'BACKLOG' | translate}}</h2>
+    <h2 class="text-center">{{'LEFT_MENU.BACKLOG' | translate}}</h2>
     <div *ngIf="state === 'open'" class="tasks-container">
         <ng-content select=".backlog-tasks-container"></ng-content>
     </div>
