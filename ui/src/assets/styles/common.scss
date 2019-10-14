@@ -100,9 +100,14 @@
     justify-content: center;
     align-items: center;
 }
-.text-ellipsis {
+.text-nowrap-ellipsis {
     overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.text-normal-ellipsis {
+    overflow: hidden;
+    white-space: normal;
     text-overflow: ellipsis;
 }
 .fixed-all-center {

@@ -10,12 +10,12 @@
             .mat-card-title,
             .mat-card-subtitle {
                 width: calc(100% - 5px);
-                @extend .text-ellipsis;
+                @extend .text-nowrap-ellipsis;
             }
         }
         .mat-card-content {
             > p {
-                @extend .text-ellipsis;
+                @extend .text-nowrap-ellipsis;
             }
         }
     }
