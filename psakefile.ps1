@@ -76,9 +76,10 @@ Task NpmInstall -Depends Init, Clean, TranspileModels {
 
 Task TranspileModels -Depends Clean {
     $models = @(
-        @{InputFile = ".\ui\apis\habitica\ApiModels.yml"; OutputFolder = ".\ui\src\app\shared\models\habitica" },
-        @{InputFile = ".\ui\apis\identity\ApiModels.yml"; OutputFolder = ".\ui\src\app\shared\models\identity" },
-        @{InputFile = ".\ui\apis\tasks\ApiModels.yml"; OutputFolder = ".\ui\src\app\shared\models\tasks" }
+        @{InputFile = "./ui/apis/habitica/ApiModels.yml"; OutputFolder = "./ui/src/app/shared/models/habitica" },
+        @{InputFile = "./ui/apis/identity/ApiModels.yml"; OutputFolder = "./ui/src/app/shared/models/identity" },
+        @{InputFile = "./ui/apis/tasks/ApiModels.yml"; OutputFolder = "./ui/src/app/shared/models/tasks" },
+        @{InputFile = "./ui/apis/tasks/RealtimeModels.yml"; OutputFolder = "./ui/src/app/shared/models/tasks/realtime" }
     )
 
     foreach ($model in $models) {
