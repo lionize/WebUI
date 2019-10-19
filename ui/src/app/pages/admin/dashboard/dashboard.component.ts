@@ -16,6 +16,9 @@ import { NotificationService } from 'src/app/shared/components/notifications/not
 import { NOTIFICATION_MESSAGES } from 'src/app/shared/messages/notification.messages';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { Utils } from 'src/app/shared/utils';
+import { SignalRService } from 'src/app/shared/services/signalr.service';
+import { Lionize } from 'src/app/shared/models/tasks/Lionize';
+type MatrixTask = Lionize.TaskManagement.ApiModels.V1.MatrixTask;
 
 @Component({
     selector: 'dashboard',
@@ -35,7 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     isLeftMenuOpen: boolean;
     leftMenu$: Observable<LeftMenu> = this.store.pipe(select(selectLeftMenu));
     NOTIFICATION_MESSAGES = NOTIFICATION_MESSAGES;
-    matrixTypes = MATRIX_NUM;
+    // MATRIX_NUM = MATRIX_NUM;
     MATRIX_TYPE_COLORS: typeof MATRIX_TYPE_COLORS = MATRIX_TYPE_COLORS;
     TASK_TYPES: typeof TASK_TYPES = TASK_TYPES;
     private destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
@@ -44,6 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private store: Store<IAppState>,
         private dashboardService: DashboardsService,
         private notificationService: NotificationService,
+        private signalRService: SignalRService
     ) {
 
     }
@@ -74,7 +78,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     getMatrixTasks(): void {
         this.store.dispatch(new AppLoading({ isAppLoading: true }));
-        this.dashboardService.getMatrixTasks_fake()
+        this.dashboardService.getMatrixTasks()
             .pipe(
                 tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
                 map((response) => {
@@ -98,7 +102,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
             )
             // TODO fix any type
             .subscribe((data: any) => {
-                this.matrixTasks = data;
+                // TODO revert
+                // this.matrixTasks = data;
                 console.log('MATRIX TASKS: ', this.matrixTasks);
             });
     }
@@ -106,28 +111,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private getBacklogTasks(): void {
         this.store.dispatch(new AppLoading({ isAppLoading: true }));
         this.dashboardService.getBacklogTasks()
-        .pipe(
-            tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
-            map((response) => {
-                return response;
-            }),
-            catchError((error) => {
-                this.store.dispatch(new AppLoading({ isAppLoading: false }));
-                this.notificationService.showNotificationToaster(SimpleNotificationComponent,
-                    { data: this.NOTIFICATION_MESSAGES.common.error }
-                );
-                return throwError(error);
-            }),
-            takeUntil(this.destroy$)
-        )
-        // TODO fix any type
-        .subscribe((data: any) => {
-            this.backlogTasks = data;
-            console.log('BACKLOG TASKS: ', this.backlogTasks);
-        });
+            .pipe(
+                tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
+                map((response) => {
+                    return response;
+                }),
+                catchError((error) => {
+                    this.store.dispatch(new AppLoading({ isAppLoading: false }));
+                    this.notificationService.showNotificationToaster(SimpleNotificationComponent,
+                        { data: this.NOTIFICATION_MESSAGES.common.error }
+                    );
+                    return throwError(error);
+                }),
+                takeUntil(this.destroy$)
+            )
+            // TODO fix any type
+            .subscribe((data: any) => {
+                this.backlogTasks = data;
+                console.log('BACKLOG TASKS: ', this.backlogTasks);
+            });
     }
 
     onTaskDrop(event: CdkDragDrop<ITask[]>) {
+        const color = this.MATRIX_TYPE_COLORS[event.container.id];
+
 
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -149,6 +156,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
 
         console.log('MATRIX TASKS: ', this.matrixTasks);
+
+        // FIXME hardcode
+        const task = {
+            TaskId: event.item.data.id,
+            Order: event.item.data.order,
+            Important: true,
+            Urgent: true,
+        };
+        this.signalRService.emitMoveToMatrix(task)
+            .then((data) => {
+                data
+            })
+            .catch((error) => {
+                error
+            });
+
     }
 
 }   

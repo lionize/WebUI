@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import * as signalR from "@aspnet/signalr";
+import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class SignalRService {
     data;
-    private hubConnection: signalR.HubConnection
+    private hubConnection: signalR.HubConnection;
+
+    constructor(
+        private authenticationService: AuthenticationService,
+    ) {
+
+    }
 
     startConnection = () => {
         this.hubConnection = new signalR.HubConnectionBuilder()
-            .withUrl('https://localhost:8083/Hubs/Matrix')
+            .withUrl(`${environment.Task_Management_Service}Hubs/Matrix?Authorization=Bearer ${this.authenticationService.currentUser.accessToken}`)
             .build();
 
         this.hubConnection
@@ -17,11 +25,15 @@ export class SignalRService {
             .catch(err => console.log('Error while starting connection: ' + err))
     }
 
-    addTransferChartDataListener = () => {
-        this.hubConnection.on('TODO_change',
-            (data) => {
-                this.data = data;
-                console.log(data);
-            });
+    emitMoveToMatrix(task): Promise<any> {
+        return this.hubConnection.send('MoveToMatrix', task);
     }
+
+    // addTransferChartDataListener = () => {
+    //     this.hubConnection.on('TODO_change',
+    //         (data) => {
+    //             this.data = data;
+    //             console.log(data);
+    //         });
+    // }
 }

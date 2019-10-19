@@ -6,7 +6,6 @@ import { IAppState } from 'src/app/store/state/app.state';
 import { ToggleLeftMenu, ToggleRightMenu } from 'src/app/store/actions/menu.actions';
 import { selectMain } from 'src/app/store/selectors/main.selectors';
 import { TranslateService } from '@ngx-translate/core';
-import { SignalRService } from './shared/services/signalr.service';
 
 @Component({
     selector: 'app-root',
@@ -23,7 +22,6 @@ export class AppComponent implements OnInit {
         private store: Store<IAppState>,
         private cdRef: ChangeDetectorRef,
         private translateService: TranslateService,
-        public signalRService: SignalRService
     ) {
         this.router.events.subscribe((event: Event) => {
 
@@ -40,8 +38,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.subscribeToMainActions();
-        this.signalRService.startConnection();
-        this.signalRService.addTransferChartDataListener();
+        // this.signalRService.addTransferChartDataListener();
     }
 
     private handleRouteChanges() {

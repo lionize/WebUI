@@ -60,3 +60,15 @@ export type BACKLOG_TASK = {
         order: number;
     };
 }
+
+export interface MoveToMatrixRequest {
+    taskId: string;
+    order: number;
+    important: boolean;
+    urgent: boolean;
+}
+
+export interface MoveToBacklogRequest {
+    taskId: string;
+    order: number;
+}
