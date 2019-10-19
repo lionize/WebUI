@@ -14,6 +14,10 @@ import { AuthenticationService } from 'src/app/pages/authentication/authenticati
 import { IAppState } from 'src/app/store/state/app.state';
 import { AppLoading } from 'src/app/store/actions/main.actions';
 import { NOTIFICATION_MESSAGES } from '../../messages/notification.messages';
+import { Lionize } from 'src/app/shared/models/tasks/Lionize';
+
+// type SignInRequest = Lionize.TaskManagement.ApiModels.V1.SignInRequest;
+// type SignInResponse = Lionize.TaskManagement.ApiModels.V1.SignInResponse;
 
 enum MODES {
     SIGN_IN = 'SIGN_IN',

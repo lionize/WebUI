@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SignalRService } from 'src/app/shared/services/signalr.service';
 
 @Component({
     selector: 'admin',
@@ -9,12 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class AdminComponent implements OnInit {
 
     constructor(
-        
+        public signalRService: SignalRService
     ) {
 
     }
 
     ngOnInit() {
-
+        this.signalRService.startConnection();
     }
 }   
