@@ -14,15 +14,20 @@ export class SignalRService {
 
     }
 
-    startConnection = () => {
+    start() {
         this.hubConnection = new signalR.HubConnectionBuilder()
-            .withUrl(`${environment.Task_Management_Service}Hubs/Matrix?Authorization=Bearer ${this.authenticationService.currentUser.accessToken}`)
+            .withUrl(`${environment.Task_Management_Service_Realtime}Hubs/Matrix`,
+                { accessTokenFactory: () => this.authenticationService.currentUser.AccessToken })
             .build();
 
         this.hubConnection
             .start()
             .then(() => console.log('Connection started'))
             .catch(err => console.log('Error while starting connection: ' + err))
+    }
+
+    disconnect() {
+        this.hubConnection.stop();
     }
 
     emitMoveToMatrix(task): Promise<any> {

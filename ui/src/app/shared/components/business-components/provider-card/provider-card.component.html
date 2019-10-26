@@ -1,10 +1,11 @@
 <mat-card class="provider-card-container">
     <mat-card-header>
-        <mat-card-title>{{type}}</mat-card-title>
-        <mat-card-subtitle>ID: {{data?.id}}</mat-card-subtitle>
+        <mat-card-title>{{type}} ({{data?.FullName}})</mat-card-title>
+        <mat-card-subtitle>ID: {{data?.ID}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <p>UserID: {{data?.habiticaUserID}}</p>
+        <p>User ID: {{data?.HabiticaUserID}}</p>
+        <p>User Name: {{data?.Username}}</p>
     </mat-card-content>
     <mat-card-actions>
         <button mat-flat-button color="primary" (click)="openPopup(type, data)">

@@ -1,5 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ITask, TASK_TYPES } from 'src/app/shared/common.models';
+import { BacklogTask } from './task-card.models';
+
+interface UIBacklogTask extends BacklogTask {
+    color: string;
+}
 
 @Component({
     selector: 'li-task-card',
@@ -9,7 +14,7 @@ import { ITask, TASK_TYPES } from 'src/app/shared/common.models';
 
 export class TaskCardComponent implements OnInit {
 
-    @Input() data: ITask;
+    @Input() data: UIBacklogTask;
     @Input() type: number;
     TASK_TYPES: typeof TASK_TYPES = TASK_TYPES;
 

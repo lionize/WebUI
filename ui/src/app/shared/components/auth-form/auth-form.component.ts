@@ -9,15 +9,11 @@ import { NotificationService } from 'src/app/shared/components/notifications/not
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { VALIDATION_MESSAGES } from 'src/app/shared/messages/validation.messages';
 import { PatternValidator, PasswordsMatchingValidator } from 'src/app/shared/helpers/form.validators';
-import { UISignupUser, UISigninUser, SigInUser, SignUpUser } from 'src/app/pages/authentication/user.model';
+import { UISignupUser, SignUpUser, SignInRequest, SignInResponse, SignUpResponse } from 'src/app/pages/authentication/user.model';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { IAppState } from 'src/app/store/state/app.state';
 import { AppLoading } from 'src/app/store/actions/main.actions';
 import { NOTIFICATION_MESSAGES } from '../../messages/notification.messages';
-import { Lionize } from 'src/app/shared/models/tasks/Lionize';
-
-// type SignInRequest = Lionize.TaskManagement.ApiModels.V1.SignInRequest;
-// type SignInResponse = Lionize.TaskManagement.ApiModels.V1.SignInResponse;
 
 enum MODES {
     SIGN_IN = 'SIGN_IN',
@@ -49,7 +45,7 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.createForm();
+        this.initForm();
     }
 
     ngOnDestroy() {
@@ -63,9 +59,9 @@ export class AuthFormComponent implements OnInit, OnDestroy {
             event.preventDefault();
         }
         else {
-            const payload: UISignupUser = {
-                username: this.form.get('username').value,
-                password: this.form.get('password').value
+            const payload: SignInRequest = {
+                Username: this.form.get('username').value,
+                Password: this.form.get('password').value
             }
             this.authenticationService.signUp(payload)
                 .pipe(
@@ -77,10 +73,10 @@ export class AuthFormComponent implements OnInit, OnDestroy {
                         );
                         return throwError(error);
                     }),
-                    map((response: SignUpUser) => {
-                        if (response.isError) {
+                    map((response: SignUpResponse) => {
+                        if (response.IsError) {
                             this.notificationService.showNotificationToaster(SimpleNotificationComponent,
-                                { data: response.errorMessage }
+                                { data: response.ErrorMessage }
                             );
                         }
                         return response;
@@ -88,7 +84,7 @@ export class AuthFormComponent implements OnInit, OnDestroy {
                     takeUntil(this.destroy$),
                 )
                 .subscribe((response) => {
-                    if (!response.isError) {
+                    if (!response.IsError) {
                         this.router.navigate(['/auth/login']);
                     }
                 });
@@ -101,9 +97,9 @@ export class AuthFormComponent implements OnInit, OnDestroy {
             event.preventDefault();
         }
         else {
-            const payload: UISigninUser = {
-                username: this.form.get('username').value,
-                password: this.form.get('password').value
+            const payload: SignInRequest = {
+                Username: this.form.get('username').value,
+                Password: this.form.get('password').value
             }
             this.authenticationService.signIn(payload)
                 .pipe(
@@ -115,19 +111,19 @@ export class AuthFormComponent implements OnInit, OnDestroy {
                         );
                         return throwError(error);
                     }),
-                    map((response: SigInUser) => {
-                        if (!response.isError) {
-                            const user: SigInUser = {
-                                username: payload.username,
-                                accessToken: response.accessToken,
-                                refreshToken: response.refreshToken
+                    map((response: SignInResponse) => {
+                        if (!response.IsError) {
+                            const user = {
+                                Username: payload.Username,
+                                AccessToken: response.AccessToken,
+                                RefreshToken: response.RefreshToken
                             }
                             localStorage.setItem('user', JSON.stringify(user));
                             this.authenticationService.setCurrentUserValue(user);
                         }
                         else {
                             this.notificationService.showNotificationToaster(SimpleNotificationComponent,
-                                { data: response.errorMessage }
+                                { data: response.ErrorMessage }
                             );
                         }
                         return response;
@@ -135,14 +131,14 @@ export class AuthFormComponent implements OnInit, OnDestroy {
                     takeUntil(this.destroy$)
                 )
                 .subscribe((response) => {
-                    if (!response.isError) {
+                    if (!response.IsError) {
                         this.router.navigate(['/admin']);
                     }
                 });
         }
     }
 
-    private createForm(): void {
+    private initForm(): void {
         this.form = this.formBuilder.group({
             username: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{4,}$/)]),
             password: this.formBuilder.control(null, [Validators.required, PatternValidator(/^.{4,}$/)]),
