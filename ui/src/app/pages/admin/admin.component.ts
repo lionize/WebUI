@@ -16,6 +16,6 @@ export class AdminComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.signalRService.startConnection();
+        this.signalRService.start();
     }
 }   

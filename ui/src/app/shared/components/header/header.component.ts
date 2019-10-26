@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { map, tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { TranslateService } from '@ngx-translate/core';
-import { SigInUser } from 'src/app/pages/authentication/user.model';
+import { SigInUser, SignInResponse, SignOutRequest, SignOutResponse } from 'src/app/pages/authentication/user.model';
 import { IAppState } from 'src/app/store/state/app.state';
 import { ResetApp } from 'src/app/store/actions/app.actions';
 import { ToggleRightMenu } from 'src/app/store/actions/menu.actions';
@@ -18,6 +18,7 @@ import { NotificationService } from '../notifications/notification.service';
 import { SimpleNotificationComponent } from '../notifications/simple/simple-notification.component';
 import { PopupComponent } from '../popup/popup.component';
 import { POPUP } from '../popup/popup.model';
+import { SignalRService } from 'src/app/shared/services/signalr.service';
 
 type Language = {
     key: string;
@@ -32,7 +33,8 @@ type Language = {
 })
 
 export class HeaderComponent implements OnInit {
-    user: SigInUser;
+    // TODO fix any type
+    user;
     isRightMenuOpen: boolean = false;
     rightMenu$: Observable<RightMenu> = this.store.pipe(select(selectRightMenu));
     languages: Language[] = [
@@ -55,7 +57,8 @@ export class HeaderComponent implements OnInit {
         private store: Store<IAppState>,
         private authenticationService: AuthenticationService,
         private notificationService: NotificationService,
-        private translateService: TranslateService
+        private translateService: TranslateService,
+        public signalRService: SignalRService
     ) {
     }
 
@@ -69,14 +72,14 @@ export class HeaderComponent implements OnInit {
 
     private signOut(): void {
         this.store.dispatch(new AppLoading({ isAppLoading: true }));
-        const payload: SigInUser = {
-            accessToken: this.user.accessToken,
-            refreshToken: this.user.refreshToken
+        const payload: SignOutRequest = {
+            AccessToken: this.user.AccessToken,
+            RefreshToken: this.user.RefreshToken
         }
         this.authenticationService.signOut(payload)
             .pipe(
                 tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
-                map((response: SigInUser) => response),
+                map((response: SignOutResponse) => response),
                 catchError((error) => {
                     this.store.dispatch(new AppLoading({ isAppLoading: false }));
                     this.notificationService.showNotificationToaster(SimpleNotificationComponent,
@@ -86,11 +89,12 @@ export class HeaderComponent implements OnInit {
                 }),
             )
             .subscribe((response) => {
-                if (!response.isError) {
+                if (!response.IsError) {
                     this.authenticationService.setCurrentUserValue(null);
                     localStorage.removeItem('user');
                     this.router.navigate(['/landing']);
                     this.store.dispatch(new ResetApp());
+                    this.signalRService.disconnect();
                 }
             });
     }

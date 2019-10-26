@@ -28,8 +28,8 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.authenticationService.currentUser && this.authenticationService.currentUser.accessToken) {
-            request = this.addToken(request, this.authenticationService.currentUser.accessToken);
+        if (this.authenticationService.currentUser && this.authenticationService.currentUser.AccessToken) {
+            request = this.addToken(request, this.authenticationService.currentUser.AccessToken);
         }
 
         return next.handle(request)
@@ -48,23 +48,24 @@ export class TokenInterceptor implements HttpInterceptor {
             this.isRefreshing = true;
             this.store.dispatch(new AppLoading({ isAppLoading: true }));
             this.refreshTokenSubject.next(null);
-            this.authenticationService.setCurrentUserValue({...this.authenticationService.currentUser, accessToken: null});
-            return this.authenticationService.refresh({ refreshToken: this.authenticationService.currentUser.refreshToken })
+            this.authenticationService.setCurrentUserValue({...this.authenticationService.currentUser, AccessToken: null});
+            return this.authenticationService.refresh({ RefreshToken: this.authenticationService.currentUser.RefreshToken })
                 .pipe(
                     switchMap((user) => {
                         this.store.dispatch(new AppLoading({ isAppLoading: false }));
                         this.isRefreshing = false;
-                        this.refreshTokenSubject.next(user.refreshToken);
+                        this.refreshTokenSubject.next(user.RefreshToken);
+                        // TODO fix any type
                         user = {
                             ...user,
-                            username: this.authenticationService.currentUser.username
-                        }
+                            Username: this.authenticationService.currentUser.Username
+                        } as any
                         this.authenticationService.setCurrentUserValue(user);
                         localStorage.setItem('user', JSON.stringify(user));
                         this.notificationService.showNotificationToaster(SimpleNotificationComponent,
                             { data: NOTIFICATION_MESSAGES.credentials.refreshCredentials }
                         );
-                        return next.handle(this.addToken(request, user.accessToken));
+                        return next.handle(this.addToken(request, user.AccessToken));
                     }),
                     catchError(error => {
                         this.store.dispatch(new AppLoading({ isAppLoading: false }));
@@ -85,11 +86,11 @@ export class TokenInterceptor implements HttpInterceptor {
         }
     }
 
-    private addToken(request: HttpRequest<any>, accessToken: string) {
-        if (accessToken) {
+    private addToken(request: HttpRequest<any>, AccessToken: string) {
+        if (AccessToken) {
             return request.clone({
                 setHeaders: {
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${AccessToken}`
                 }
             });
         }
