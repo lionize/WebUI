@@ -17,8 +17,7 @@ import { NOTIFICATION_MESSAGES } from 'src/app/shared/messages/notification.mess
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { Utils } from 'src/app/shared/utils';
 import { SignalRService } from 'src/app/shared/services/signalr.service';
-import { Lionize } from 'src/app/shared/models/tasks/Lionize';
-type MatrixTask = Lionize.TaskManagement.ApiModels.V1.MatrixTask;
+import { BacklogTask } from 'src/app/shared/components/business-components/task-card/task-card.models';
 
 @Component({
     selector: 'dashboard',
@@ -33,8 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         DELEGATE: [],
         DONT_DO: []
     };
-    // TODO check
-    backlogTasks = [];
+    backlogTasks: BacklogTask[] = [];
     isLeftMenuOpen: boolean;
     leftMenu$: Observable<LeftMenu> = this.store.pipe(select(selectLeftMenu));
     NOTIFICATION_MESSAGES = NOTIFICATION_MESSAGES;
@@ -100,8 +98,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 }),
                 takeUntil(this.destroy$)
             )
-            // TODO fix any type
-            .subscribe((data: any) => {
+            .subscribe((data) => {
                 // TODO revert
                 // this.matrixTasks = data;
                 console.log('MATRIX TASKS: ', this.matrixTasks);
@@ -126,8 +123,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 takeUntil(this.destroy$)
             )
             // TODO fix any type
-            .subscribe((data: any) => {
-                this.backlogTasks = data;
+            .subscribe((data) => {
+                this.backlogTasks = data.sort((a, b) => a.Order - b.Order);
                 console.log('BACKLOG TASKS: ', this.backlogTasks);
             });
     }
