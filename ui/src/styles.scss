@@ -2,24 +2,24 @@
 @import '~@angular/material/theming';
 @import '~material-design-icons/iconfont/material-icons.css';
 
-@import 'assets/styles/variables';
-@import 'assets/styles/mixins';
-@import 'assets/styles/fonts';
-@import 'assets/styles/common';
-@import 'assets/styles/reset.css';
+@import 'app/styles/variables';
+@import 'app/styles/mixins';
+@import 'app/styles/fonts';
+@import 'app/styles/common';
+@import 'app/styles/reset.css';
 
 @include mat-core();
 
-@import 'assets/styles/themes/eisenhower-theme';
+@import 'app/styles/themes/eisenhower-theme';
 
-@import 'assets/styles/mixins/app-theme.component'; 
-@import 'assets/styles/mixins/admin-theme.component'; 
-@import 'assets/styles/mixins/footer-theme.component'; 
-@import 'assets/styles/mixins/header-theme.component'; 
-@import 'assets/styles/mixins/auth-form-theme.component'; 
-@import 'assets/styles/mixins/right-menu-theme.component'; 
-@import 'assets/styles/mixins/left-menu-theme.component'; 
-@import 'assets/styles/mixins/task-card-theme.component'; 
+@import 'app/styles/mixins/app-theme.component'; 
+@import 'app/styles/mixins/admin-theme.component'; 
+@import 'app/styles/mixins/footer-theme.component'; 
+@import 'app/styles/mixins/header-theme.component'; 
+@import 'app/styles/mixins/auth-form-theme.component'; 
+@import 'app/styles/mixins/right-menu-theme.component'; 
+@import 'app/styles/mixins/left-menu-theme.component'; 
+@import 'app/styles/mixins/task-card-theme.component'; 
 
 @mixin custom-theme($theme) {
     @include app-theme-component($theme);
