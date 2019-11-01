@@ -11,7 +11,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 
 import { AuthenticationRoutingModule } from './authentication.routing.module';
-import { TokenInterceptor } from 'src/app/shared/helpers/token.interceptor';
+import { TokenInterceptor } from 'src/app/core/helpers/token.interceptor';
 import { AuthenticationComponent } from './authentication.component';
 import { SignInComponent } from './signin/signin.component';
 import { SignUpComponent } from './signup/signup.component';

@@ -1,10 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ITask, TASK_TYPES } from 'src/app/shared/common.models';
-import { BacklogTask } from './task-card.models';
-
-interface UIBacklogTask extends BacklogTask {
-    color: string;
-}
+import { BacklogTask, UIBacklogTask } from './task-card.model';
 
 @Component({
     selector: 'li-task-card',

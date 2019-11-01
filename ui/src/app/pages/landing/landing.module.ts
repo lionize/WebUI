@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { LandingRoutingModule } from './landing.routing.module';
 import { LandingComponent } from './landing.component';
-import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
+import { FooterComponent } from 'src/app/core/components/footer/footer.component';
 
 @NgModule({
     imports: [

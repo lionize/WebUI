@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SignalRService } from 'src/app/shared/services/signalr.service';
+import { SignalRService } from 'src/app/core/services/signalr.service';
 
 @Component({
     selector: 'admin',

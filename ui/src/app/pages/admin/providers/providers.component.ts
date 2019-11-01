@@ -9,14 +9,14 @@ import { PopupComponent } from 'src/app/shared/components/popup/popup.component'
 import { ProvidersService } from './providers.service';
 import { PROVIDER_TYPES, PROVIDER_DATA_TYPES } from './providers.models';
 import { HTTP_REQUEST_TYPES } from 'src/app/shared/constants';
-import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { AppLoading } from 'src/app/store/actions/main.actions';
 import { IAppState } from 'src/app/store/state/app.state';
 import { POPUP } from 'src/app/shared/components/popup/popup.model';
 // import { GetAllProviders } from 'src/app/store/actions/providers.actions';
 // import { selectProviders } from 'src/app/store/selectors/providers.selectors';
-import { NOTIFICATION_MESSAGES } from 'src/app/shared/messages/notification.messages';
+import { NOTIFICATION_MESSAGES } from 'src/app/core/messages/notification.messages';
 
 @Component({
     selector: 'providers',

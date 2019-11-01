@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/core/services/api.service';
 import { API_URLS } from 'src/app/shared/constants';
 import { environment } from 'src/environments/environment';
 import { SigInUser, SignUpUser, UISigninUser, UISignupUser, SignInRequest, SignInResponse, SignOutResponse, SignOutRequest, RefreshTokenRequest, RefreshTokenResponse, SignUpRequest, SignUpResponse } from './user.model';
