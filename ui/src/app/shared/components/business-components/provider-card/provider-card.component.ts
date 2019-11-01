@@ -5,7 +5,7 @@ import { POPUP } from 'src/app/shared/components/popup/popup.model';
 import { Lionize } from 'src/app/shared/models/habitica/Lionize';
 import { HTTP_REQUEST_TYPES } from 'src/app/shared/constants';
 import { PROVIDER_DATA_TYPES } from 'src/app/pages/admin/providers/providers.models';
-import { SettingsGetterResponseItem } from './provider-card.models';
+import { SettingsGetterResponseItem } from './provider-card.model';
 
 @Component({
     selector: 'li-provider-card',

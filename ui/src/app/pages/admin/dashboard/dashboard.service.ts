@@ -1,14 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/core/services/api.service';
 import { environment } from 'src/environments/environment';
-import { MatrixTask, BacklogTask } from 'src/app/shared/components/business-components/task-card/task-card.models';
-
-interface UIMatrixTask extends MatrixTask {
-    color: string;
-    // TODO remove type: string (use urgent: boolean, important: boolean)
-    type: string;
-}
+import { MatrixTask, BacklogTask, UIMatrixTask } from 'src/app/shared/components/business-components/task-card/task-card.model';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardsService {

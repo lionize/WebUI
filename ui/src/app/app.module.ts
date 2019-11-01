@@ -14,9 +14,9 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from 'src/environments/environment';
 import { appReducers } from 'src/app/store/reducers/app.reducers';
 
-import { AuthGuard } from 'src/app/shared/guards/auth.guard';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { AuthenticationModule } from 'src/app/pages/authentication/authentication.module';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/core/services/api.service';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 // TODO think about to move to separate module all notification stuff

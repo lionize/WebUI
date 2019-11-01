@@ -9,8 +9,8 @@ import { Store } from '@ngrx/store';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { IAppState } from 'src/app/store/state/app.state';
 import { AppLoading } from 'src/app/store/actions/main.actions';
-import { NotificationService } from '../components/notifications/notification.service';
-import { SimpleNotificationComponent } from '../components/notifications/simple/simple-notification.component';
+import { NotificationService } from '../services/notification.service';
+import { SimpleNotificationComponent } from '../../shared/components/notifications/simple/simple-notification.component';
 import { NOTIFICATION_MESSAGES } from '../messages/notification.messages';
 
 @Injectable()

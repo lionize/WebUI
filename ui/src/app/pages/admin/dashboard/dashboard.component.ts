@@ -12,12 +12,12 @@ import { ToggleLeftMenu } from 'src/app/store/actions/menu.actions';
 import { LeftMenu } from 'src/app/shared/components/menu/menu.model';
 import { DashboardsService } from './dashboard.service';
 import { AppLoading } from 'src/app/store/actions/main.actions';
-import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
-import { NOTIFICATION_MESSAGES } from 'src/app/shared/messages/notification.messages';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { NOTIFICATION_MESSAGES } from 'src/app/core/messages/notification.messages';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { Utils } from 'src/app/shared/utils';
-import { SignalRService } from 'src/app/shared/services/signalr.service';
-import { BacklogTask } from 'src/app/shared/components/business-components/task-card/task-card.models';
+import { SignalRService } from 'src/app/core/services/signalr.service';
+import { BacklogTask } from 'src/app/shared/components/business-components/task-card/task-card.model';
 
 @Component({
     selector: 'dashboard',

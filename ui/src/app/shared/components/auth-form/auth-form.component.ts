@@ -5,15 +5,15 @@ import { map, tap, takeUntil, catchError } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { Store } from '@ngrx/store';
-import { NotificationService } from 'src/app/shared/components/notifications/notification.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
-import { VALIDATION_MESSAGES } from 'src/app/shared/messages/validation.messages';
-import { PatternValidator, PasswordsMatchingValidator } from 'src/app/shared/helpers/form.validators';
+import { VALIDATION_MESSAGES } from 'src/app/core/messages/validation.messages';
+import { PatternValidator, PasswordsMatchingValidator } from 'src/app/core/helpers/form.validators';
 import { UISignupUser, SignUpUser, SignInRequest, SignInResponse, SignUpResponse } from 'src/app/pages/authentication/user.model';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { IAppState } from 'src/app/store/state/app.state';
 import { AppLoading } from 'src/app/store/actions/main.actions';
-import { NOTIFICATION_MESSAGES } from '../../messages/notification.messages';
+import { NOTIFICATION_MESSAGES } from '../../../core/messages/notification.messages';
 
 enum MODES {
     SIGN_IN = 'SIGN_IN',

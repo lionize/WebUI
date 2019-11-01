@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { VALIDATION_MESSAGES } from 'src/app/shared/messages/validation.messages';
+import { VALIDATION_MESSAGES } from 'src/app/core/messages/validation.messages';
 // import { Lionize } from 'src/app/shared/models/habitica/Lionize';
 
 @Component({

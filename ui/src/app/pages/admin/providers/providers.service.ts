@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/core/services/api.service';
 // import { Lionize } from 'src/app/shared/models/habitica/Lionize';
 import { environment } from 'src/environments/environment';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';

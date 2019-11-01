@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from 'src/app/shared/guards/auth.guard';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from 'src/app/pages/admin/dashboard/dashboard.component';

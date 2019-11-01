@@ -17,7 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 
-import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { HeaderComponent } from 'src/app/core/components/header/header.component';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { TaskCardComponent } from 'src/app/shared/components/business-components/task-card/task-card.component';
 import { ProviderCardComponent } from 'src/app/shared/components/business-components/provider-card/provider-card.component';

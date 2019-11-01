@@ -14,11 +14,12 @@ import { AuthenticationService } from 'src/app/pages/authentication/authenticati
 import { RightMenu } from 'src/app/shared/components/menu/menu.model';
 import { selectRightMenu } from 'src/app/store/selectors/menu.selectors';
 import { AppLoading } from 'src/app/store/actions/main.actions';
-import { NotificationService } from '../notifications/notification.service';
-import { SimpleNotificationComponent } from '../notifications/simple/simple-notification.component';
-import { PopupComponent } from '../popup/popup.component';
-import { POPUP } from '../popup/popup.model';
-import { SignalRService } from 'src/app/shared/services/signalr.service';
+import { NotificationService } from '../../services/notification.service';
+import { SimpleNotificationComponent } from '../../../shared/components/notifications/simple/simple-notification.component';
+import { PopupComponent } from '../../../shared/components/popup/popup.component';
+import { POPUP } from '../../../shared/components/popup/popup.model';
+import { SignalRService } from 'src/app/core/services/signalr.service';
+import { NOTIFICATION_MESSAGES } from 'src/app/core/messages/notification.messages';
 
 type Language = {
     key: string;
@@ -50,6 +51,7 @@ export class HeaderComponent implements OnInit {
         }
     ];
     selectedLanguageNative: string = this.languages[0].native;
+    NOTIFICATION_MESSAGES = NOTIFICATION_MESSAGES;
 
     constructor(
         public dialog: MatDialog,
@@ -83,7 +85,7 @@ export class HeaderComponent implements OnInit {
                 catchError((error) => {
                     this.store.dispatch(new AppLoading({ isAppLoading: false }));
                     this.notificationService.showNotificationToaster(SimpleNotificationComponent,
-                        { data: error.message || error.statusText }
+                        { data: this.NOTIFICATION_MESSAGES.common.error }
                     );
                     return throwError(error);
                 }),
