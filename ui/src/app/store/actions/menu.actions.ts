@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { LeftMenu, RightMenu } from 'src/app/shared/components/menu/menu.model';
+import { LeftMenu, RightMenu } from 'src/app/shared/ui-models/menu.models';
 
 export enum MENU_ACTIONS {
     OPEN_LEFT_MENU = '[MENU] Open Left Menu',

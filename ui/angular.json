@@ -87,9 +87,6 @@
                         "browserTarget": "lionize:build"
                     },
                     "configurations": {
-                        "local": {
-                            "browserTarget": "lionize:build:local"
-                        },
                         "development": {
                             "browserTarget": "lionize:build:development"
                         },

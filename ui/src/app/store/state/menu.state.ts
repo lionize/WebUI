@@ -1,4 +1,4 @@
-import { LeftMenu, RightMenu } from 'src/app/shared/components/menu/menu.model';
+import { LeftMenu, RightMenu } from 'src/app/shared/ui-models/menu.models';
 
 export interface IMenuState {
     leftMenu: LeftMenu;

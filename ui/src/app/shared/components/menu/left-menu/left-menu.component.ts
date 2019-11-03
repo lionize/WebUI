@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { IAppState } from 'src/app/store/state/app.state';
 import { selectLeftMenu } from 'src/app/store/selectors/menu.selectors';
-import { LeftMenu } from 'src/app/shared/components/menu/menu.model';
+import { LeftMenu } from 'src/app/shared/ui-models/menu.models';
 import { leftMenuToggleAnimation } from '../menu.animations';
 
 @Component({

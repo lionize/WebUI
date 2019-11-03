@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ITask, TASK_TYPES } from 'src/app/shared/common.models';
-import { BacklogTask, UIBacklogTask } from './task-card.model';
+import { ITask, TASK_TYPES } from 'src/app/shared/ui-models/common.models';
+import { BacklogTask, UIBacklogTask } from '../../../ui-models/task-card.models';
 
 @Component({
     selector: 'li-task-card',

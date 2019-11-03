@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { PROVIDER_DATA_TYPES } from 'src/app/pages/admin/providers/providers.models';
+import { PROVIDER_DATA_TYPES } from 'src/app/shared/ui-models/providers.models';
 
 export enum PROVIDERS_ACTIONS {
     GET_ALL_PROVIDERS = '[PROVIDERS] Get All Providers',

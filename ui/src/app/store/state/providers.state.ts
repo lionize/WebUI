@@ -1,5 +1,5 @@
 
-import { PROVIDER_DATA_TYPES } from 'src/app/pages/admin/providers/providers.models';
+import { PROVIDER_DATA_TYPES } from 'src/app/shared/ui-models/providers.models';
 
 export interface IProvidersState {
     providers: PROVIDER_DATA_TYPES;
