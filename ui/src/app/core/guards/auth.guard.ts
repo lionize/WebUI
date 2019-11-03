@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, CanLoad } from '@angular/router';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
-import { SigInUser } from 'src/app/pages/authentication/user.model';
 
 @Injectable()
 export class AuthGuard implements CanLoad, CanActivate {

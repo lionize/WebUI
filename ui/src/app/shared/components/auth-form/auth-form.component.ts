@@ -9,7 +9,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { VALIDATION_MESSAGES } from 'src/app/core/messages/validation.messages';
 import { PatternValidator, PasswordsMatchingValidator } from 'src/app/core/helpers/form.validators';
-import { UISignupUser, SignUpUser, SignInRequest, SignInResponse, SignUpResponse } from 'src/app/pages/authentication/user.model';
+import { SignInRequest, SignInResponse, SignUpResponse } from 'src/app/shared/ui-models/user.models';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { IAppState } from 'src/app/store/state/app.state';
 import { AppLoading } from 'src/app/store/actions/main.actions';

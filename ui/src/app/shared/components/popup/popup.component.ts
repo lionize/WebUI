@@ -4,7 +4,7 @@ import { HabiticaComponent } from 'src/app/shared/components/dynamic-components/
 import { MicrosoftComponent } from 'src/app/shared/components/dynamic-components/providers/microsoft/microsoft.component';
 import { GoogleComponent } from 'src/app/shared/components/dynamic-components/providers/google/google.component';
 import { SimpleDialogComponent } from '../dynamic-components/dialogs/simple/simple-dialog.component';
-import { PROVIDER_TYPES } from 'src/app/pages/admin/providers/providers.models';
+import { PROVIDER_TYPES } from 'src/app/shared/ui-models/providers.models';
 
 @Component({
     selector: 'li-popup',

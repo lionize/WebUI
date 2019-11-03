@@ -19,12 +19,8 @@ import { AuthenticationModule } from 'src/app/pages/authentication/authenticatio
 import { ApiService } from 'src/app/core/services/api.service';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
-// TODO think about to move to separate module all notification stuff
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
+
+import { SharedModule } from 'src/app/shared/shared.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,7 +29,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
     declarations: [
         AppComponent,
-        SimpleNotificationComponent
     ],
     imports: [
         BrowserModule, BrowserAnimationsModule, HttpClientModule,
@@ -44,18 +39,16 @@ export function HttpLoaderFactory(http: HttpClient) {
                 deps: [HttpClient]
             }
         }),
-        MatSnackBarModule, MatButtonModule, MatProgressSpinnerModule, MatIconModule,
         StoreModule.forRoot(appReducers),
         // EffectsModule.forRoot([ProvidersEffects]),
         StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         AuthenticationModule,
-        AppRoutingModule
+        AppRoutingModule,
+        SharedModule
     ],
     providers: [AuthGuard, ApiService],
-    entryComponents: [
-        SimpleNotificationComponent
-    ],
+    entryComponents: [],
     bootstrap: [AppComponent]
 })
 

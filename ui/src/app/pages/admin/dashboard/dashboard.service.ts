@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { ApiService } from 'src/app/core/services/api.service';
 import { environment } from 'src/environments/environment';
-import { MatrixTask, BacklogTask, UIMatrixTask } from 'src/app/shared/components/business-components/task-card/task-card.model';
+import { MatrixTask, BacklogTask, UIMatrixTask } from 'src/app/shared/ui-models/task-card.models';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardsService {

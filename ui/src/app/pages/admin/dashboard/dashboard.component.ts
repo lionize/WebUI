@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MATRIX_NUM, ITask, MATRIX_TYPE_COLORS, TASK_TYPES } from 'src/app/shared/common.models';
+import { MATRIX_NUM, ITask, MATRIX_TYPE_COLORS, TASK_TYPES } from 'src/app/shared/ui-models/common.models';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { tap, catchError, takeUntil, map } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { IAppState } from 'src/app/store/state/app.state';
 import { selectLeftMenu } from 'src/app/store/selectors/menu.selectors';
 import { ToggleLeftMenu } from 'src/app/store/actions/menu.actions';
-import { LeftMenu } from 'src/app/shared/components/menu/menu.model';
+import { LeftMenu } from 'src/app/shared/ui-models/menu.models';
 import { DashboardsService } from './dashboard.service';
 import { AppLoading } from 'src/app/store/actions/main.actions';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -17,7 +17,7 @@ import { NOTIFICATION_MESSAGES } from 'src/app/core/messages/notification.messag
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { Utils } from 'src/app/shared/utils';
 import { SignalRService } from 'src/app/core/services/signalr.service';
-import { BacklogTask } from 'src/app/shared/components/business-components/task-card/task-card.model';
+import { BacklogTask } from 'src/app/shared/ui-models/task-card.models';
 
 @Component({
     selector: 'dashboard',
@@ -162,12 +162,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
             Urgent: true,
         };
         this.signalRService.emitMoveToMatrix(task)
-            .then((data) => {
-                data
+            .subscribe((response) => {
+                console.log(response);
             })
-            .catch((error) => {
-                error
-            });
 
     }
 

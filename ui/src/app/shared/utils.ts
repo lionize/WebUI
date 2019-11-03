@@ -1,4 +1,4 @@
-import { MATRIX_NUM } from 'src/app/shared/common.models';
+import { MATRIX_NUM } from 'src/app/shared/ui-models/common.models';
 
 export class Utils {
 

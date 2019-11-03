@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { ApiService } from 'src/app/core/services/api.service';
 import { API_URLS } from 'src/app/shared/constants';
 import { environment } from 'src/environments/environment';
-import { SigInUser, SignUpUser, UISigninUser, UISignupUser, SignInRequest, SignInResponse, SignOutResponse, SignOutRequest, RefreshTokenRequest, RefreshTokenResponse, SignUpRequest, SignUpResponse } from './user.model';
+import { SignInRequest, SignInResponse, SignOutResponse, SignOutRequest, RefreshTokenRequest, RefreshTokenResponse, SignUpRequest, SignUpResponse } from '../../shared/ui-models/user.models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {

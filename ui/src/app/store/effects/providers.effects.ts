@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { switchMap, map } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
-import { PROVIDER_DATA_TYPES } from 'src/app/pages/admin/providers/providers.models';
+import { PROVIDER_DATA_TYPES } from 'src/app/shared/ui-models/providers.models';
 import { ProvidersService } from 'src/app/pages/admin/providers/providers.service';
 import { PROVIDERS_ACTIONS, GetAllProviders, GetAllProvidersSuccess } from '../actions/providers.actions';
 
