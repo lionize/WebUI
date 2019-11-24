@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MATRIX_NUM, ITask, MATRIX_TYPE_COLORS, TASK_TYPES } from 'src/app/shared/ui-models/common.models';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { tap, catchError, takeUntil, map } from 'rxjs/operators';
@@ -17,7 +16,8 @@ import { NOTIFICATION_MESSAGES } from 'src/app/core/messages/notification.messag
 import { SimpleNotificationComponent } from 'src/app/shared/components/notifications/simple/simple-notification.component';
 import { Utils } from 'src/app/shared/utils';
 import { SignalRService } from 'src/app/core/services/signalr.service';
-import { BacklogTask } from 'src/app/shared/ui-models/task-card.models';
+import { BacklogTask, MoveToMatrixRequest, UIMatrixTask, MoveToBacklogRequest, UIBacklogTask } from 'src/app/shared/ui-models/task-card.models';
+import { MATRIX_NUM, MATRIX_TYPE_COLORS, TASK_TYPES } from 'src/app/shared/ui-models/common.models';
 
 @Component({
     selector: 'dashboard',
@@ -47,7 +47,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private notificationService: NotificationService,
         private signalRService: SignalRService
     ) {
+        // TODO refactor
+        this.signalRService.addMethodHandler('MoveToMatrix', (data) => {
+            console.log("MoveToMatrix response: ", data);
+        });
 
+        this.signalRService.addMethodHandler('MoveToBacklog', (data) => {
+            console.log("MoveToBacklog response: ", data);
+        })
+            // .subscribe(data => {
+            //     console.log("MoveToMatrix response: ", data);
+            // });
+
+        // this.signalRService.invoke('MoveToBacklog')
+        //     .subscribe(data => {
+        //         console.log("MoveToBacklog response: ", data);
+        //     });
     }
 
     ngOnInit() {
@@ -80,10 +95,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
             .pipe(
                 tap(() => this.store.dispatch(new AppLoading({ isAppLoading: false }))),
                 map((response) => {
-                    let result = {};
+                    const result = {};
                     response.map((item, index, self) => {
                         item.type = MATRIX_NUM[item.type];
-                        item.color = Utils.mapColors(item, item.type);
+                        item.color = Utils.mapColor(item, item.type);
                         result[item.type] = self.filter((selfItem) => selfItem.type === item.type);
                         return item;
                     });
@@ -129,23 +144,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
             });
     }
 
-    onTaskDrop(event: CdkDragDrop<ITask[]>) {
-        const color = this.MATRIX_TYPE_COLORS[event.container.id];
+    onTaskDrop(event: CdkDragDrop<UIMatrixTask[] | UIBacklogTask[]>) {
 
+        event.item.data.Order = event.currentIndex + 1;
+
+        if (event.container.id === this.containerIds[0]) {
+            this.handleMoveToBacklog(event);
+
+        } else {
+            this.handleMoveToMatrix(event);
+        }
 
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {
-            // TODO bad solution, use enum
-            let color = this.MATRIX_TYPE_COLORS[event.container.id];
-            let type;
-            for (let prop in this.MATRIX_TYPE_COLORS) {
-                if (color === this.MATRIX_TYPE_COLORS[prop]) {
-                    type = prop
-                }
-            }
-            event.item.data.color = color;
-            event.item.data.type = type;
             transferArrayItem(event.previousContainer.data,
                 event.container.data,
                 event.previousIndex,
@@ -154,18 +166,56 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
         console.log('MATRIX TASKS: ', this.matrixTasks);
 
-        // FIXME hardcode
-        const task = {
-            TaskId: event.item.data.id,
-            Order: event.item.data.order,
-            Important: true,
-            Urgent: true,
+    }
+
+    private handleMoveToMatrix(event) {
+        let type: string;
+        const color: string = this.MATRIX_TYPE_COLORS[event.container.id];
+
+        // FIXME, bad solution, use enum
+        for (let prop in this.MATRIX_TYPE_COLORS) {
+            if (color === this.MATRIX_TYPE_COLORS[prop]) {
+                type = prop;
+            }
+        }
+
+        event.item.data.color = color;
+        event.item.data.type = type;
+        const mappedUrgentImportantItem = Utils.mapUrgentImportant(event.item.data);
+
+        event.item.data = {
+            ...event.item.data,
+            ...mappedUrgentImportantItem
         };
+
+        // FIXME remove type and color, event.item.data type is any, no Order and ID fields
+        let task: MoveToMatrixRequest = {
+            Important: event.item.data.Important,
+            Order: event.item.data.Order,
+            TaskId: event.item.data.ID,
+            Urgent: event.item.data.Urgent
+        };
+        console.log('MoveToMatrixRequest: ', task);
+
         this.signalRService.emitMoveToMatrix(task)
             .subscribe((response) => {
                 console.log(response);
-            })
+            });
+    }
 
+    private handleMoveToBacklog(event) {
+        // FIXME, event.item.data type is any, no Order and ID fields
+        let task: MoveToBacklogRequest = {
+            Order: event.item.data.Order,
+            TaskId: event.item.data.ID
+        };
+
+        console.log('MoveToBacklogRequest: ', task);
+
+        this.signalRService.emitMoveToBacklog(task)
+            .subscribe((response) => {
+                console.log(response);
+            });
     }
 
 }   
