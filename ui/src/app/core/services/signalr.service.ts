@@ -7,6 +7,7 @@ import { fromPromise } from 'rxjs/internal-compatibility';
 import { AuthenticationService } from 'src/app/pages/authentication/authentication.service';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
+import { MoveToMatrixRequest, MoveToBacklogRequest } from 'src/app/shared/ui-models/task-card.models';
 //#endregion
 
 /**
@@ -27,7 +28,6 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 
 export class SignalRService {
-    data;
     private hubConnection: signalR.HubConnection;
     private hubConnectionState$: BehaviorSubject<boolean>;
     private errorHandler$: BehaviorSubject<string>;
@@ -87,8 +87,8 @@ export class SignalRService {
     /**
      * Inovke method called from client to server
      */
-    invoke<T>(methodName: string, ...args): Promise<T> {
-        return this.hubConnection.invoke(methodName, ...args);
+    invoke<T>(methodName: string, ...args): Observable<T> {
+        return fromPromise(this.hubConnection.invoke(methodName, ...args));
     }
 
     start(): void {
@@ -124,8 +124,13 @@ export class SignalRService {
         return fromPromise(this.hubConnection.stop());
     }
 
-    // TODO fix task and Observable type
-    emitMoveToMatrix(task): Observable<any> {
+    emitMoveToMatrix(task: MoveToMatrixRequest): Observable<void> {
         return fromPromise(this.hubConnection.send('MoveToMatrix', task));
     }
+
+    emitMoveToBacklog(task: MoveToBacklogRequest): Observable<void> {
+        return fromPromise(this.hubConnection.send('MoveToBacklog', task));
+    }
+
+    // TODO add subscribe to MoveToMatrix in app component
 }
